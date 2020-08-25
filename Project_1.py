@@ -7,7 +7,6 @@ x = np.linspace(0,1,n)
 
 u = 1 - (1 - np.exp(-10)) * x - np.exp(-10 * x)
 
-
 f = np.zeros(n)
 A = np.zeros((n,n))
 a = np.full(10, 2)
