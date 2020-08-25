@@ -15,5 +15,10 @@ for i in range(n-1):
     f[i] = - (u[i+1] + u[i-1] - 2 * u[i]) / h**2
 
 
+<<<<<<< HEAD
+=======
+z = 2
+'''
+>>>>>>> 75034c7ac4027faf6c100a59d3de9043c3cbbe70
 plt.plot(x,u)
 plt.show()
