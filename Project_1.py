@@ -15,7 +15,7 @@ for i in range(n-1):
     f[i] = - (u[i+1] + u[i-1] - 2 * u[i]) / h**2
 
 qv = 2
-z = 2
+z = 20x
 
 plt.plot(x,u)
 plt.show()
