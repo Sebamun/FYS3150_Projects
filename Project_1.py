@@ -15,6 +15,8 @@ a = np.full(10, 2)
 for i in range(n-1):
     f[i] = - (u[i+1] + u[i-1] - 2 * u[i]) / h**2
 
+
+z = 2
 '''
 plt.plot(x,u)
 plt.show()
