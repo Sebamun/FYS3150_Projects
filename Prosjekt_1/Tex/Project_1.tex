@@ -1,0 +1,30 @@
+\documentclass[norsk,a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc} %for å bruke æøå
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx} %for å inkludere grafikk
+\usepackage{verbatim} %for å inkludere filer med tegn LaTeX ikke liker
+\usepackage{mathpazo}
+\usepackage{amsmath}
+\usepackage{float}
+\usepackage{amsmath}
+\bibliographystyle{plain}
+
+\title{Project1, FYS3150}
+\author{Marcus Berget, Sebastian Amundsen, Andreas Wetzel}
+\date{August 2020}
+\begin{document}
+
+\maketitle
+\section{a}
+By multiplying \textbf{A} and \textbf{v} we get \\
+\begin{align*}
+\begin{bmatrix} 2 & -1 & 0 & \dots & \dots & 0 \\ -1 & 2 & -1 & 0 & \dots & \dots \\ 0 & -1 & 2 & -1 & 0 & \dots \\ \vdots & \vdots & \vdots & \ddots \\ 0 & \vdots & \vdots & -1 & 2 & -1 \\ 0 & \vdots & \vdots & 0 & -1 & 2  \end{bmatrix}
+\begin{bmatrix} v_0 \\ v_1\\ v_2\\ \vdots \\ v_n \\ v_{n+1} \end{bmatrix}&=\begin{bmatrix} 2v_0 - v_1 \\ -v_0+2v_1-v_2 \\ -v_1+2v_2-v_3 \\ \vdots \\ -v_{n-1}+2v_n-v_{n+1} \\ -v_n+2v_{n+1}
+\end{bmatrix}\\&=
+\begin{bmatrix}h^2f_0 \\ h^2f_1\\ h^2f_2\\ \vdots \\ h^2f_n\\ h^2f_{n+1}\end{bmatrix} = \widetilde{\textbf{b}}
+\end{align*}
+
+\bibliography{referanser}
+\end{document}
+
