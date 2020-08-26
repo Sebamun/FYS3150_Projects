@@ -15,14 +15,14 @@ b_m = np.zeros(n) # Her lagrer jeg verdiene for den nye diagonalen.
 f_m[0] = f[0]
 b_m[0] = b[0]
 # Steg 1:
-for i in range(1,n):
-    b_m[i] = b[i] - (a[i] * c[i-1] / b_m[i-1])
-    f_m[i] = f[i] - (a[i] * f_m[i-1] / b_m[i-1])
+for j in range(1,n):
+    b_m[j] = b[j] - (a[j] * c[j-1] / b_m[j-1])
+    f_m[j] = f[j] - (a[j] * f_m[j-1] / b_m[j-1])
 u = np.zeros(n) # Her lagrer vi verdiene for u.
 u[-1] = f_m[-1] / b_m[-1] # Her setter vi den siste verdien for u.
 # Steg 2:
-for i in range(1,n):
-    u[-i-1] = (f_m[-i-1] - c[-i-1] * u[-i]) / b_m[-i-1]
+for j in range(1,n):
+    u[-j-1] = (f_m[-j-1] - c[-j-1] * u[-j]) / b_m[-j-1]
 # Her plotter vi:
 fig, (ax_1, ax_2) = plt.subplots(1, 2)
 fig.suptitle('Tittel')
