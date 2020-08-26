@@ -8,8 +8,8 @@ f_m = np.zeros(n) # Her lagrer vi verdiene for den nye funksjonen.
 u_l = 1 - (1 - np.exp(-10)) * x - np.exp(-10 * x) # Dette er den analystiske løsningen.
 #Diagonalen for matrisen er gitt:
 a = np.full(n,-1, dtype='float')
-b = np.full(n,2.0, dtype='float')
-c = np.full(n,-1.0, dtype='float')
+b = np.full(n,2, dtype='float')
+c = np.full(n,-1, dtype='float')
 b_m = np.zeros(n) # Her lagrer jeg verdiene for den nye diagonalen.
 # Initialbetingleser:
 f_m[0] = f[0]
