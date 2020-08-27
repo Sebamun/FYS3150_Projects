@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-n = 10000
+n = 1000000
 h = 1/(n+1)
 x = np.linspace(0,1,n)
 f = 100*np.exp(-10*x)*h**2
