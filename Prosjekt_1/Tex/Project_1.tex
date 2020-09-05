@@ -25,12 +25,34 @@
 
 \section{Introduction}
 
-In this project we will use numerical methods to solve the one dimensional Poisson equation. We will be rewriting the Dirichlet boundary conditions as a set of linear equations. 
+In this project we will use numerical methods to solve the one dimensional Poisson equation. We will be rewriting the Dirichlet boundary conditions as a set of linear equations. Our numerical methods will have varying degrees of accuracy. We are going to compare our algorithms and the CPU time for the different numerical methods. 
 
 \section{Method}
 
+The general one dimensional Poisson equation is given by:
 
-By multiplying \textbf{A} and \textbf{v} we get \\
+\begin{equation}
+-u''(x)=f(x)
+ \label{eq:udd}
+ \end{equation}
+
+Where $u=v_i$ (discretized approximation) and $f(x)$ are functions. We have the interval $x\in(0,1)$ and the initial conditions $u(0)=u(1)=0$. We have an approximation of the second derivative of u given by:
+
+\begin{equation}
+\frac{-v_{i+1}+v_{i-1}-2v_i}{h^2}=f_i, \textrm{  where  } i=1,2,3......,n,
+ \label{eq:2der}
+ \end{equation}
+ 
+ Here the step length of spacing is given by $h=1/(n+1)$ and the grid points is defined by $x_i=ih$. We can rewrite equation \ref{eq:2der} as a linear set of equations on the form $\textbf{A}\textbf{v}=\tilde{\textbf{b}}$. In our case we have the source term $f(x)=100e^{-10x}$ which gives us a closed form solution $u(x)$ given by:
+
+\begin{equation}
+u(x)=1-(1-e^{-10})x-e^{-10x}
+ \label{eq:d_i}
+ \end{equation}
+
+We will use this solution as a point of reference to discuss the accuracy of our numerical methods. 
+
+by multiplying \textbf{A} and \textbf{v} we get \\
 \begin{align*}
 \begin{bmatrix} 2 & -1 & 0 & \dots & \dots & 0 \\ -1 & 2 & -1 & 0 & \dots & \dots \\ 0 & -1 & 2 & -1 & 0 & \dots \\ \vdots & \vdots & \vdots & \ddots \\ 0 & \vdots & \vdots & -1 & 2 & -1 \\ 0 & \vdots & \vdots & 0 & -1 & 2  \end{bmatrix}
 \begin{bmatrix} v_0 \\ v_1\\ v_2\\ \vdots \\ v_n \\ v_{n+1} \end{bmatrix}&=\begin{bmatrix} 2v_0 - v_1 \\ -v_0+2v_1-v_2 \\ -v_1+2v_2-v_3 \\ \vdots \\ -v_{n-1}+2v_n-v_{n+1} \\ -v_n+2v_{n+1}
@@ -74,7 +96,7 @@ u_{i-1}=\frac{i-1}{i}(\tilde{f}_{i-1}+\tilde{u})
  \label{eq:f_i}
  \end{equation}
  
-For the numerical $v_i$ and analytical $u_i$ function values. 
+For the numerical $v_i$ and analytical $u_i$ function values. We wish to extract the max value of the relative error for varying numbers of grid points n. This will give us some information about how precise the numerical approximation is compared to the analytical solution.
 
  \subsection{LU decomposition}
 
