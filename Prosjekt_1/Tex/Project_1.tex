@@ -25,6 +25,8 @@
 
 \section{Introduction}
 
+In this project we will use numerical methods to solve the one dimensional Poisson equation. We will be rewriting the Dirichlet boundary conditions as a set of linear equations. 
+
 \section{Method}
 
 
@@ -58,21 +60,40 @@ Here the initial value is $\tilde{f}_1=f_1$. The last step is to make a backward
 
 \begin{equation}
 u_{i-1}=\frac{i-1}{i}(\tilde{f}_{i-1}+\tilde{u})
- \label{eq:f_i}
+ \label{eq:u_i-1}
  \end{equation}
  
  This method requires that we know the last value $u_n$ in the $u_i$ array. This value is given by $u_n=\tilde{f}_n/\tilde{b}_n$. 
+ 
+ \subsection{Relative error}
+ 
+ \subsection{LU decomposition}
+ 
+ Algorithms have a varying degree of uncertainty. We will test how precise our algorithm is for the specific tri-diagonal matrix case. The numerical solution will be compared to the analytical solution given the relative error $\epsilon_i$:
+ 
+ \begin{equation}
+\epsilon_i = \log_{10}\bigg(\bigg|\frac{v_i-u_i}{u_i}\bigg|\bigg)
+ \label{eq:f_i}
+ \end{equation}
+ 
+For the numerical $v_i$ and analytical $u_i$ function values. 
 
 \section{Implementation}
 
 All programs used is available at: \\
 \url{https://github.com/Sebamun/FYS3150_Projekter}
 
-We implement the algorithms numerically with varying values of grid points n.
-
-
+We implement the algorithms numerically with varying values of grid points n. 
 
 \section{Results}
+
+\subsection{General algorithm}
+
+\subsection{Algorithm for specific tri-diagonal matrix}
+
+ \subsection{Relative error}
+ 
+  \subsection{LU decomposition}
 
 \section{Concluding remarks}
 
