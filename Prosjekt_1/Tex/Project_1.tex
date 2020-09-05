@@ -8,6 +8,7 @@
 \usepackage{amsmath}
 \usepackage{float}
 \usepackage{amsmath}
+\usepackage{hyperref}
 \bibliographystyle{plain}
 
 \title{FYS3150-Project 1}
@@ -15,12 +16,17 @@
 \date{August 2020}
 \begin{document}
 
+
 \maketitle
+
+\begin{abstract}
+
+\end{abstract}
+
 \section{Introduction}
 
 \section{Method}
 
-\subsection{a}
 
 By multiplying \textbf{A} and \textbf{v} we get \\
 \begin{align*}
@@ -30,7 +36,9 @@ By multiplying \textbf{A} and \textbf{v} we get \\
 \begin{bmatrix}h^2f_0 \\ h^2f_1\\ h^2f_2\\ \vdots \\ h^2f_n\\ h^2f_{n+1}\end{bmatrix} = \widetilde{\textbf{b}}
 \end{align*}
 
-\subsection{c}
+\subsection{General algorithm}
+
+\subsection{Algorithm for specific tri-diagonal matrix}
 
 In our special case we can implement a solver that is even simpler than what is described previously.  We will exploit the fact that the matrix has identical matrix elements along the diagonal and identical values for the non diagonal elements $\vec{e}_i$. In this case we can precalculate the new values for the updated matrix elements $d_i$ without taking into account the values for $\vec{e}_i$:
 
@@ -55,10 +63,12 @@ u_{i-1}=\frac{i-1}{i}(\tilde{f}_{i-1}+\tilde{u})
  
  This method requires that we know the last value $u_n$ in the $u_i$ array. This value is given by $u_n=\tilde{f}_n/\tilde{b}_n$. 
 
-
 \section{Implementation}
 
-\subsection{c)}
+All programs used is available at: \\
+\url{https://github.com/Sebamun/FYS3150_Projekter}
+
+We implement the algorithms numerically with varying values of grid points n.
 
 
 
