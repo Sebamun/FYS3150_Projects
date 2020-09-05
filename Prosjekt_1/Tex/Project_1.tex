@@ -10,13 +10,18 @@
 \usepackage{amsmath}
 \bibliographystyle{plain}
 
-\title{Project1, FYS3150}
+\title{FYS3150-Project 1}
 \author{Marcus Berget, Sebastian Amundsen, Andreas Wetzel}
 \date{August 2020}
 \begin{document}
 
 \maketitle
-\section{a}
+\section{Introduction}
+
+\section{Method}
+
+\subsection{a}
+
 By multiplying \textbf{A} and \textbf{v} we get \\
 \begin{align*}
 \begin{bmatrix} 2 & -1 & 0 & \dots & \dots & 0 \\ -1 & 2 & -1 & 0 & \dots & \dots \\ 0 & -1 & 2 & -1 & 0 & \dots \\ \vdots & \vdots & \vdots & \ddots \\ 0 & \vdots & \vdots & -1 & 2 & -1 \\ 0 & \vdots & \vdots & 0 & -1 & 2  \end{bmatrix}
@@ -24,6 +29,42 @@ By multiplying \textbf{A} and \textbf{v} we get \\
 \end{bmatrix}\\&=
 \begin{bmatrix}h^2f_0 \\ h^2f_1\\ h^2f_2\\ \vdots \\ h^2f_n\\ h^2f_{n+1}\end{bmatrix} = \widetilde{\textbf{b}}
 \end{align*}
+
+\subsection{c}
+
+In our special case we can implement a solver that is even simpler than what is described previously.  We will exploit the fact that the matrix has identical matrix elements along the diagonal and identical values for the non diagonal elements $\vec{e}_i$. In this case we can precalculate the new values for the updated matrix elements $d_i$ without taking into account the values for $\vec{e}_i$:
+
+\begin{equation}
+d_i = 2-\frac{1}{\tilde{d}_{i-1}}=\frac{i+1}{i}
+ \label{eq:d_i}
+ \end{equation}
+
+Here the initial value is $\tilde{d}_1=2$. The new righthand side solution $\tilde{f}_i$ is given by:
+
+\begin{equation}
+\tilde{f}_i = f_i + \frac{(i-1)\tilde{f}_{i-1}}{i}
+ \label{eq:f_i}
+ \end{equation}
+
+Here the initial value is $\tilde{f}_1=f_1$. The last step is to make a backward substitution which gives the final solution $u_i$:
+
+\begin{equation}
+u_{i-1}=\frac{i-1}{i}(\tilde{f}_{i-1}+\tilde{u})
+ \label{eq:f_i}
+ \end{equation}
+ 
+ This method requires that we know the last value $u_n$ in the $u_i$ array. This value is given by $u_n=\tilde{f}_n/\tilde{b}_n$. 
+
+
+\section{Implementation}
+
+\subsection{c)}
+
+
+
+\section{Results}
+
+\section{Concluding remarks}
 
 \bibliography{referanser}
 \end{document}
