@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2020.2.24)  5 SEP 2020 17:14
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2020.2.24)  5 SEP 2020 17:20
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -381,15 +381,9 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 101.
  (./Project_1.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 101.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 101.
+Package rerunfilecheck Info: File `Project_1.out' has not changed.
+(rerunfilecheck)             Checksum: D333742ADD2CB7EB545025EC5D294C70;806.
 
-
-Package rerunfilecheck Warning: File `Project_1.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `Project_1.out':
-(rerunfilecheck)             Before: 8AF38F4BDBD2FBA5C8C2955A7625324D;806
-(rerunfilecheck)             After:  D333742ADD2CB7EB545025EC5D294C70;806.
 
 LaTeX Warning: There were multiply-defined labels.
 
@@ -414,7 +408,7 @@ ve/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive
 exmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/local/texlive/2019/texmf-di
 st/fonts/type1/urw/palatino/uplr8a.pfb></usr/local/texlive/2019/texmf-dist/font
 s/type1/urw/palatino/uplri8a.pfb>
-Output written on Project_1.pdf (3 pages, 113142 bytes).
+Output written on Project_1.pdf (3 pages, 113117 bytes).
 PDF statistics:
  122 PDF objects out of 1000 (max. 8388607)
  106 compressed objects within 2 object streams
