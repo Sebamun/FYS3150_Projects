@@ -99,6 +99,31 @@ For the numerical $v_i$ and analytical $u_i$ function values. We wish to extract
 
  \subsection{LU decomposition}
 
+We are now going to LU decomposition the matrixes 10 x 10, 100 x 100, 1000 x 1000 and 10 000 x 10 000. What the LU decomposition does, is that we can rewrite a matrix as the product of two other matrices L and U, like this:
+\begin{align*}
+\begin{bmatrix}
+a_{11} & a_{12} & .... & a_{1n} \\
+a_{21} & a_{22} & .... & a_{2n} \\
+: & :& .... & : \\
+a_{n1} & a_{n2} & .... & a_{nn} \\
+\end{bmatrix}
+\begin{bmatrix}
+1 & 0 & .... & 0 \\
+l_{21} & 1 & .... & 0 \\
+: & :& .... & : \\
+l_{n1} & l_{n2} & .... & 1\\
+\end{bmatrix}
+\end{align*}
+
+
+
+
+
+There are several reasons why we use LU decomposition instead of standard Gaussian elimination. First of all, it is straight forward to solve the determinant of a matrix. Second, if we still need to solve a set of linear equation with the same matrix, but with a different vector, the number of FLOPS is of order $n^3$. Where FLOPS is floating point operations per second. Where a such operation is the inverse. 
+
+
+
+
 \section{Implementation}
 
 All programs used is available at: \\
