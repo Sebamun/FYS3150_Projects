@@ -1,8 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
-import time
+#import time
 def algo(n):
-    h = 1 / (n + 1) # Steglengde.
+    h = 1.0 / (n + 1.0) # Steglengde.
     x = np.linspace(0,1,n) # Intervallet vi studerer.
     f = 100 * np.exp(-10 * x) * h**2 # Dette er funksjonen.
     f_m = np.zeros(n) # Her lagrer vi verdiene for den nye funksjonen.
@@ -41,4 +41,5 @@ axes[3].title.set_text('n=1000')
 axes[0].set_xlabel('x')
 axes[0].set_ylabel('u(x)')
 plt.show()
-print(time.clock()) # "Process time in seconds"
+#print(time.clock()) # "Process time in seconds"
+print(algo(10)[1])
