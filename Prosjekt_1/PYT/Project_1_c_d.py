@@ -15,9 +15,9 @@ def algo(n):# n er Antall maalepunkter.
     # Lager nye arrays der jeg eksluderer ytterpunktene:
     u2 = 1 - (1 - np.exp(-10)) * x - np.exp(-10 * x) # Analytiske.
     return x, u, u2
-max = np.zeros(6)
+max = np.zeros(7)
 # Lagrer verdiene gitt ulike n:
-n = [10,10**2,10**3,10**4,10**5,10**6]
+n = [10,10**2,10**3,10**4,10**5,10**6,10**7]
 for i in range(len(n)):
     x_new = algo(n[i])[0]
     u_new = algo(n[i])[1]
@@ -28,4 +28,4 @@ for i in range(len(n)):
     #plt.plot(x_new, u_new)
     #plt.plot(x_new, u2_new, '--')
     #plt.show()
-print("d) Den relative feilen er gitt {:} for heholdsvis n=10,10^2,....10^6.".format(max))
+print("d) Den relative feilen er gitt {:} for heholdsvis n=10,10^2,....10^7.".format(max))

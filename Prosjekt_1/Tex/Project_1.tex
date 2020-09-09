@@ -16,7 +16,6 @@
 \title{FYS3150-Project 1}
 \author{Marcus Berget, Sebastian Amundsen, Andreas Wetzel}
 \date{August 2020}
-
 \maketitle
 
 \begin{abstract}
@@ -71,7 +70,6 @@ where $\tilde{b}_1=b_1$ and $\tilde{f}_i=f_i$. The algorithm then continues with
 u_{i-1}=\frac{\tilde{f}_{i-1}-c_{i-1}u_i}{\tilde{b}_{i-1}}
 \end{align}
 \\
-
 \subsection{Algorithm for specific tri-diagonal matrix}
 
 In our special case we can implement a solver that is even simpler than what is described previously.  We will exploit the fact that the matrix has identical matrix elements along the diagonal and identical values for the non diagonal elements $\vec{e}_i$. In this case we can precalculate the new values for the updated matrix elements $d_i$ without taking into account the values for $\vec{e}_i$:
@@ -103,7 +101,7 @@ u_{i-1}=\frac{i-1}{i}(\tilde{f}_{i-1}+\tilde{u})
  
  \begin{equation}
 \epsilon_i = \log_{10}\bigg(\bigg|\frac{v_i-u_i}{u_i}\bigg|\bigg)
- \label{eq:f_i}
+ \label{eq:eps}
  \end{equation}
  
 For the numerical $v_i$ and analytical $u_i$ function values. We wish to extract the max value of the relative error for varying numbers of grid points n. This will give us some information about how precise the numerical approximation is compared to the analytical solution.
@@ -133,10 +131,6 @@ u_{11} & u_{12} & .... & u_{1n} \\
 \end{bmatrix}
 \end{align*}
 
-
-
-
-
 There are several reasons why we use LU decomposition instead of standard Gaussian elimination. First of all, it is straight forward to solve the determinant of a matrix. Second, if we still need to solve a set of linear equation with the same matrix, but with a different vector, the number of FLOPS is of order $n^3$. Where FLOPS is floating point operations per second. Where a such operation is the inverse. 
 \\
 By using LU decomposition, it will be comfortably to solve the inverse, determinate and linear equation.         
@@ -155,9 +149,6 @@ In order to calculate a set of linear equation by using the LU decomposition for
 Where $\mathbf{b}$ is given as the one-dimensional Poisson equation times the square of the step length h. $$\mathbf{b}=-\frac{d^2u}{dx^2}h^2=f(x)h^2$$
 Since we now have obtained two separated equation, we now solve for y in equation $$\mathbf{L}\mathbf{y}=\mathbf{b} \rightarrow \mathbf{L}\mathbf{y}=\mathbf{b} $$. Which we afterwards plug in  $$\mathbf{U}\mathbf{x}=\mathbf{y} \rightarrow \mathbf{x}=\mathbf{U^{-1}}\mathbf{y}$$, which then gives us vector $\mathbf{x}$.
 
-
-
-
 There are several reasons why we use LU decomposition instead of standard Gaussian elimination. First of all, it is straight forward to solve the determinant of a matrix. Second, if we still need to solve a set of linear equation with the same matrix, but with a different vector, the number of FLOPS is of order $n^3$. Where FLOPS is floating point operations per second. Where a such operation is the inverse. 
 
 \section{Implementation}
@@ -165,9 +156,7 @@ There are several reasons why we use LU decomposition instead of standard Gaussi
 All programs used is available at: \\
 \url{https://github.com/Sebamun/FYS3150_Projekter}
 
-We implement the algorithms numerically with varying values of grid points n.
-
-Her må jeg si noe om hvorfor jeg valgte de grensene jeg valgte for den relative feilen. Vil ikke ha med ytterpunkter --> feilen blir gigantisk. Se på forholdet. 
+We implement the algorithms numerically with varying values of grid points n. The approximations are plotted for the general algorithm and we find the relative error for the specific case. The relative error is really high at the endpoints for the specific algorithm. This is due to the ratio between numerator and denominator in equation \ref{eq:eps}. This is solved by excluding the endpoints for the approximation. 
 
 \section{Results}
 
@@ -181,9 +170,28 @@ Her må jeg si noe om hvorfor jeg valgte de grensene jeg valgte for den relative
 \end{figure}
 \subsection{Algorithm for specific tri-diagonal matrix}
 
+
+
  \subsection{Relative error}
  
-  \subsection{LU decomposition}
+ \begin{table}[h!]
+\begin{center}
+\caption{Relative error for specific tri-diagonal matrix algorithm.}
+\begin{tabular}{ |c|c|c| } \hline
+Steps (n)&Relative error ($\epsilon$) \\ \hline
+$10$&$6.20*10^{-1}$ \\ \hline
+$10^2$&$1.21*10^{-1}$ \\ \hline
+$10^3$&$2.36*10^{-2}$ \\ \hline
+$10^4$&$3.61*10^{-3}$ \\ \hline
+$10^5$&$4.89*10^{-4}$ \\ \hline
+$10^6$&$6.17*10^{-5}$ \\ \hline
+$10^7$&$7.45*10^{-6}$ \\ \hline
+\end{tabular}
+\label{tab:e}
+\end{center}
+\end{table}
+ 
+ \subsection{LU decomposition}
  If we compare our solution from the general algorithm and the CPU-time with the LU decomposition, we see that it takes a lot of more time to calculate the LU decomposition. This comes that it takes $n^3$ steps to find the LU decomposition, which is the same for gauss- elimination. But when we calculate LU decomposition, we calculate a set of two equation instead of one. This shows us that there are more steps for calculating just one vector. If we are going to calculate other vectors as well for the same matrix will show us that the LU decomposition will be much more effective. This comes from that we have already calculated the LU decomposition, which lead us to the calculation of the vector now is just $n^2$.    
 \\
 \\
@@ -191,10 +199,10 @@ The reason why we can’t use LU decomposition on a $10^5 \times 10^5$ matrix co
 \\
 The number of floating point operations that the LU decomposition use to solve the set of linear equation equals $\frac{2}{3} n^3$. This means that the FLOPS depend on the size of the matrix. When the matrix becomes large, we can ignore the orders $n$ and $n^2$.        
 
-  \section{Discussion}
+ \section{Discussion}
+ 
+ We can see from table \ref{tab:e} that the relative error decreases as n increases. This is due to the fact that more grid points lead to better precision. However this is only true as long as we have enough memory to store our information. If we would increase the number of grid points further than $n=10^7$ our relative error could potentially increase dramatically. Since we are using python, more than $n=10^7$ grid points make the algorithm take too long to run. We could have used a larger n If we had used a faster programming language (like C++), making it possible to observe an increasing relative error at a larger n.
   
-  
-
 \section{Concluding remarks}
 
 \bibliography{referanser}
