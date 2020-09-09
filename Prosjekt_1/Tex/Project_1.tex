@@ -9,13 +9,14 @@
 \usepackage{float}
 \usepackage{amsmath}
 \usepackage{hyperref}
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
 \bibliographystyle{plain}
 
+\begin{document}
 \title{FYS3150-Project 1}
 \author{Marcus Berget, Sebastian Amundsen, Andreas Wetzel}
 \date{August 2020}
 \begin{document}
-
 
 \maketitle
 
@@ -29,38 +30,49 @@ In this project we will use numerical methods to solve the one dimensional Poiss
 
 \section{Method}
 
-The general one dimensional Poisson equation is given by:
+The one dimensional Poisson equation with Dirichlet boundary conditions is given by:
 
 \begin{equation}
--u''(x)=f(x)
+-u''(x)=f(x) \hspace{1cm} x \in (0,1) \hspace{1cm} u(0)=u(1)=0
  \label{eq:udd}
  \end{equation}
 
-Where $u=v_i$ (discretized approximation) and $f(x)$ are functions. We have the interval $x\in(0,1)$ and the initial conditions $u(0)=u(1)=0$. We have an approximation of the second derivative of u given by:
+Let's define the discretized approximation to $u(x)$ as $v_i$, and to $f(x)$ as $f_i$. We can then make an approximation of the second derivative of $u$ given by:
 
 \begin{equation}
 \frac{-v_{i+1}+v_{i-1}-2v_i}{h^2}=f_i, \textrm{  where  } i=1,2,3......,n,
  \label{eq:2der}
  \end{equation}
  
- Here the step length of spacing is given by $h=1/(n+1)$ and the grid points is defined by $x_i=ih$. We can rewrite equation \ref{eq:2der} as a linear set of equations on the form $\textbf{A}\textbf{v}=\tilde{\textbf{b}}$. In our case we have the source term $f(x)=100e^{-10x}$ which gives us a closed form solution $u(x)$ given by:
+ Here the step length of spacing is given by $h=1/(n+1)$ and the grid points is defined by $x_i=ih$. We can rewrite equation \ref{eq:2der} as a linear set of equations on the form $\textbf{A}\textbf{v}=\tilde{\textbf{b}}$:
+\begin{align*}
+\textbf{A}\textbf{v}&= \begin{bmatrix} 2 & -1 & 0 & \dots & \dots & 0 \\ -1 & 2 & -1 & 0 & \dots & \dots \\ 0 & -1 & 2 & -1 & 0 & \dots \\ \vdots & \vdots & \vdots & \ddots \\ 0 & \vdots & \vdots & -1 & 2 & -1 \\ 0 & \vdots & \vdots & 0 & -1 & 2  \end{bmatrix}
+\begin{bmatrix} v_0 \\ v_1\\ v_2\\ \vdots \\ v_n \\ v_{n+1} \end{bmatrix}=\begin{bmatrix} 2v_0 - v_1 \\ -v_0+2v_1-v_2 \\ -v_1+2v_2-v_3 \\ \vdots \\ -v_{n-1}+2v_n-v_{n+1} \\ -v_n+2v_{n+1}
+\end{bmatrix}\\ &=
+\begin{bmatrix}h^2f_0 \\ h^2f_1\\ h^2f_2\\ \vdots \\ h^2f_n\\ h^2f_{n+1}\end{bmatrix} = \widetilde{\textbf{b}} \numberthis \label{eq:lineq}
+\end{align*}
+
+In our case we will use the source term $f(x)=100e^{-10x}$ which gives us a closed form solution $u(x)$ given by:
 
 \begin{equation}
 u(x)=1-(1-e^{-10})x-e^{-10x}
- \label{eq:d_i}
- \end{equation}
+\label{eq:d_i}
+\end{equation}
 
 We will use this solution as a point of reference to discuss the accuracy of our numerical methods. 
 
-by multiplying \textbf{A} and \textbf{v} we get \\
-\begin{align*}
-\begin{bmatrix} 2 & -1 & 0 & \dots & \dots & 0 \\ -1 & 2 & -1 & 0 & \dots & \dots \\ 0 & -1 & 2 & -1 & 0 & \dots \\ \vdots & \vdots & \vdots & \ddots \\ 0 & \vdots & \vdots & -1 & 2 & -1 \\ 0 & \vdots & \vdots & 0 & -1 & 2  \end{bmatrix}
-\begin{bmatrix} v_0 \\ v_1\\ v_2\\ \vdots \\ v_n \\ v_{n+1} \end{bmatrix}&=\begin{bmatrix} 2v_0 - v_1 \\ -v_0+2v_1-v_2 \\ -v_1+2v_2-v_3 \\ \vdots \\ -v_{n-1}+2v_n-v_{n+1} \\ -v_n+2v_{n+1}
-\end{bmatrix}\\&=
-\begin{bmatrix}h^2f_0 \\ h^2f_1\\ h^2f_2\\ \vdots \\ h^2f_n\\ h^2f_{n+1}\end{bmatrix} = \widetilde{\textbf{b}}
-\end{align*}
+\subsection{General algorithm for tri-diagonal matrix}
 
-\subsection{General algorithm}
+There exists an algorithm for solving generic sets of linear equations, but in the case for equation (\ref{eq:lineq})  where we have a tri-diagonal matrix we can use a different algorithm which decreases the amount of floating point operations needed. We denote the elements in the leading diagonal of A as $b_1, b_2, ..., b_n$, the elements above the leading diagonal as $a_2, a_3 ..., a_n$, and the elements below the leading diagonal as $c_1, c_2, ..., c_{n-1}$. The algorithm uses a forward substitution to replace the leading diagonal with elements denoted by $\tilde{b}_i$, and replacing the righthand side in with the elements $\tilde{f}_i$ as shown below:
+\begin{align*}
+\tilde{b}_i=b_i-\frac{a_ic_{i-1}}{\tilde{b}_{i-1}} \\
+\tilde{f}_i=f_i-\frac{a_i\tilde{f}_{i-1}}{\tilde{b}_{i-1}}
+\end{align*}
+where $\tilde{b}_1=b_1$ and $\tilde{f}_i=f_i$. The algorithm then continues with a backward substitution which gives the solution:
+\begin{align}
+u_{i-1}=\frac{\tilde{f}_{i-1}-c_{i-1}u_i}{\tilde{b}_{i-1}}
+\end{align}
+\\
 
 \subsection{Algorithm for specific tri-diagonal matrix}
 
@@ -144,6 +156,15 @@ In order to calculate a set of linear equation by using the LU decomposition for
 \end{align*}
 Where $\mathbf{b}$ is given as the one-dimensional Poisson equation times the square of the step length h. $$\mathbf{b}=-\frac{d^2u}{dx^2}h^2=f(x)h^2$$
 Since we now have obtained two separated equation, we now solve for y in equation $$\mathbf{L}\mathbf{y}=\mathbf{b} \rightarrow \mathbf{L}\mathbf{y}=\mathbf{b} $$. Which we afterwards plug in  $$\mathbf{U}\mathbf{x}=\mathbf{y} \rightarrow \mathbf{x}=\mathbf{U^{-1}}\mathbf{y}$$, which then gives us vector $\mathbf{x}$.
+\end{align*}
+
+
+
+
+
+There are several reasons why we use LU decomposition instead of standard Gaussian elimination. First of all, it is straight forward to solve the determinant of a matrix. Second, if we still need to solve a set of linear equation with the same matrix, but with a different vector, the number of FLOPS is of order $n^3$. Where FLOPS is floating point operations per second. Where a such operation is the inverse. 
+
+
 
 
 \section{Implementation}
@@ -168,6 +189,11 @@ We implement the algorithms numerically with varying values of grid points n.
 The reason why we can’t use LU decomposition on a $10^5 \times 10^5$ matrix comes from the random accesses memory problem. The data that should be stored from the operation takes to much memory that the computer cant handle the operation we want to.  
 \\
 The number of floating point operations that the LU decomposition use to solve the set of linear equation equals $\frac{2}{3} n^3$. This means that the FLOPS depend on the size of the matrix. When the matrix becomes large, we can ignore the orders $n$ and $n^2$.        
+
+  \section{Discussion}
+  
+  
+
 \section{Concluding remarks}
 
 \bibliography{referanser}
