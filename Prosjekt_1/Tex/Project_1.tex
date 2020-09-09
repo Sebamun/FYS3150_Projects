@@ -184,18 +184,23 @@ Her må jeg si noe om hvorfor jeg valgte de grensene jeg valgte for den relative
  \subsection{Relative error}
  
   \subsection{LU decomposition}
+ 
+
+  \section{Discussion}
+    \subsection{LU decomposition}
  If we compare our solution from the general algorithm and the CPU-time with the LU decomposition, we see that it takes a lot of more time to calculate the LU decomposition. This comes that it takes $n^3$ steps to find the LU decomposition, which is the same for gauss- elimination. But when we calculate LU decomposition, we calculate a set of two equation instead of one. This shows us that there are more steps for calculating just one vector. If we are going to calculate other vectors as well for the same matrix will show us that the LU decomposition will be much more effective. This comes from that we have already calculated the LU decomposition, which lead us to the calculation of the vector now is just $n^2$.    
 \\
 \\
 The reason why we can’t use LU decomposition on a $10^5 \times 10^5$ matrix comes from the random accesses memory problem. The data that should be stored from the operation takes to much memory that the computer cant handle the operation we want to.  
 \\
-The number of floating point operations that the LU decomposition use to solve the set of linear equation equals $\frac{2}{3} n^3$. This means that the FLOPS depend on the size of the matrix. When the matrix becomes large, we can ignore the orders $n$ and $n^2$.        
-
-  \section{Discussion}
+The number of floating point operations that the LU decomposition use to solve the set of linear equation equals $\frac{2}{3} n^3$. This means that the FLOPS depend on the size of the matrix. When the matrix becomes large, we can ignore the orders $n$ and $n^2$.     
   
   
 
 \section{Concluding remarks}
+
+
+
 
 \bibliography{referanser}
 \end{document}

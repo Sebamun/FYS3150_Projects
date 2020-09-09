@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.7.15)  9 SEP 2020 14:41
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.7.15)  9 SEP 2020 15:07
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -399,31 +399,60 @@ LaTeX Font Info:    Try loading font information for T1+cmtt on input line 172.
  (/usr/local/texlive/2019/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-Underfull \hbox (badness 10000) in paragraph at lines 187--193
+Underfull \hbox (badness 10000) in paragraph at lines 191--197
 
  []
 
 [5]
+Underfull \hbox (badness 2753) in paragraph at lines 207--207
+[]\T1/ppl/m/n/12 Country Name
+ []
+
+
+Underfull \hbox (badness 2376) in paragraph at lines 207--207
+[]\T1/ppl/m/n/12 ISO AL-PHA 2
+ []
+
+
+Underfull \hbox (badness 2376) in paragraph at lines 207--207
+[]\T1/ppl/m/n/12 ISO AL-PHA 3
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 207--208
+[]\T1/ppl/m/n/12 ISO nu-meric
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 213--213
+[]\T1/ppl/m/n/12 American
+ []
+
+
+Overfull \hbox (1.43304pt too wide) in paragraph at lines 203--218
+[] 
+ []
+
 No file Project_1.bbl.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 201.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 220.
 [6]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 201.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 220.
  (./Project_1.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 201.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 201.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 220.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 220.
 Package rerunfilecheck Info: File `Project_1.out' has not changed.
-(rerunfilecheck)             Checksum: 3DE1951575890B3ACB389BB343F1C4DA;876.
+(rerunfilecheck)             Checksum: 9564E7E6F14D38882D0DE9CD36CDF7EC;942.
 
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 201.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 220.
  ) 
 Here is how much of TeX's memory you used:
- 6157 strings out of 492616
- 88653 string characters out of 6129481
+ 6159 strings out of 492616
+ 88683 string characters out of 6129481
  185142 words of memory out of 5000000
- 9953 multiletter control sequences out of 15000+600000
+ 9954 multiletter control sequences out of 15000+600000
  40968 words of font info for 92 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  28i,16n,28p,741b,334s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -438,10 +467,10 @@ ve/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive
 exmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/local/texlive/2019/texmf-di
 st/fonts/type1/urw/palatino/uplr8a.pfb></usr/local/texlive/2019/texmf-dist/font
 s/type1/urw/palatino/uplri8a.pfb>
-Output written on Project_1.pdf (6 pages, 125919 bytes).
+Output written on Project_1.pdf (6 pages, 127391 bytes).
 PDF statistics:
- 146 PDF objects out of 1000 (max. 8388607)
- 127 compressed objects within 2 object streams
- 30 named destinations out of 1000 (max. 500000)
- 113 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 151 PDF objects out of 1000 (max. 8388607)
+ 132 compressed objects within 2 object streams
+ 31 named destinations out of 1000 (max. 500000)
+ 121 words of extra memory for PDF output out of 10000 (max. 10000000)
 

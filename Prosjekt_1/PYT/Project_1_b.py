@@ -1,6 +1,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
-#import time
+import time
+
+start_time = time.time()
+
 def algo(n):
     h = 1.0 / (n + 1.0) # Steglengde.
     x = np.linspace(0,1,n) # Intervallet vi studerer.
@@ -30,8 +33,22 @@ u_2 = 1 - (1 - np.exp(-10)) * x_2 - np.exp(-10 * x_2) # Den analystiske løsning
 fig, axes = plt.subplots(1,4)
 axes[0].plot(x_2, u_2)
 axes[1].plot(algo(10)[0], algo(10)[1])
+
+print("--- %s seconds ---" % (time.time() - start_time))
+
 axes[2].plot(algo(100)[0], algo(100)[1])
+
+print("--- %s seconds ---" % (time.time() - start_time))
+
 axes[3].plot(algo(1000)[0], algo(1000)[1])
+
+print("--- %s seconds ---" % (time.time() - start_time))
+
+axes[3].plot(algo(10000)[0], algo(10000)[1])
+
+print("--- %s seconds ---" % (time.time() - start_time))
+
+
 # Navn på plott:
 fig.suptitle('u(x)')
 axes[0].title.set_text('analytiske')
