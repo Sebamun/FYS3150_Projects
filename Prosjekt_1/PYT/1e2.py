@@ -16,7 +16,7 @@ u[0] = 100
 
 
 
-A = np.zeros((10, 10), int)
+A = np.zeros((10, 10), int) #Creating a matrix A
 for i in range(10):
     for j in range(10):
         if i==j:
@@ -29,14 +29,14 @@ for i in range(10):
 
 
 x = np.linspace(0,1,n)
-f = 100*np.exp(-10*x)*h**2
+f = 100*np.exp(-10*x)*h**2 #our given function
 
 
 for i in range(1,n):
     f[i] = f[i] + (i-1)*f[i-1]/i
 
 
-P,L,U = lu(A)
+P,L,U = lu(A) #calculating the LU decompsition
 
 L_inv = np.linalg.inv(L)
 
@@ -46,6 +46,7 @@ U_inv = np.linalg.inv(U)
 
 x = U_inv@y
 
+print(x)
 print("--- %s seconds ---" % (time.time() - start_time))
 
 

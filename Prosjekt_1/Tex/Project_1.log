@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.7.15)  7 SEP 2020 15:24
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.7.15)  9 SEP 2020 14:16
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -372,34 +372,59 @@ Underfull \hbox (badness 10000) in paragraph at lines 55--56
 LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <14.4> not available
 (Font)              Font shape `T1/ppl/b/n' tried instead on input line 63.
 [2]
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 131.
+Underfull \hbox (badness 10000) in paragraph at lines 130--138
 
- (/usr/local/texlive/2019/texmf-dist/tex/latex/base/t1cmtt.fd
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 130--138
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 130--138
+
+ []
+
+[3]
+Overfull \hbox (1.18402pt too wide) in paragraph at lines 144--145
+\T1/ppl/m/n/12 Where $\OT1/zplm/b/n/12 b$ \T1/ppl/m/n/12 is given as the one-di
+mensional Pois-son equa-tion times the square
+ []
+
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 152.
+
+(/usr/local/texlive/2019/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
-) [3]
-No file Project_1.bbl.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 148.
+)
+Underfull \hbox (badness 10000) in paragraph at lines 165--171
+
+ []
+
 [4]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 148.
+No file Project_1.bbl.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 174.
+[5]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 174.
  (./Project_1.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 148.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 148.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 174.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 174.
 Package rerunfilecheck Info: File `Project_1.out' has not changed.
 (rerunfilecheck)             Checksum: D333742ADD2CB7EB545025EC5D294C70;806.
 
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 148.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 174.
  ) 
 Here is how much of TeX's memory you used:
- 6140 strings out of 492616
- 88506 string characters out of 6129481
+ 6150 strings out of 492616
+ 88590 string characters out of 6129481
  184144 words of memory out of 5000000
- 9947 multiletter control sequences out of 15000+600000
- 38127 words of font info for 84 fonts, out of 8000000 for 9000
+ 9950 multiletter control sequences out of 15000+600000
+ 40968 words of font info for 92 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 28i,16n,28p,428b,328s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 28i,16n,28p,741b,340s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}
 {/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/tex
 live/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texl
@@ -411,10 +436,10 @@ ve/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive
 exmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/local/texlive/2019/texmf-di
 st/fonts/type1/urw/palatino/uplr8a.pfb></usr/local/texlive/2019/texmf-dist/font
 s/type1/urw/palatino/uplri8a.pfb>
-Output written on Project_1.pdf (4 pages, 118730 bytes).
+Output written on Project_1.pdf (5 pages, 122304 bytes).
 PDF statistics:
- 131 PDF objects out of 1000 (max. 8388607)
- 114 compressed objects within 2 object streams
- 25 named destinations out of 1000 (max. 500000)
+ 135 PDF objects out of 1000 (max. 8388607)
+ 117 compressed objects within 2 object streams
+ 26 named destinations out of 1000 (max. 500000)
  105 words of extra memory for PDF output out of 10000 (max. 10000000)
 
