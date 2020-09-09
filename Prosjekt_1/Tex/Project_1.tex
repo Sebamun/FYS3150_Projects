@@ -16,7 +16,6 @@
 \title{FYS3150-Project 1}
 \author{Marcus Berget, Sebastian Amundsen, Andreas Wetzel}
 \date{August 2020}
-\begin{document}
 
 \maketitle
 
@@ -29,7 +28,6 @@
 In this project we will use numerical methods to solve the one dimensional Poisson equation. We will be rewriting the Dirichlet boundary conditions as a set of linear equations. Our numerical methods will have varying degrees of accuracy. We are going to compare our algorithms and the CPU time for the different numerical methods. 
 
 \section{Method}
-
 The one dimensional Poisson equation with Dirichlet boundary conditions is given by:
 
 \begin{equation}
@@ -156,7 +154,8 @@ In order to calculate a set of linear equation by using the LU decomposition for
 \end{align*}
 Where $\mathbf{b}$ is given as the one-dimensional Poisson equation times the square of the step length h. $$\mathbf{b}=-\frac{d^2u}{dx^2}h^2=f(x)h^2$$
 Since we now have obtained two separated equation, we now solve for y in equation $$\mathbf{L}\mathbf{y}=\mathbf{b} \rightarrow \mathbf{L}\mathbf{y}=\mathbf{b} $$. Which we afterwards plug in  $$\mathbf{U}\mathbf{x}=\mathbf{y} \rightarrow \mathbf{x}=\mathbf{U^{-1}}\mathbf{y}$$, which then gives us vector $\mathbf{x}$.
-\end{align*}
+
+
 
 
 
@@ -172,7 +171,9 @@ There are several reasons why we use LU decomposition instead of standard Gaussi
 All programs used is available at: \\
 \url{https://github.com/Sebamun/FYS3150_Projekter}
 
-We implement the algorithms numerically with varying values of grid points n. 
+We implement the algorithms numerically with varying values of grid points n.
+
+Her må jeg si noe om hvorfor jeg valgte de grensene jeg valgte for den relative feilen. Vil ikke ha med ytterpunkter --> feilen blir gigantisk. Se på forholdet. 
 
 \section{Results}
 
