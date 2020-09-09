@@ -28,41 +28,42 @@ In this project we will use numerical methods to solve the one dimensional Poiss
 
 \section{Method}
 
-The general one dimensional Poisson equation is given by:
+The one dimensional Poisson equation with Dirichlet boundary conditions is given by:
 
 \begin{equation}
--u''(x)=f(x)
+-u''(x)=f(x) \hspace{1cm} x \in (0,1) \hspace{1cm} u(0)=u(1)=0
  \label{eq:udd}
  \end{equation}
 
-Where $u=v_i$ (discretized approximation) and $f(x)$ are functions. We have the interval $x\in(0,1)$ and the initial conditions $u(0)=u(1)=0$. We have an approximation of the second derivative of u given by:
+Let's define the discretized approximation to $u(x)$ as $v_i$, and to $f(x)$ as $f_i$. We can then make an approximation of the second derivative of $u$ given by:
 
 \begin{equation}
 \frac{-v_{i+1}+v_{i-1}-2v_i}{h^2}=f_i, \textrm{  where  } i=1,2,3......,n,
  \label{eq:2der}
  \end{equation}
  
- Here the step length of spacing is given by $h=1/(n+1)$ and the grid points is defined by $x_i=ih$. We can rewrite equation \ref{eq:2der} as a linear set of equations on the form $\textbf{A}\textbf{v}=\tilde{\textbf{b}}$. In our case we have the source term $f(x)=100e^{-10x}$ which gives us a closed form solution $u(x)$ given by:
-
-\begin{equation}
-u(x)=1-(1-e^{-10})x-e^{-10x}
- \label{eq:d_i}
- \end{equation}
-
-We will use this solution as a point of reference to discuss the accuracy of our numerical methods. 
-
-by multiplying \textbf{A} and \textbf{v} we get \\
+ Here the step length of spacing is given by $h=1/(n+1)$ and the grid points is defined by $x_i=ih$. We can rewrite equation \ref{eq:2der} as a linear set of equations on the form $\textbf{A}\textbf{v}=\tilde{\textbf{b}}$:
 \begin{align*}
-\begin{bmatrix} 2 & -1 & 0 & \dots & \dots & 0 \\ -1 & 2 & -1 & 0 & \dots & \dots \\ 0 & -1 & 2 & -1 & 0 & \dots \\ \vdots & \vdots & \vdots & \ddots \\ 0 & \vdots & \vdots & -1 & 2 & -1 \\ 0 & \vdots & \vdots & 0 & -1 & 2  \end{bmatrix}
-\begin{bmatrix} v_0 \\ v_1\\ v_2\\ \vdots \\ v_n \\ v_{n+1} \end{bmatrix}&=\begin{bmatrix} 2v_0 - v_1 \\ -v_0+2v_1-v_2 \\ -v_1+2v_2-v_3 \\ \vdots \\ -v_{n-1}+2v_n-v_{n+1} \\ -v_n+2v_{n+1}
-\end{bmatrix}\\&=
+\textbf{A}\textbf{v}&= \begin{bmatrix} 2 & -1 & 0 & \dots & \dots & 0 \\ -1 & 2 & -1 & 0 & \dots & \dots \\ 0 & -1 & 2 & -1 & 0 & \dots \\ \vdots & \vdots & \vdots & \ddots \\ 0 & \vdots & \vdots & -1 & 2 & -1 \\ 0 & \vdots & \vdots & 0 & -1 & 2  \end{bmatrix}
+\begin{bmatrix} v_0 \\ v_1\\ v_2\\ \vdots \\ v_n \\ v_{n+1} \end{bmatrix}=\begin{bmatrix} 2v_0 - v_1 \\ -v_0+2v_1-v_2 \\ -v_1+2v_2-v_3 \\ \vdots \\ -v_{n-1}+2v_n-v_{n+1} \\ -v_n+2v_{n+1}
+\end{bmatrix}\\ &=
 \begin{bmatrix}h^2f_0 \\ h^2f_1\\ h^2f_2\\ \vdots \\ h^2f_n\\ h^2f_{n+1}\end{bmatrix} = \widetilde{\textbf{b}}
 \end{align*}
 
-\subsection{General algorithm}
+In our case we will use the source term $f(x)=100e^{-10x}$ which gives us a closed form solution $u(x)$ given by:
 
-Nå funker det
+\begin{equation}
+u(x)=1-(1-e^{-10})x-e^{-10x}
+\label{eq:d_i}
+\end{equation}
+
+We will use this solution as a point of reference to discuss the accuracy of our numerical methods. 
+
+\subsection{General algorithm for tri-diagonal matrix}
+
+In the case where 
 \\
+
 \subsection{Algorithm for specific tri-diagonal matrix}
 
 In our special case we can implement a solver that is even simpler than what is described previously.  We will exploit the fact that the matrix has identical matrix elements along the diagonal and identical values for the non diagonal elements $\vec{e}_i$. In this case we can precalculate the new values for the updated matrix elements $d_i$ without taking into account the values for $\vec{e}_i$:
