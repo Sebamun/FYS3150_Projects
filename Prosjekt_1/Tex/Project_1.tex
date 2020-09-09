@@ -9,6 +9,7 @@
 \usepackage{float}
 \usepackage{amsmath}
 \usepackage{hyperref}
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
 \bibliographystyle{plain}
 
 \title{FYS3150-Project 1}
@@ -47,7 +48,7 @@ Let's define the discretized approximation to $u(x)$ as $v_i$, and to $f(x)$ as 
 \textbf{A}\textbf{v}&= \begin{bmatrix} 2 & -1 & 0 & \dots & \dots & 0 \\ -1 & 2 & -1 & 0 & \dots & \dots \\ 0 & -1 & 2 & -1 & 0 & \dots \\ \vdots & \vdots & \vdots & \ddots \\ 0 & \vdots & \vdots & -1 & 2 & -1 \\ 0 & \vdots & \vdots & 0 & -1 & 2  \end{bmatrix}
 \begin{bmatrix} v_0 \\ v_1\\ v_2\\ \vdots \\ v_n \\ v_{n+1} \end{bmatrix}=\begin{bmatrix} 2v_0 - v_1 \\ -v_0+2v_1-v_2 \\ -v_1+2v_2-v_3 \\ \vdots \\ -v_{n-1}+2v_n-v_{n+1} \\ -v_n+2v_{n+1}
 \end{bmatrix}\\ &=
-\begin{bmatrix}h^2f_0 \\ h^2f_1\\ h^2f_2\\ \vdots \\ h^2f_n\\ h^2f_{n+1}\end{bmatrix} = \widetilde{\textbf{b}}
+\begin{bmatrix}h^2f_0 \\ h^2f_1\\ h^2f_2\\ \vdots \\ h^2f_n\\ h^2f_{n+1}\end{bmatrix} = \widetilde{\textbf{b}} \numberthis \label{eq:lineq}
 \end{align*}
 
 In our case we will use the source term $f(x)=100e^{-10x}$ which gives us a closed form solution $u(x)$ given by:
@@ -61,7 +62,15 @@ We will use this solution as a point of reference to discuss the accuracy of our
 
 \subsection{General algorithm for tri-diagonal matrix}
 
-In the case where 
+There exists an algorithm for solving generic sets of linear equations, but in the case for equation (\ref{eq:lineq})  where we have a tri-diagonal matrix we can use a different algorithm which decreases the amount of floating point operations needed. We denote the elements in the leading diagonal of A as $b_1, b_2, ..., b_n$, the elements above the leading diagonal as $a_2, a_3 ..., a_n$, and the elements below the leading diagonal as $c_1, c_2, ..., c_{n-1}$. The algorithm uses a forward substitution to replace the leading diagonal with elements denoted by $\tilde{b}_i$, and replacing the righthand side in with the elements $\tilde{f}_i$ as shown below:
+\begin{align*}
+\tilde{b}_i=b_i-\frac{a_ic_{i-1}}{\tilde{b}_{i-1}} \\
+\tilde{f}_i=f_i-\frac{a_i\tilde{f}_{i-1}}{\tilde{b}_{i-1}}
+\end{align*}
+where $\tilde{b}_1=b_1$ and $\tilde{f}_i=f_i$. The algorithm then continues with a backward substitution which gives the solution:
+\begin{align}
+u_{i-1}=\frac{\tilde{f}_{i-1}-c_{i-1}u_i}{\tilde{b}_{i-1}}
+\end{align}
 \\
 
 \subsection{Algorithm for specific tri-diagonal matrix}
@@ -116,7 +125,7 @@ l_{21} & 1 & .... & 0 \\
 : & :& .... & : \\
 l_{n1} & l_{n2} & .... & 1\\
 \end{bmatrix}
-\end{align*}
+\end{align*}gi
 
 
 
