@@ -158,13 +158,7 @@ Since we now have obtained two separated equation, we now solve for y in equatio
 
 
 
-
-
-
 There are several reasons why we use LU decomposition instead of standard Gaussian elimination. First of all, it is straight forward to solve the determinant of a matrix. Second, if we still need to solve a set of linear equation with the same matrix, but with a different vector, the number of FLOPS is of order $n^3$. Where FLOPS is floating point operations per second. Where a such operation is the inverse. 
-
-
-
 
 \section{Implementation}
 
@@ -199,7 +193,37 @@ The number of floating point operations that the LU decomposition use to solve t
 
 \section{Concluding remarks}
 
+\begin{tabular}{ |p{5cm}|p{5cm}|p{5cm}|  }
+\hline
+\multicolumn{3}{|c|}{Country List} \\
+\hline
+Generel algorithm& Special algorithm& LU decomposition \\
+\hline
+Afghanistan & AF &0.585 seconds \\
+Aland Islands & AX   & 0.591 seconds \\
+Albania &AL & 0.736 seconds \\
+Algeria    &DZ & 56.580 seconds \\
+American Samoa & AS & ... \\
+Andorra & AD & ...   \\
+Angola & AO & ... \\
+\hline
+\end{tabular}
 
+\begin{tabular}{ |p{4cm}||p{4cm}|p{4cm}|p{4cm}|  }
+ \hline
+ \multicolumn{4}{|c|}{Country List} \\
+ \hline
+ Country Name     or Area Name& Generel algorithm& Special algorithm& LU decomposition \\ \\
+ \hline
+ Afghanistan & AF & &0.585 seconds\\
+Aland Islands & AX   &  & 0.591 seconds\\
+Albania &AL &  & 0.736 seconds\\
+Algeria    &DZ &  &56.580 seconds\\
+American Samoa & AS & & ...\\
+Andorra & AD &    &...\\
+Angola & AO &  &...\\
+ \hline
+\end{tabular}
 
 
 \bibliography{referanser}

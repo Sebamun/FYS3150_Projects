@@ -1,8 +1,5 @@
 import numpy as np
 import matplotlib.pyplot as plt
-import time
-
-start_time = time.time()
 
 def algo(n):# n er Antall maalepunkter.
     h = 1/(n+1) # Steglengde.
