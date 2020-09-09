@@ -12,10 +12,10 @@
 \newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
 \bibliographystyle{plain}
 
+\begin{document}
 \title{FYS3150-Project 1}
 \author{Marcus Berget, Sebastian Amundsen, Andreas Wetzel}
 \date{August 2020}
-\begin{document}
 
 \maketitle
 
@@ -28,7 +28,6 @@
 In this project we will use numerical methods to solve the one dimensional Poisson equation. We will be rewriting the Dirichlet boundary conditions as a set of linear equations. Our numerical methods will have varying degrees of accuracy. We are going to compare our algorithms and the CPU time for the different numerical methods. 
 
 \section{Method}
-
 The one dimensional Poisson equation with Dirichlet boundary conditions is given by:
 
 \begin{equation}
@@ -111,7 +110,7 @@ For the numerical $v_i$ and analytical $u_i$ function values. We wish to extract
 
  \subsection{LU decomposition}
 
-We are now going to LU decomposition the matrixes 10 x 10, 100 x 100, 1000 x 1000 and 10 000 x 10 000. What the LU decomposition does, is that we can rewrite a matrix as the product of two other matrices L and U, like this:
+We are now going to LU decomposition the matrixes 10 x 10, 100 x 100, 1000 x 1000 and 10 000 x 10 000. What the LU decomposition does, is that it rewrite a matrix as the product of two other matrices L and U, like this:
 \begin{align*}
 \begin{bmatrix}
 a_{11} & a_{12} & .... & a_{1n} \\
@@ -119,11 +118,18 @@ a_{21} & a_{22} & .... & a_{2n} \\
 : & :& .... & : \\
 a_{n1} & a_{n2} & .... & a_{nn} \\
 \end{bmatrix}
+=
 \begin{bmatrix}
 1 & 0 & .... & 0 \\
 l_{21} & 1 & .... & 0 \\
 : & :& .... & : \\
 l_{n1} & l_{n2} & .... & 1\\
+\end{bmatrix}
+\begin{bmatrix}
+u_{11} & u_{12} & .... & u_{1n} \\
+0 & u_{22} & .... & u_{2n} \\
+: & :& .... & : \\
+0 & 0& .... & u_{nn} \\
 \end{bmatrix}
 \end{align*}
 
@@ -132,16 +138,36 @@ l_{n1} & l_{n2} & .... & 1\\
 
 
 There are several reasons why we use LU decomposition instead of standard Gaussian elimination. First of all, it is straight forward to solve the determinant of a matrix. Second, if we still need to solve a set of linear equation with the same matrix, but with a different vector, the number of FLOPS is of order $n^3$. Where FLOPS is floating point operations per second. Where a such operation is the inverse. 
+\\
+By using LU decomposition, it will be comfortably to solve the inverse, determinate and linear equation.         
+\\
+\\
+In order to calculate a set of linear equation by using the LU decomposition for matrix Ax=w. We first need to compose a matrix A to two matrices L and U. When we have done that we split our equation in to two equation, which you can see under here.  
+\\
+\\
+\begin{align*}
+\mathbf{A}\mathbf{x}=\mathbf{L}\mathbf{U}\mathbf{x}=\mathbf{b}\\
+\mathbf{A}\mathbf{x}=\mathbf{L}\mathbf{U}\mathbf{x}=\mathbf{b}\\
+\mathbf{L}\mathbf{y}=\mathbf{b} \land  \mathbf{U}\mathbf{x}=\mathbf{y}\\
+\end{align*}
+\begin{align*}
+\end{align*}
+Where $\mathbf{b}$ is given as the one-dimensional Poisson equation times the square of the step length h. $$\mathbf{b}=-\frac{d^2u}{dx^2}h^2=f(x)h^2$$
+Since we now have obtained two separated equation, we now solve for y in equation $$\mathbf{L}\mathbf{y}=\mathbf{b} \rightarrow \mathbf{L}\mathbf{y}=\mathbf{b} $$. Which we afterwards plug in  $$\mathbf{U}\mathbf{x}=\mathbf{y} \rightarrow \mathbf{x}=\mathbf{U^{-1}}\mathbf{y}$$, which then gives us vector $\mathbf{x}$.
 
 
 
+
+There are several reasons why we use LU decomposition instead of standard Gaussian elimination. First of all, it is straight forward to solve the determinant of a matrix. Second, if we still need to solve a set of linear equation with the same matrix, but with a different vector, the number of FLOPS is of order $n^3$. Where FLOPS is floating point operations per second. Where a such operation is the inverse. 
 
 \section{Implementation}
 
 All programs used is available at: \\
 \url{https://github.com/Sebamun/FYS3150_Projekter}
 
-We implement the algorithms numerically with varying values of grid points n. 
+We implement the algorithms numerically with varying values of grid points n.
+
+Her må jeg si noe om hvorfor jeg valgte de grensene jeg valgte for den relative feilen. Vil ikke ha med ytterpunkter --> feilen blir gigantisk. Se på forholdet. 
 
 \section{Results}
 
@@ -152,11 +178,16 @@ We implement the algorithms numerically with varying values of grid points n.
  \subsection{Relative error}
  
   \subsection{LU decomposition}
-  
+ If we compare our solution from the general algorithm and the CPU-time with the LU decomposition, we see that it takes a lot of more time to calculate the LU decomposition. This comes that it takes $n^3$ steps to find the LU decomposition, which is the same for gauss- elimination. But when we calculate LU decomposition, we calculate a set of two equation instead of one. This shows us that there are more steps for calculating just one vector. If we are going to calculate other vectors as well for the same matrix will show us that the LU decomposition will be much more effective. This comes from that we have already calculated the LU decomposition, which lead us to the calculation of the vector now is just $n^2$.    
+\\
+\\
+The reason why we can’t use LU decomposition on a $10^5 \times 10^5$ matrix comes from the random accesses memory problem. The data that should be stored from the operation takes to much memory that the computer cant handle the operation we want to.  
+\\
+The number of floating point operations that the LU decomposition use to solve the set of linear equation equals $\frac{2}{3} n^3$. This means that the FLOPS depend on the size of the matrix. When the matrix becomes large, we can ignore the orders $n$ and $n^2$.        
+
   \section{Discussion}
   
   
-
 
 \section{Concluding remarks}
 

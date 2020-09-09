@@ -19,27 +19,25 @@ def algo(n):
         b_m[j] = b[j] - (a[j] * c[j-1] / b_m[j-1])
         f_m[j] = f[j] - (a[j] * f_m[j-1] / b_m[j-1])
     u = np.zeros(n) # Her lagrer vi verdiene for u.
-    u[-1] = 0 # Her setter vi den siste verdien for u.
+    u[-1] = f_m[-1] / b_m[-1] # Her setter vi den siste verdien for u.
     # Steg 2:
-    for j in range(1,n-1):
+    for j in range(1,n):
         u[-j-1] = (f_m[-j-1] - c[-j-1] * u[-j]) / b_m[-j-1] # Den numeriske tilnærmingen.
-    u2 = 1 - (1 - np.exp(-10)) * x - np.exp(-10 * x) # Den analystiske løsningen.
-    return x, u, u2
+    return x, u
+x_2 = np.linspace(0,1,1000) # Vilkårlige punkter som brukes i den analytiske løsningen.
+u_2 = 1 - (1 - np.exp(-10)) * x_2 - np.exp(-10 * x_2) # Den analystiske løsningen.
 # Her plotter vi:
-fig, axes = plt.subplots(1,3)
-axes[0].plot(algo(10)[0], algo(10)[1])
-axes[0].plot(algo(10)[0], algo(10)[2],'--')
-axes[1].plot(algo(100)[0], algo(100)[1])
-axes[1].plot(algo(100)[0], algo(100)[2],'--')
-axes[2].plot(algo(1000)[0], algo(1000)[1])
-axes[2].plot(algo(1000)[0], algo(1000)[2],'--')
+fig, axes = plt.subplots(1,4)
+axes[0].plot(x_2, u_2)
+axes[1].plot(algo(10)[0], algo(10)[1])
+axes[2].plot(algo(100)[0], algo(100)[1])
+axes[3].plot(algo(1000)[0], algo(1000)[1])
 # Navn på plott:
-fig.suptitle('u(x)')
-axes[0].title.set_text('n=10')
-axes[1].title.set_text('n=100')
-axes[2].title.set_text('n=1000')
-axes[0].set_xlabel('x')
-axes[0].set_ylabel('u(x)')
+fig.suptitle('Analytical vs computed')
+axes[0].title.set_text('analytiske')
+axes[1].title.set_text('n=10')
+axes[2].title.set_text('n=100')
+axes[3].title.set_text('n=1000')
 axes[0].set_xlabel('x')
 axes[0].set_ylabel('u(x)')
 axes[1].set_xlabel('x')
@@ -50,5 +48,5 @@ axes[3].set_xlabel('x')
 axes[3].set_ylabel('u(x)')
 plt.tight_layout()
 plt.show()
+fig.savefig('1b.png', dpi=fig.dpi)
 #print(time.clock()) # "Process time in seconds"
-print(algo(10)[1])
