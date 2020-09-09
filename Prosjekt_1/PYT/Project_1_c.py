@@ -8,8 +8,8 @@ def algo(n):# n er Antall maalepunkter.
     for j in range(1, n): # Regner ut hooyre side.
         f[j] = f[j] + (j)*f[j-1]/(j+1) # Når indexer i=i+1 borsett fra i vektorer.
     u = np.zeros(n) # Lagres sluttverdiene.
-    u[-1] = n*f[-1]/(n+1) # Her definerer vi det siste punktet.
-    for j in range(1, n): # Backward substitution.
+    u[-1] = 0 # Her definerer vi det siste punktet.
+    for j in range(1, n-1): # Backward substitution.
         u[-j-1] = (f[-j-1]+u[-j])*((n-j)-1)/(n-j)  #i=(n-i)
         #Legger til 1 hver gang det står j.
     # Lager nye arrays der jeg eksluderer ytterpunktene:
