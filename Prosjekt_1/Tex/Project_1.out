@@ -1,0 +1,18 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Method}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{General algorithm for tri-diagonal matrix}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Algorithm for specific tri-diagonal matrix}{section.2}% 4
+\BOOKMARK [2][-]{subsection.2.3}{Relative error}{section.2}% 5
+\BOOKMARK [2][-]{subsection.2.4}{LU decomposition}{section.2}% 6
+\BOOKMARK [1][-]{section.3}{Implementation}{}% 7
+\BOOKMARK [1][-]{section.4}{Results}{}% 8
+\BOOKMARK [2][-]{subsection.4.1}{General algorithm}{section.4}% 9
+\BOOKMARK [2][-]{subsection.4.2}{Algorithm for specific tri-diagonal matrix}{section.4}% 10
+\BOOKMARK [2][-]{subsection.4.3}{Relative error}{section.4}% 11
+\BOOKMARK [2][-]{subsection.4.4}{LU decomposition}{section.4}% 12
+\BOOKMARK [1][-]{section.5}{Discussion}{}% 13
+\BOOKMARK [2][-]{subsection.5.1}{LU decomposition}{section.5}% 14
+\BOOKMARK [2][-]{subsection.5.2}{LU decomposition}{section.5}% 15
+\BOOKMARK [1][-]{section.6}{Discussion}{}% 16
+\BOOKMARK [2][-]{subsection.6.1}{LU decomposition}{section.6}% 17
+\BOOKMARK [1][-]{section.7}{Concluding remarks}{}% 18

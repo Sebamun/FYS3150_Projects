@@ -30,6 +30,7 @@ def algo(n):
     return x, u, u2
 # Her plotter vi:fig, axes = plt.subplots(1,3)
 fig, axes = plt.subplots(1,3)
+<<<<<<< HEAD
 
 axes[0].plot(algo(10)[0], algo(10)[1])
 
@@ -65,13 +66,32 @@ print("--- %s seconds ---" % (time.time() - start_time))
 
 
 
+=======
+axes[0].plot(algo(10)[0], algo(10)[1], label='Computed')
+axes[0].plot(algo(10)[0], algo(10)[2],'--', label='Analytical')
+axes[1].plot(algo(100)[0], algo(100)[1], label='Computed')
+axes[1].plot(algo(100)[0], algo(100)[2],'--', label='Analytical')
+axes[2].plot(algo(1000)[0], algo(1000)[1], label='Computed')
+axes[2].plot(algo(1000)[0], algo(1000)[2],'--', label='Analytical')
+axes[0].legend(loc="upper right")
+axes[1].legend(loc="upper right")
+axes[2].legend(loc="upper right")
+>>>>>>> 5c4c6ddfbcf3798c69e257a92116cc287dee6951
 # Navn på plott:
-fig.suptitle('u(x)')
+fig.suptitle('Analytical vs Computed')
 axes[0].title.set_text('n=10')
 axes[1].title.set_text('n=100')
 axes[2].title.set_text('n=1000')
 axes[0].set_xlabel('x')
 axes[0].set_ylabel('u(x)')
+axes[0].set_xlabel('x')
+axes[0].set_ylabel('u(x)')
+axes[1].set_xlabel('x')
+axes[1].set_ylabel('u(x)')
+axes[2].set_xlabel('x')
+axes[2].set_ylabel('u(x)')
+plt.tight_layout()
 plt.show()
+fig.savefig('1b.png', dpi=fig.dpi)
 #print(time.clock()) # "Process time in seconds"
 print(algo(10)[1])
