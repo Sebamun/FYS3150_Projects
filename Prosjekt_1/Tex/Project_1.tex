@@ -19,12 +19,12 @@
 \maketitle
 
 \begin{abstract}
-
+We have compared three methods of solving a discretized version of one dimensional Poisson equation with Dirichlet  conditions. These three methods include using two different algorithms exploiting that the second derivative takes form of a tri-diagonal matrix. The third method is using LU-decomposition. The algorithm for our specific case has the least amount of floating point operations and fastest run-time, with the LU-decomposition method being the slowest with the largest amount of floating point operations. 
 \end{abstract}
 
 \section{Introduction}
 
-In this project we will use numerical methods to solve the one dimensional Poisson equation. We will be rewriting the Dirichlet boundary conditions as a set of linear equations. Our numerical methods will have varying degrees of accuracy. We are going to compare our algorithms and the CPU time for the different numerical methods. 
+In this project we will use numerical methods to solve the one dimensional Poisson equation with Dirichlet boundary conditions. We will be rewriting the equation as a set of linear equations. Our numerical methods will have varying degrees of accuracy. We are going to compare our algorithms and the CPU time for the different numerical methods. 
 
 \section{Method}
 The one dimensional Poisson equation with Dirichlet boundary conditions is given by:
@@ -41,7 +41,7 @@ Let's define the discretized approximation to $u(x)$ as $v_i$, and to $f(x)$ as 
  \label{eq:2der}
  \end{equation}
  
- Here the step length of spacing is given by $h=1/(n+1)$ and the grid points is defined by $x_i=ih$. We can rewrite equation \ref{eq:2der} as a linear set of equations on the form $\textbf{A}\textbf{v}=\tilde{\textbf{b}}$:
+ Here the step length of spacing is given by $h=1/(n+1)$ and the grid points are defined by $x_i=ih$. We can then rewrite equation (\ref{eq:2der}) as a linear set of equations on the form $\textbf{A}\textbf{v}=\tilde{\textbf{b}}$:
 \begin{align*}
 \textbf{A}\textbf{v}&= \begin{bmatrix} 2 & -1 & 0 & \dots & \dots & 0 \\ -1 & 2 & -1 & 0 & \dots & \dots \\ 0 & -1 & 2 & -1 & 0 & \dots \\ \vdots & \vdots & \vdots & \ddots \\ 0 & \vdots & \vdots & -1 & 2 & -1 \\ 0 & \vdots & \vdots & 0 & -1 & 2  \end{bmatrix}
 \begin{bmatrix} v_0 \\ v_1\\ v_2\\ \vdots \\ v_n \\ v_{n+1} \end{bmatrix}=\begin{bmatrix} 2v_0 - v_1 \\ -v_0+2v_1-v_2 \\ -v_1+2v_2-v_3 \\ \vdots \\ -v_{n-1}+2v_n-v_{n+1} \\ -v_n+2v_{n+1}
@@ -108,7 +108,7 @@ For the numerical $v_i$ and analytical $u_i$ function values. We wish to extract
 
  \subsection{LU decomposition}
 
-We are now going to LU decomposition on the matrices 10 x 10, 100 x 100, 1000 x 1000 and 10 000 x 10 000. What the LU decomposition does, is that it rewrites a matrix as the product of two other matrices L and U, like this:
+We are now going to LU factorize the matrices 10 x 10, 100 x 100, 1000 x 1000 and 10 000 x 10 000. What the LU decomposition does, is that it rewrites a matrix as the product of two other matrices L and U, like this:
 \begin{align*}
 \begin{bmatrix}
 a_{11} & a_{12} & .... & a_{1n} \\
@@ -163,11 +163,11 @@ We implement the algorithms numerically with varying values of grid points n. Th
 	\label{fig:1bplot}
 \end{figure}
 
-We found that the number of floating point operations are 9 for the general algorithm. The CPU time is given in Table \ref{tab:LU}.
+We found that the number of floating point operations are 9 per iteration for the general algorithm. The CPU time is given in Table (\ref{tab:LU}).
 
 \subsection{Algorithm for specific tri-diagonal matrix}
 
-We found that the number of floating point operations are 4 for the general algorithm. The CPU time is given in Table \ref{tab:LU}.
+We found that the number of floating point operations are 4 per iteration for the general algorithm. The CPU time is given in Table (\ref{tab:LU}).
 
  \subsection{Relative error}
  
@@ -212,13 +212,14 @@ The number of floating point operations for the LU decomposition is $\frac{2}{3}
 
 The number of floating point operations are different for each of our algorithms. Our algorithm for the specific tri diagonal matrix has the least amount of floating point operations. In practice this means that the CPU time should be less for the specific case than for the general algorithm and the LU method. Our time tests show this exact trend (Table \ref{tab:LU}). The LU method have the highest amount of FLOPS, which leads to it being the slowest method for our matrix. FLOPS depend on the size of the matrix. When the matrix becomes large in our LU method, we can ignore the orders $n$ and $n^2$.     
 
-We can see from table \ref{tab:e} that the relative error decreases as n increases. This is due to the fact that more grid points lead to better precision. However this is only true as long as we have enough memory to store our information. If we would increase the number of grid points further than $n=10^7$ our relative error could potentially increase dramatically. Since we are using python, more than $n=10^7$ grid points make the algorithm take too long to run. We could have used a larger n If we had used a faster programming language (like C++), making it possible to observe an increasing relative error at a larger n.
+We can see from table \ref{tab:e} that the relative error decreases as n increases. This is due to the fact that more grid points lead to better precision. However this is only true up to a certain point. If we would increase the number of grid points further our relative error could potentially increase dramatically. This is due to the fact that by using more grid points we could encounter round off errors which in turn would make the computed relative error very large. Since we are using python, more than $n=10^7$ grid points make the algorithm take too long to run. We could have used a larger n If we had used a faster programming language (like C++), making it possible to observe an increasing relative error at a larger n.
 
 If we compare our solution from the general algorithm and the CPU-time for the LU decomposition (Table \ref{tab:e}), we see that it takes a lot of more time to calculate the LU decomposition. This is due to the fact that it takes $n^3$ steps to find the LU decomposition (which is the same as for the gaussian- elimination method). The advantage of using LU decomposition is that it can be used to solve multiple different vectors, with one less calculation than for the gaussian elimination method. The remaining calculation only takes $n^2$ floating point operations. This can save a lot of time if you wish to solve multiple vectors with the same matrix. In our case the LU decompositions is essentially unnecessary since we only solve one vector per matrix. Another benefit of the LU decomposition is that it makes it straight forward to solve the determinant of a matrix.
 
 The reason why we can’t use LU decomposition on a $10^5 \times 10^5$ matrix is due to a random accesses memory problem. The data that needs be stored for this operation is too large for the computers memory. 
 
 \section{Concluding remarks}
-
+We have compared three methods of solving the one dimensional Poisson equation with Dirichlet  conditions. The method where we used the specific algorithm for tri-diagonal matrices has the fastest run-time and uses the least amount of RAM. The disadvantage of using this method is that it only applies to matrices with identical elements along the diagonals. However, using the algorithm for generic trio-diagonal matrices is not much slower than using the specific algorithm, at least compared to the LU-decomposition method which by far is the slowest. So when choosing an algorithm for solving similar problems, finding a viable algorithm with the least amount of floating point operations should be high on your priority list. 
 \bibliography{referanser}
+http://compphysics.github.io/ComputationalPhysics/doc/pub/linalg/pdf/linalg-print.pdf
 \end{document}
