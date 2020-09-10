@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.7.15)  9 SEP 2020 19:21
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.7.15)  10 SEP 2020 09:09
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -399,11 +399,6 @@ LaTeX Font Info:    Try loading font information for T1+cmtt on input line 166.
  (/usr/local/texlive/2019/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-Underfull \hbox (badness 10000) in paragraph at lines 185--185
-[]\T1/ppl/m/n/12 Country Name or
- []
-
-
 Overfull \hbox (115.24408pt too wide) in paragraph at lines 181--196
 [] 
  []
@@ -448,7 +443,7 @@ ve/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive
 exmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/local/texlive/2019/texmf-di
 st/fonts/type1/urw/palatino/uplr8a.pfb></usr/local/texlive/2019/texmf-dist/font
 s/type1/urw/palatino/uplri8a.pfb>
-Output written on Project_1.pdf (7 pages, 127221 bytes).
+Output written on Project_1.pdf (7 pages, 126952 bytes).
 PDF statistics:
  157 PDF objects out of 1000 (max. 8388607)
  137 compressed objects within 2 object streams
