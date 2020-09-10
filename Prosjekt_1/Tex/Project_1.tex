@@ -174,28 +174,7 @@ We implement the algorithms numerically with varying values of grid points n. Th
 
  \subsection{Relative error}
  
-
-  \subsection{LU decomposition}
- \begin{tabular}{ |p{4cm}||p{4cm}|p{4cm}|p{4cm}|  }
- \hline
- \multicolumn{4}{|c|}{Country List} \\
- \hline
-Size & Generel algorithm& Special algorithm& LU decomposition \\ \\
- \hline
- n =10 & 0.135 seconds & &0.585 seconds\\
-n = 100 & 0.137 seconds   &  & 0.591 seconds\\
-n = 1000 &0.146 seconds &  & 0.736 seconds\\
-n = 10 000    &0.203 seconds&  &56.580 seconds\\
-n = 100 000& 0.730 seconds & & ...\\
-n = 1 000 000 & 6.177 secondss &    &...\\
- &  &  &\\
- \hline
-\end{tabular}
-
-  \section{Discussion}
-    \subsection{LU decomposition}
-
- \begin{table}[h!]
+  \begin{table}[h!]
 \begin{center}
 \caption{Relative error for specific tri-diagonal matrix algorithm.}
 \begin{tabular}{ |c|c|c| } \hline
@@ -211,12 +190,29 @@ $10^7$&$7.45*10^{-6}$ \\ \hline
 \label{tab:e}
 \end{center}
 \end{table}
- 
+
  \subsection{LU decomposition}
+ 
+ \begin{tabular}{ |p{3.5cm}||p{3.5cm}|p{3.5cm}|p{3.5cm}|  }
+ \hline
+ \multicolumn{4}{|c|}{CPU time of algorithms} \\
+ \hline
+Size & Generel algorithm& Special algorithm& LU decomposition \\ \\
+ \hline
+ n =10 & 0.135 seconds & &0.585 seconds\\
+n = 100 & 0.137 seconds   &  & 0.591 seconds\\
+n = 1000 &0.146 seconds &  & 0.736 seconds\\
+n = 10 000    &0.203 seconds&  &56.580 seconds\\
+n = 100 000& 0.730 seconds & & ...\\
+n = 1 000 000 & 6.177 secondss &    &...\\
+ &  &  &\\
+ \hline
+\end{tabular}
+ 
+\section{Discussion}
 
-
-
- \section{Discussion}
+\subsection{Relative error}
+ 
  
  We can see from table \ref{tab:e} that the relative error decreases as n increases. This is due to the fact that more grid points lead to better precision. However this is only true as long as we have enough memory to store our information. If we would increase the number of grid points further than $n=10^7$ our relative error could potentially increase dramatically. Since we are using python, more than $n=10^7$ grid points make the algorithm take too long to run. We could have used a larger n If we had used a faster programming language (like C++), making it possible to observe an increasing relative error at a larger n.\\
  \\
