@@ -41,7 +41,7 @@ print("--- %s seconds ---" % (time.time() - start_time))
 
 axes[1].plot(algo(100)[0], algo(100)[1])
 
-print("--- %s seconds ---" % (time.time() - start_time))
+
 
 axes[1].plot(algo(100)[0], algo(100)[2],'--')
 
@@ -54,6 +54,16 @@ print("--- %s seconds ---" % (time.time() - start_time))
 axes[2].plot(algo(10000)[0], algo(10000)[2],'--')
 
 print("--- %s seconds ---" % (time.time() - start_time))
+
+axes[2].plot(algo(100000)[0], algo(100000)[2],'--')
+
+print("--- %s seconds ---" % (time.time() - start_time))
+
+axes[2].plot(algo(1000000)[0], algo(1000000)[2],'--')
+
+print("--- %s seconds ---" % (time.time() - start_time))
+
+
 
 # Navn på plott:
 fig.suptitle('u(x)')

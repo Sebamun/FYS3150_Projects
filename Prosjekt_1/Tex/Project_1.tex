@@ -178,7 +178,21 @@ Her må jeg si noe om hvorfor jeg valgte de grensene jeg valgte for den relative
  \subsection{Relative error}
  
   \subsection{LU decomposition}
- 
+ \begin{tabular}{ |p{4cm}||p{4cm}|p{4cm}|p{4cm}|  }
+ \hline
+ \multicolumn{4}{|c|}{Country List} \\
+ \hline
+ Country Name     or Area Name& Generel algorithm& Special algorithm& LU decomposition \\ \\
+ \hline
+ n =10 & 0.135 seconds & &0.585 seconds\\
+n = 100 & 0.137 seconds   &  & 0.591 seconds\\
+n = 1000 &0.146 seconds &  & 0.736 seconds\\
+n = 10 000    &0.203 seconds&  &56.580 seconds\\
+n = 100 000& 0.730 seconds & & ...\\
+n = 1 000 000 & 6.177 secondss &    &...\\
+ &  &  &\\
+ \hline
+\end{tabular}
 
   \section{Discussion}
     \subsection{LU decomposition}
@@ -193,37 +207,7 @@ The number of floating point operations that the LU decomposition use to solve t
 
 \section{Concluding remarks}
 
-\begin{tabular}{ |p{5cm}|p{5cm}|p{5cm}|  }
-\hline
-\multicolumn{3}{|c|}{Country List} \\
-\hline
-Generel algorithm& Special algorithm& LU decomposition \\
-\hline
-Afghanistan & AF &0.585 seconds \\
-Aland Islands & AX   & 0.591 seconds \\
-Albania &AL & 0.736 seconds \\
-Algeria    &DZ & 56.580 seconds \\
-American Samoa & AS & ... \\
-Andorra & AD & ...   \\
-Angola & AO & ... \\
-\hline
-\end{tabular}
 
-\begin{tabular}{ |p{4cm}||p{4cm}|p{4cm}|p{4cm}|  }
- \hline
- \multicolumn{4}{|c|}{Country List} \\
- \hline
- Country Name     or Area Name& Generel algorithm& Special algorithm& LU decomposition \\ \\
- \hline
- Afghanistan & AF & &0.585 seconds\\
-Aland Islands & AX   &  & 0.591 seconds\\
-Albania &AL &  & 0.736 seconds\\
-Algeria    &DZ &  &56.580 seconds\\
-American Samoa & AS & & ...\\
-Andorra & AD &    &...\\
-Angola & AO &  &...\\
- \hline
-\end{tabular}
 
 
 \bibliography{referanser}
