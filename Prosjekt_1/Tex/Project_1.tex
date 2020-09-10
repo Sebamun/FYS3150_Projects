@@ -108,7 +108,7 @@ For the numerical $v_i$ and analytical $u_i$ function values. We wish to extract
 
  \subsection{LU decomposition}
 
-We are now going to LU decomposition the matrixes 10 x 10, 100 x 100, 1000 x 1000 and 10 000 x 10 000. What the LU decomposition does, is that it rewrite a matrix as the product of two other matrices L and U, like this:
+We are now going to LU decomposition on the matrices 10 x 10, 100 x 100, 1000 x 1000 and 10 000 x 10 000. What the LU decomposition does, is that it rewrites a matrix as the product of two other matrices L and U, like this:
 \begin{align*}
 \begin{bmatrix}
 a_{11} & a_{12} & .... & a_{1n} \\
@@ -129,14 +129,10 @@ u_{11} & u_{12} & .... & u_{1n} \\
 : & :& .... & : \\
 0 & 0& .... & u_{nn} \\
 \end{bmatrix}
-\end{align*}
-
-There are several reasons why we use LU decomposition instead of standard Gaussian elimination. First of all, it is straight forward to solve the determinant of a matrix. Second, if we still need to solve a set of linear equation with the same matrix, but with a different vector, the number of FLOPS is of order $n^3$. Where FLOPS is floating point operations per second. Where a such operation is the inverse. 
-\\
-By using LU decomposition, it will be comfortably to solve the inverse, determinate and linear equation.         
+\end{align*}  
 \\
 \\
-In order to calculate a set of linear equation by using the LU decomposition for matrix Ax=w. We first need to compose a matrix A to two matrices L and U. When we have done that we split our equation in to two equation, which you can see under here.  
+In order to calculate a set of linear equation by using the LU decomposition for matrix Ax=w. We first need to compose a matrix A of two matrices L and U. When we have done that we split our equation in to two equation:
 \\
 \\
 \begin{align*}
@@ -147,9 +143,7 @@ In order to calculate a set of linear equation by using the LU decomposition for
 \begin{align*}
 \end{align*}
 Where $\mathbf{b}$ is given as the one-dimensional Poisson equation times the square of the step length h. $$\mathbf{b}=-\frac{d^2u}{dx^2}h^2=f(x)h^2$$
-Since we now have obtained two separated equation, we now solve for y in equation $$\mathbf{L}\mathbf{y}=\mathbf{b} \rightarrow \mathbf{L}\mathbf{y}=\mathbf{b} $$. Which we afterwards plug in  $$\mathbf{U}\mathbf{x}=\mathbf{y} \rightarrow \mathbf{x}=\mathbf{U^{-1}}\mathbf{y}$$, which then gives us vector $\mathbf{x}$.
-
-There are several reasons why we use LU decomposition instead of standard Gaussian elimination. First of all, it is straight forward to solve the determinant of a matrix. Second, if we still need to solve a set of linear equation with the same matrix, but with a different vector, the number of FLOPS is of order $n^3$. Where FLOPS is floating point operations per second. Where a such operation is the inverse. 
+Since we now have obtained two separated equation, we now solve for y in equation $$\mathbf{L}\mathbf{y}=\mathbf{b} \rightarrow \mathbf{L}\mathbf{y}=\mathbf{b} $$ Which we afterwards plug in  $$\mathbf{U}\mathbf{x}=\mathbf{y} \rightarrow \mathbf{x}=\mathbf{U^{-1}}\mathbf{y}$$, which then gives us vector $\mathbf{x}$.
 
 \section{Implementation}
 
@@ -168,13 +162,16 @@ We implement the algorithms numerically with varying values of grid points n. Th
 	\caption{Plot comparing analytical vs computed solutions of the differential equation. We can see that the computed solution approaches the analytical solution when the number of gridpoints increases.}
 	\label{fig:1bplot}
 \end{figure}
+
+We found that the number of floating point operations are 9 for the general algorithm. The CPU time is given in Table \ref{tab:LU}.
+
 \subsection{Algorithm for specific tri-diagonal matrix}
 
-
+We found that the number of floating point operations are 4 for the general algorithm. The CPU time is given in Table \ref{tab:LU}.
 
  \subsection{Relative error}
  
-  \begin{table}[h!]
+  \begin{table}[H]
 \begin{center}
 \caption{Relative error for specific tri-diagonal matrix algorithm.}
 \begin{tabular}{ |c|c|c| } \hline
@@ -193,42 +190,34 @@ $10^7$&$7.45*10^{-6}$ \\ \hline
 
  \subsection{LU decomposition}
  
- \begin{tabular}{ |p{3.5cm}||p{3.5cm}|p{3.5cm}|p{3.5cm}|  }
- \hline
- \multicolumn{4}{|c|}{CPU time of algorithms} \\
- \hline
-Size & Generel algorithm& Special algorithm& LU decomposition \\ \\
- \hline
- n =10 & 0.135 seconds & &0.585 seconds\\
-n = 100 & 0.137 seconds   &  & 0.591 seconds\\
-n = 1000 &0.146 seconds &  & 0.736 seconds\\
-n = 10 000    &0.203 seconds&  &56.580 seconds\\
-n = 100 000& 0.730 seconds & & ...\\
-n = 1 000 000 & 6.177 secondss &    &...\\
- &  &  &\\
- \hline
+   \begin{table}[H]
+\begin{center}
+\caption{CPU time of algorithms.}
+\begin{tabular}{ |c|c|c|clcl } \hline
+Size & Generel algorithm& Special algorithm& LU decomposition \\ \hline
+n =10 & 0.0002 seconds &0.0002 seconds&0.585 seconds\\ \hline
+n = 100 & 0.0007 seconds   &0.0005  seconds& 0.591 seconds\\ \hline
+n = 1000 &0.0041 seconds &0.003 seconds& 0.736 seconds\\ \hline
+n = 10 000    &0.0336 seconds&0.0245  seconds&56.580 seconds\\ \hline
+n = 100 000& 0.306 seconds &0.233 seconds& ...\\ \hline
+n = 1 000 000 & 3.011 secondss &2.245 seconds&...\\ \hline
 \end{tabular}
- 
+\label{tab:LU}
+\end{center}
+\end{table}
+
+The number of floating point operations for the LU decomposition is $\frac{2}{3} n^3$.
+
 \section{Discussion}
 
-\subsection{Relative error}
- 
- 
- We can see from table \ref{tab:e} that the relative error decreases as n increases. This is due to the fact that more grid points lead to better precision. However this is only true as long as we have enough memory to store our information. If we would increase the number of grid points further than $n=10^7$ our relative error could potentially increase dramatically. Since we are using python, more than $n=10^7$ grid points make the algorithm take too long to run. We could have used a larger n If we had used a faster programming language (like C++), making it possible to observe an increasing relative error at a larger n.\\
- \\
- \subsection{LU decomposition}
-  If we compare our solution from the general algorithm and the CPU-time with the LU decomposition, we see that it takes a lot of more time to calculate the LU decomposition. This comes that it takes $n^3$ steps to find the LU decomposition, which is the same for gauss- elimination. But when we calculate LU decomposition, we calculate a set of two equation instead of one. This shows us that there are more steps for calculating just one vector. If we are going to calculate other vectors as well for the same matrix will show us that the LU decomposition will be much more effective. This comes from that we have already calculated the LU decomposition, which lead us to the calculation of the vector now is just $n^2$.    
-\\
-\\
-The reason why we can’t use LU decomposition on a $10^5 \times 10^5$ matrix comes from the random accesses memory problem. The data that should be stored from the operation takes to much memory that the computer cant handle the operation we want to.  
-\\
+The number of floating point operations are different for each of our algorithms. Our algorithm for the specific tri diagonal matrix has the least amount of floating point operations. In practice this means that the CPU time should be less for the specific case than for the general algorithm and the LU method. Our time tests show this exact trend (Table \ref{tab:LU}). The LU method have the highest amount of FLOPS, which leads to it being the slowest method for our matrix. FLOPS depend on the size of the matrix. When the matrix becomes large in our LU method, we can ignore the orders $n$ and $n^2$.     
 
-The number of floating point operations that the LU decomposition use to solve the set of linear equation equals $\frac{2}{3} n^3$. This means that the FLOPS depend on the size of the matrix. When the matrix becomes large, we can ignore the orders $n$ and $n^2$.     
-  
+We can see from table \ref{tab:e} that the relative error decreases as n increases. This is due to the fact that more grid points lead to better precision. However this is only true as long as we have enough memory to store our information. If we would increase the number of grid points further than $n=10^7$ our relative error could potentially increase dramatically. Since we are using python, more than $n=10^7$ grid points make the algorithm take too long to run. We could have used a larger n If we had used a faster programming language (like C++), making it possible to observe an increasing relative error at a larger n.
 
-The number of floating point operations that the LU decomposition use to solve the set of linear equation equals $\frac{2}{3} n^3$. This means that the FLOPS depend on the size of the matrix. When the matrix becomes large, we can ignore the orders $n$ and $n^2$.        
+If we compare our solution from the general algorithm and the CPU-time for the LU decomposition (Table \ref{tab:e}), we see that it takes a lot of more time to calculate the LU decomposition. This is due to the fact that it takes $n^3$ steps to find the LU decomposition (which is the same as for the gaussian- elimination method). The advantage of using LU decomposition is that it can be used to solve multiple different vectors, with one less calculation than for the gaussian elimination method. The remaining calculation only takes $n^2$ floating point operations. This can save a lot of time if you wish to solve multiple vectors with the same matrix. In our case the LU decompositions is essentially unnecessary since we only solve one vector per matrix. Another benefit of the LU decomposition is that it makes it straight forward to solve the determinant of a matrix.
 
-  
+The reason why we can’t use LU decomposition on a $10^5 \times 10^5$ matrix is due to a random accesses memory problem. The data that needs be stored for this operation is too large for the computers memory. 
+
 \section{Concluding remarks}
 
 
