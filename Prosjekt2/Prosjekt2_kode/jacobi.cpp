@@ -1,5 +1,3 @@
-
-
 #include "prosjekt2.hpp"
 
 int Initialize(int Dim, double Rmin, double Rmax, mat& U)
@@ -28,7 +26,7 @@ int Initialize(int Dim, double Rmin, double Rmax, mat& U)
 
 }
 
-int check(int Dim, double Rmax, mat& U){
+int check(int Dim, double Rmax, mat& U, string filename){
     // diagonalize and obtain eigenvalues
     double Step, DiagConst, NondiagConst;
     Step = Rmax / Dim;
@@ -37,15 +35,26 @@ int check(int Dim, double Rmax, mat& U){
     vec Eigval(Dim);
     eig_sym(Eigval, U);
     double pi = acos(-1.0);
-    cout << "RESULTS:" << endl;
-    cout << setiosflags(ios::showpoint | ios::uppercase);
-    cout << "Number of Eigenvalues = " << setw(15) << Dim << endl;
-    cout << "Exact versus numerical eigenvalues:" << endl;
+    // Her skriver jeg til fil:
+    ofstream ofile;
+    ofile.open(filename);
+    ofile << "Results" << endl;
+    ofile << "-------"<<endl;
+
+
+    ofile << setiosflags(ios::showpoint | ios::uppercase);
+    //ofile <<  setw(15) << setprecision(8) << "relative error=" << RelativeError << endl;
+    ofile << "Number of Eigenvalues = " << setw(15) << Dim << endl;
+    ofile << endl;
+    ofile << "Exact:" << setw(25) << "Numerical:" << setw(45) << "Exact versus numerical eigenvalues:" << endl;
+    cout << scientific << endl; 
     for (int i = 0; i < Dim; i++)
     {
         double Exact = DiagConst + 2 * NondiagConst * cos((i + 1) * pi / (Dim + 1));
-        cout << setprecision(8) << fabs(Eigval[i] - Exact) << endl;
+        ofile << setprecision(8) << Exact << setw(21) << Eigval[i] << setw(24) << fabs(Eigval[i] - Exact) << endl;
     }
+
+    ofile.close();
     return 0;
 } //  end of main function
 
