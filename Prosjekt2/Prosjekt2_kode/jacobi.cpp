@@ -1,5 +1,3 @@
-
-
 #include "prosjekt2.hpp"
 
 int Initialize(int Dim, double Rmin, double Rmax, mat& A)
