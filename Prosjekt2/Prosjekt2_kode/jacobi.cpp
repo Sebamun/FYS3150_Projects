@@ -35,15 +35,26 @@ int check(int Dim, double Rmax, mat& A){
     vec Eigval(Dim);
     eig_sym(Eigval, A);
     double pi = acos(-1.0);
-    cout << "RESULTS:" << endl;
-    cout << setiosflags(ios::showpoint | ios::uppercase);
-    cout << "Number of Eigenvalues = " << setw(15) << Dim << endl;
-    cout << "Exact versus numerical eigenvalues:" << endl;
+    // Her skriver jeg til fil:
+    ofstream ofile;
+    ofile.open(filename);
+    ofile << "Results" << endl;
+    ofile << "-------"<<endl;
+
+
+    ofile << setiosflags(ios::showpoint | ios::uppercase);
+    //ofile <<  setw(15) << setprecision(8) << "relative error=" << RelativeError << endl;
+    ofile << "Number of Eigenvalues = " << setw(15) << Dim << endl;
+    ofile << endl;
+    ofile << "Exact:" << setw(25) << "Numerical:" << setw(45) << "Exact versus numerical eigenvalues:" << endl;
+    cout << scientific << endl; 
     for (int i = 0; i < Dim; i++)
     {
         double Exact = DiagConst + 2 * NondiagConst * cos((i + 1) * pi / (Dim + 1));
         cout << setprecision(8) << fabs(fabs(Eigval[i]) - Exact) << endl;
     }
+
+    ofile.close();
     return 0;
 } //  end of main function
 
@@ -113,5 +124,9 @@ void Jacobi_rotate(mat& A, mat &R, int k, int l, int n)
         R(i, k) = c * r_ik - s * r_il;
         R(i, l) = c * r_il + s * r_ik;
     }
+
+    cout << "Diagonalization took " << count << " iterations" << endl;
+    cout << scientific << "CPU time (sec) : " << ((double)end - (double)start) / CLOCKS_PER_SEC << endl;
+
     return;
 }
