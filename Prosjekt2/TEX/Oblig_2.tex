@@ -26,7 +26,32 @@
 
 \section{Method}
 
+We find the analytical eigenvalues by using armadillos functions for diagonalizing a matrix. These values are to be compared with values found using the Jacobi method. 
+
+The general expression for the new matrix elements are:
+$$
+b_{ii}=a_{ii}, i\neq k, i\neq l \\
+$$
+$$
+b_{ik}=a_{ik}\cos \theta - a_{il}\sin \theta, i\neq k, i\neq l
+$$
+$$
+b_{il}=a_{il}\cos\theta+a_{ik}\sin\theta, i\neq k, i\neq l
+$$
+$$
+b_{kk}=a_{kk} \cos^2\theta - 2a_{kl}\cos\theta \sin\theta + a_{ll}\sin^2\theta
+$$
+$$
+b_{ll}=a_{ll}\cos^2\theta+2a_{kl}\cos\theta \sin\theta + a_{kk}\sin^2\theta
+$$
+\begin{equation}
+b_{kl} = (a_{kk}-a_{ll})\cos\theta\sin\theta+a_{kl}(\cos^2\theta-\sin^2\theta)
+ \label{eq:Jacob}
+ \end{equation}
+
 \section{Implementation}
+
+
 
 \section{Results}
 
