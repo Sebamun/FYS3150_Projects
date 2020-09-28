@@ -1,39 +1,39 @@
 #include "prosjekt2.hpp"
 
-int Initialize(int Dim, double Rmin, double Rmax, mat& U)
+int Initialize(int Dim, double Rmin, double Rmax, mat& A)
 {
     int i, j;
     double Step, DiagConst, NondiagConst;
-    U = zeros<mat>(Dim, Dim);
+    A = zeros<mat>(Dim, Dim);
     // Integration step length
     Step = Rmax / Dim;
     DiagConst = 2.0 / (Step * Step);
     NondiagConst = -1.0 / (Step * Step);
 
     // Setting up tridiagonal matrix and diagonalization using Armadillo
-    U(0, 0) = DiagConst;
-    U(0, 1) = NondiagConst;
+    A(0, 0) = DiagConst;
+    A(0, 1) = NondiagConst;
     for (i = 1; i < Dim - 1; i++)
     {
-        U(i, i - 1) = NondiagConst;
-        U(i, i) = DiagConst;
-        U(i, i + 1) = NondiagConst;
+        A(i, i - 1) = NondiagConst;
+        A(i, i) = DiagConst;
+        A(i, i + 1) = NondiagConst;
     }
-    U(Dim - 1, Dim - 2) = NondiagConst;
-    U(Dim - 1, Dim - 1) = DiagConst;
+    A(Dim - 1, Dim - 2) = NondiagConst;
+    A(Dim - 1, Dim - 1) = DiagConst;
 
     return 0;
 
 }
 
-int check(int Dim, double Rmax, mat& U, string filename){
+int check(int Dim, double Rmax, mat& A){
     // diagonalize and obtain eigenvalues
     double Step, DiagConst, NondiagConst;
     Step = Rmax / Dim;
     DiagConst = 2.0 / (Step * Step);
     NondiagConst = -1.0 / (Step * Step);
     vec Eigval(Dim);
-    eig_sym(Eigval, U);
+    eig_sym(Eigval, A);
     double pi = acos(-1.0);
     // Her skriver jeg til fil:
     ofstream ofile;
@@ -51,99 +51,82 @@ int check(int Dim, double Rmax, mat& U, string filename){
     for (int i = 0; i < Dim; i++)
     {
         double Exact = DiagConst + 2 * NondiagConst * cos((i + 1) * pi / (Dim + 1));
-        ofile << setprecision(8) << Exact << setw(21) << Eigval[i] << setw(24) << fabs(Eigval[i] - Exact) << endl;
+        cout << setprecision(8) << fabs(fabs(Eigval[i]) - Exact) << endl;
     }
 
     ofile.close();
     return 0;
 } //  end of main function
 
-/*
-
-int Jacobi_solver(int n, double eps, mat& U){
-    cout.precision(5);
-    double aip = 0, aiq = 0, vpi = 0, vqi = 0;
-    double tau = 0, t = 0, s = 0, c = 0; //tan(theta), sin(theta), cos(theta)
-    int count = 1;                       //count of iterations
-    int count_old = count - 10;          //keep track of every 10th iteration
-    int p = n - 1, q = n - 2;            //off diag all same value to start
-                                         //pick last as first maximum
-    clock_t start, end;
-
-    if (n <= 10)
+// the offdiag function, using Armadillo
+int offdiag(mat A, int &p, int &q, int n, double& max){
+    max = 0.0;
+    for (int i = 0; i < n; ++i)
     {
-        cout << "Before diagonalization" << endl;
-        print_vals(a, v, n, conv);
-        cout << endl;
-    }
-
-    double app = a(p, p);
-    double aqq = a(q, q);
-    double apq = a(p, q);
-
-    start = clock();
-
-    while (abs(apq) > conv)
-    {
-        if (count > 1)
+        for (int j = i + 1; j < n; ++j)
         {
-            apq = 0;
-            find_max(a, p, q, apq, n);
+            double aij = fabs(A(i, j));
+            if (aij > max)
+            {
+                max = aij;
+                p = i;
+                q = j;
+            }
         }
+    }
+    return 0;
+}
 
-        //calculate sin(theta) and cos(theta)
-        aqq = a(q, q);
-        app = a(p, p);
-        tau = (aqq - app) / (2 * apq);
-        if (tau > 0)
-            t = 1 / (tau + sqrt(1 + tau * tau));
+void Jacobi_rotate(mat& A, mat &R, int k, int l, int n)
+{
+    double s, c;
+    if (A(k, l) != 0.0)
+    {
+        double t, tau;
+        tau = (A(l, l) - A(k, k)) / (2 * A(k, l));
+        if (tau >= 0)
+        {
+            t = 1.0 / (tau + sqrt(1.0 + tau * tau));
+        }
         else
-            t = -1 / (-tau + sqrt(1 + tau * tau));
+        {
+            t = -1.0 / (-tau + sqrt(1.0 + tau * tau));
+        }
         c = 1 / sqrt(1 + t * t);
         s = c * t;
-
-        //calculate new matrix elements and vectors
-        for (int i = 0; i < n; i++)
-        {
-            if (i != p && i != q)
-            {
-                aip = a(i, p);
-                aiq = a(i, q);
-                a(i, p) = aip * c - aiq * s;
-                a(p, i) = aip * c - aiq * s;
-                a(i, q) = aiq * c + aip * s;
-                a(q, i) = aiq * c + aip * s;
-            }
-            //vpi=v(p,i);
-            //vqi=v(q,i);
-            vpi = v(i, p);
-            vqi = v(i, q);
-            //v(p,i)=c*vpi-s*vqi;
-            // v(q,i)=c*vqi+s*vpi;
-            v(i, p) = c * vpi - s * vqi;
-            v(i, q) = c * vqi + s * vpi;
-        }
-        a(p, p) = app * c * c - 2 * apq * c * s + aqq * s * s;
-        a(q, q) = app * s * s + 2 * apq * c * s + aqq * c * c;
-        a(p, q) = 0;
-        a(q, p) = 0;
-
-        count++;
     }
-
-    end = clock();
-
-    if (n <= 10)
+    else
     {
-        cout << "After diagonalization" << endl;
-        print_vals(a, v, n, conv);
-        cout << endl;
+        c = 1.0;
+        s = 0.0;
+    }
+    double a_kk, a_ll, a_ik, a_il, r_ik, r_il;
+    a_kk = A(k, k);
+    a_ll = A(l, l);
+    A(k, k) = c * c * a_kk - 2.0 * c * s * A(k, l) + s * s * a_ll;
+    A(l, l) = s * s * a_kk + 2.0 * c * s * A(k, l) + c * c * a_ll;
+    A(k, l) = 0.0; // hard-coding non-diagonal elements by hand
+    A(l, k) = 0.0; // same here
+    for (int i = 0; i < n; i++)
+    {
+        if (i != k && i != l)
+        {
+            a_ik = A(i, k);
+            a_il = A(i, l);
+            A(i, k) = c * a_ik - s * a_il;
+            A(k, i) = A(i, k);
+            A(i, l) = c * a_il + s * a_ik;
+            A(l, i) = A(i, l);
+        }
+        // And finally the new eigenvectors
+        r_ik = R(i, k);
+        r_il = R(i, l);
+        R(i, k) = c * r_ik - s * r_il;
+        R(i, l) = c * r_il + s * r_ik;
     }
 
     cout << "Diagonalization took " << count << " iterations" << endl;
     cout << scientific << "CPU time (sec) : " << ((double)end - (double)start) / CLOCKS_PER_SEC << endl;
 
-    return 0;
+    return;
 }
-}
-*/
