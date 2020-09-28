@@ -26,7 +26,7 @@ int Initialize(int Dim, double Rmin, double Rmax, mat& A)
 
 }
 
-int check(int Dim, double Rmax, mat& A){
+int check(int Dim, double Rmax, mat& A, string filename){
     // diagonalize and obtain eigenvalues
     double Step, DiagConst, NondiagConst;
     Step = Rmax / Dim;
@@ -47,11 +47,11 @@ int check(int Dim, double Rmax, mat& A){
     ofile << "Number of Eigenvalues = " << setw(15) << Dim << endl;
     ofile << endl;
     ofile << "Exact:" << setw(25) << "Numerical:" << setw(45) << "Exact versus numerical eigenvalues:" << endl;
-    cout << scientific << endl; 
+    ofile << scientific << endl;
     for (int i = 0; i < Dim; i++)
     {
         double Exact = DiagConst + 2 * NondiagConst * cos((i + 1) * pi / (Dim + 1));
-        cout << setprecision(8) << fabs(fabs(Eigval[i]) - Exact) << endl;
+        ofile << setprecision(8) << Exact << setw(21) << Eigval[i] << setw(24) << fabs(Eigval[i] - Exact) << endl;
     }
 
     ofile.close();
@@ -124,9 +124,6 @@ void Jacobi_rotate(mat& A, mat &R, int k, int l, int n)
         R(i, k) = c * r_ik - s * r_il;
         R(i, l) = c * r_il + s * r_ik;
     }
-
-    cout << "Diagonalization took " << count << " iterations" << endl;
-    cout << scientific << "CPU time (sec) : " << ((double)end - (double)start) / CLOCKS_PER_SEC << endl;
 
     return;
 }
