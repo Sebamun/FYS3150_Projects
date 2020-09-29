@@ -23,24 +23,29 @@ int Initialize(int Dim, double Rmin, double Rmax, mat& A)
     A(Dim - 1, Dim - 1) = DiagConst;
 
     return 0;
-
 }
 
-int check(int Dim, double Rmax, mat& A, string filename){
+int check(int Dim, double Rmax, mat& A, string filename, string file_for_plot){
     // diagonalize and obtain eigenvalues
     double Step, DiagConst, NondiagConst;
     Step = Rmax / Dim;
     DiagConst = 2.0 / (Step * Step);
     NondiagConst = -1.0 / (Step * Step);
     vec Eigval(Dim);
-    eig_sym(Eigval, A);
+    mat Eigvec;
+    eig_sym(Eigval, Eigvec, A);
+    if (file_for_plot == 0){
+      
+    }
+    ofstream ofile;
+    ofile.open(file_for_plot);
+    ofile << Eigvec << endl;
+    ofile.close();
     double pi = acos(-1.0);
     // Her skriver jeg til fil:
-    ofstream ofile;
     ofile.open(filename);
     ofile << "Results" << endl;
     ofile << "-------"<<endl;
-
 
     ofile << setiosflags(ios::showpoint | ios::uppercase);
     //ofile <<  setw(15) << setprecision(8) << "relative error=" << RelativeError << endl;
@@ -124,6 +129,18 @@ void Jacobi_rotate(mat& A, mat &R, int k, int l, int n)
         R(i, k) = c * r_ik - s * r_il;
         R(i, l) = c * r_il + s * r_ik;
     }
-
     return;
 }
+/*
+void find_le(int dim, mat R, string filename){
+  mat S = arma::zeros<mat>(dim,1);
+  //cout<<S<<endl;
+  for (int i=0; i<dim; i++){
+    S(i) = R(i,0);
+  ofstream ofile;
+  ofile.open(filename);
+  ofile << S << endl;
+  ofile.close();
+}
+}
+*/

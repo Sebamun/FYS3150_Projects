@@ -3,6 +3,7 @@
 int main(int argc, char const *argv[]) {
     string filename_1 = argv[1];
     string filename_2 = argv[2];
+    string filename_3 = argv[3];
     mat A;
     double max = 1;
     double MaxNonDiag = 5.0E-10;
@@ -10,8 +11,11 @@ int main(int argc, char const *argv[]) {
     int p, q;
     double dim = 10;
     mat R = arma::zeros<mat>(dim, dim);
+    for (int i = 0; i < dim; i++){
+      R(i,i) = 1;
+    }
     Initialize(dim, 0, 1, A);
-    check(dim, 1, A, filename_1);
+    check(dim, 1, A, filename_1, );
 
     clock_t start, end;
     start = clock();
@@ -22,10 +26,10 @@ int main(int argc, char const *argv[]) {
         Jacobi_rotate(A, R, p, q, dim);
         iterations ++;
     }
-    check(dim, 1, A, filename_2);
+    check(dim, 1, A, filename_2, filename_3);
+    //find_le(dim,R,filename_3);
     end = clock();
     cout << "Diagonalization took " << iterations << " iterations" << endl;
     cout << scientific << "CPU time (sec) : " << ((double)end - (double)start) / CLOCKS_PER_SEC << endl;
-
     return 0;
 }
