@@ -52,7 +52,6 @@ int check(int Dim, double Rmax, mat& A, string filename, string filename2){
         double Exact = DiagConst + 2 * NondiagConst * cos((i + 1) * pi / (Dim + 1));
         ofile << setprecision(8) << Exact << setw(21) << Eigval[i] << setw(24) << fabs(Eigval[i] - Exact) << endl;;
     }
-
     ofile.close();
     ofile.open(filename2);
     ofile << Eigvec.col(0) << endl;

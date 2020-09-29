@@ -1,8 +1,11 @@
 #include "prosjekt2.hpp"
 
 int main(int argc, char const *argv[]) {
-    string filename_1 = argv[1];
-    string filename_2 = argv[2];
+    int n = atoi(argv[1]);
+    cout << n << argv[2] << endl;
+    return 0;
+    string filename_1 = "Egenverdier1";
+    string filename_2 = "Egenverdier2";
     string filename_3 = "Egenvektorer";
     string filename_4 = "Egenvektorer_2";
     mat A;
