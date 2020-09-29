@@ -10,7 +10,7 @@ int main(int argc, char const *argv[]) {
     double MaxNonDiag = 5.0E-10;
     double eps = 1.0E-15;
     int p, q;
-    double dim = 100;
+    double dim = 1000;
     mat R = arma::zeros<mat>(dim, dim);
     for (int i = 0; i < dim; i++){
       R(i,i) = 1;
