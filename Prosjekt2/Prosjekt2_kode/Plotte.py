@@ -13,6 +13,6 @@ u = np.sin(n*np.pi/len(eig_vec))
 
 # Plotting:
 plt.plot(rho, eig_vec, label='Num')
-plt.plot(rho, u, label='teor')
+#plt.plot(rho, u, label='teor')
 plt.legend()
 plt.show()

@@ -1,25 +1,24 @@
 #include "prosjekt2.hpp"
 
 int main(int argc, char const *argv[]) {
-    int n = atoi(argv[1]);
-    cout << n << argv[2] << endl;
-    return 0;
+
     string filename_1 = "Egenverdier1";
     string filename_2 = "Egenverdier2";
     string filename_3 = "Egenvektorer";
-    string filename_4 = "Egenvektorer_2";
+    string filename_4 = "Egenvektorer2";
+
     mat A;
     double max = 1;
     double MaxNonDiag = 5.0E-10;
-    double eps = 1.0E-15;
+    double eps = 1.0E-40;
     int p, q;
-    double dim = 100;
+    double dim = 150;
     mat R = arma::zeros<mat>(dim, dim);
     for (int i = 0; i < dim; i++){
       R(i,i) = 1;
     }
-    Initialize(dim, 0, 1, A);
-    check(dim, 1, A, filename_1, filename_3);
+    Initialize(dim, 0, 5, A, 0);
+    check(dim, 5, A, filename_1, filename_3);
 
     clock_t start, end;
     start = clock();
