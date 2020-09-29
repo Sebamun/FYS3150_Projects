@@ -26,14 +26,15 @@ int Initialize(int Dim, double Rmin, double Rmax, mat& A)
 
 }
 
-int check(int Dim, double Rmax, mat& A, string filename){
+int check(int Dim, double Rmax, mat& A, string filename, string filename2){
     // diagonalize and obtain eigenvalues
     double Step, DiagConst, NondiagConst;
     Step = Rmax / Dim;
     DiagConst = 2.0 / (Step * Step);
     NondiagConst = -1.0 / (Step * Step);
     vec Eigval(Dim);
-    eig_sym(Eigval, A);
+    mat Eigvec;
+    eig_sym(Eigval, Eigvec, A);
     double pi = acos(-1.0);
     // Her skriver jeg til fil:
     ofstream ofile;
@@ -51,9 +52,12 @@ int check(int Dim, double Rmax, mat& A, string filename){
     for (int i = 0; i < Dim; i++)
     {
         double Exact = DiagConst + 2 * NondiagConst * cos((i + 1) * pi / (Dim + 1));
-        ofile << setprecision(8) << Exact << setw(21) << Eigval[i] << setw(24) << fabs(Eigval[i] - Exact) << endl;
+        ofile << setprecision(8) << Exact << setw(21) << Eigval[i] << setw(24) << fabs(Eigval[i] - Exact) << endl;;
     }
 
+    ofile.close();
+    ofile.open(filename2);
+    ofile << Eigvec.col(0) << endl;
     ofile.close();
     return 0;
 } //  end of main function
