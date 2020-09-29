@@ -25,7 +25,7 @@ int Initialize(int Dim, double Rmin, double Rmax, mat& A)
     return 0;
 }
 
-int check(int Dim, double Rmax, mat& A, string filename, string file_for_plot){
+int check(int Dim, double Rmax, mat& A, string filename, string filename2){
     // diagonalize and obtain eigenvalues
     double Step, DiagConst, NondiagConst;
     Step = Rmax / Dim;
@@ -34,13 +34,6 @@ int check(int Dim, double Rmax, mat& A, string filename, string file_for_plot){
     vec Eigval(Dim);
     mat Eigvec;
     eig_sym(Eigval, Eigvec, A);
-    if (file_for_plot == 0){
-      
-    }
-    ofstream ofile;
-    ofile.open(file_for_plot);
-    ofile << Eigvec << endl;
-    ofile.close();
     double pi = acos(-1.0);
     // Her skriver jeg til fil:
     ofile.open(filename);
@@ -56,9 +49,12 @@ int check(int Dim, double Rmax, mat& A, string filename, string file_for_plot){
     for (int i = 0; i < Dim; i++)
     {
         double Exact = DiagConst + 2 * NondiagConst * cos((i + 1) * pi / (Dim + 1));
-        ofile << setprecision(8) << Exact << setw(21) << Eigval[i] << setw(24) << fabs(Eigval[i] - Exact) << endl;
+        ofile << setprecision(8) << Exact << setw(21) << Eigval[i] << setw(24) << fabs(Eigval[i] - Exact) << endl;;
     }
 
+    ofile.close();
+    ofile.open(filename2);
+    ofile << Eigvec.col(0) << endl;
     ofile.close();
     return 0;
 } //  end of main function
