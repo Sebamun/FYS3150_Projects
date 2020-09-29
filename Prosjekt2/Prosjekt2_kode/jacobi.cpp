@@ -36,6 +36,7 @@ int check(int Dim, double Rmax, mat& A, string filename, string filename2){
     eig_sym(Eigval, Eigvec, A);
     double pi = acos(-1.0);
     // Her skriver jeg til fil:
+    ofstream ofile;
     ofile.open(filename);
     ofile << "Results" << endl;
     ofile << "-------"<<endl;
