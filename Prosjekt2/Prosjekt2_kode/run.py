@@ -2,34 +2,40 @@ import subprocess
 import matplotlib.pyplot as plt
 import numpy as np
 import sys
-ns = [10, 25, 50, 75, 100, 125, 150, 175, 200, 225, 250, 275, 300]
-iterations = []
-CPU_time = []
-switch = sys.argv[1]
-for n in ns:
-    subprocess.run(['./Tridiag.x', str(n), str(switch)])
-    infile = open("Output","r")
-    for line in infile:
+ns = [10, 25, 50, 75, 100, 125, 150, 175, 200, 225, 250, 275, 300] # De ulike dimensjonene.
+iterations = [] # Her lagres iterasjonsverdier.
+CPU_time = [] # Her lagres CPU tiden for de ulike iterasjonstidene.
+switch = str(sys.argv[1]) # Her bestemmer man om vi skal ha med kvanteledd.
+for n in ns: # Løper gjennom dimensjonsverdiene:
+    subprocess.run(['./Tridiag.x', str(n), switch]) # Kjører c++ filen.
+    infile = open("Output","r") # Her leser vi av verdiene for egenvektoren.
+    for line in infile: # Går gjennom linje for linje:
         p = line.split()
-        iterations.append(float(p[0]))
-        CPU_time.append(float(p[1]))
+        iterations.append(float(p[0])) # Henter verdier for iterasjoner.
+        CPU_time.append(float(p[1])) # Henter verdier for CPU tiden.
 
-infile = open('Egenvektorer', 'r')
-lines = infile.readlines()
-eig_vec = np.zeros(len(lines)-1)
-for i in range(len(lines)-1):
-    eig_vec[i] = float(lines[i])
-rho = np.linspace(0,1, len(eig_vec))
+infile = open('Egenvektorer', 'r') # Aapner filen som man leser av egenvektoren.
+lines = infile.readlines() # Leser linjene i filen.
+eig_vec = np.zeros(len(lines)-1) # Her lagrer vi verdiene.
+for i in range(len(lines)-1): # Løper gjennom hver linje.
+    eig_vec[i] = float(lines[i]) # Legger til egenvektor verdier fra filen.
+rho = np.linspace(0,1, len(eig_vec)) # Lengden vi studerer.
 #u = np.zeros(len(eig_vec))
-n = np.arange(0,len(eig_vec))
+n = np.arange(0,len(eig_vec)) # Regner ut den teoretiske egenvektoren.
 u = np.sin(n*np.pi/len(eig_vec))
-# Plotting:
+# Plotting for egenvektor for den laveste egenverdien:
+if switch=='0': # Bestemmer hvilken teoretisk løsning vi skal ta med. 
+    plt.title("Eigenvector for the lowest eigenvalue")
+    plt.plot(rho, u/np.linalg.norm(u), label='teor')
+else:
+    plt.title("Eigenvector for the lowest eigenvalue in quantom case")
+    # Her går plottet for den teoretiske egenvektoren i kvantetilfellet.
 plt.plot(rho, eig_vec, label='Num')
-plt.plot(rho, u/np.linalg.norm(u), label='teor')
+plt.xlabel('rho')
+plt.ylabel('Eigenvec')
 plt.legend()
 plt.show()
-
-#Plotting:
+#Plotting for antall iterasjoner og CPU tid:
 plt.title('Number of iterations')
 plt.plot(ns, iterations,'bo')
 plt.xlabel('Dimension')
