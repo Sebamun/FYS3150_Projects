@@ -1,11 +1,14 @@
 #include "prosjekt2.hpp"
 int main(int argc, char const *argv[]) {
+    // Her henter vi filene vi skal lese til:
     string runtime = "Output";
     string filename_1 = "Egenverdier";
     string filename_2 = "Egenverdier_2";
     string filename_3 = "Egenvektorer";
     string filename_4 = "Egenvektorer_2";
-    double dim = atof(argv[1]);
+    // Definerer variabler:
+    double dim = atof(argv[1]); // Her hentes stoorelsen på matrisen.
+    int quant = atoi(argv[2]); // Her bestemmes det om vi skal ha kvantedel med. 
     mat A;
     double max = 1;
     double MaxNonDiag = 5.0E-10;
@@ -15,8 +18,9 @@ int main(int argc, char const *argv[]) {
     for (int i = 0; i < dim; i++){
       R(i,i) = 1;
     }
-    Initialize(dim, 0, 1, A);
-    check(dim, 1, A, filename_1, filename_3);
+
+    Initialize(dim, 0, 5, A, quant);
+    check(dim, 5, A, filename_1, filename_3);
 
     clock_t start, end;
     start = clock();
