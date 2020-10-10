@@ -9,6 +9,7 @@ int main(int argc, char const *argv[]) {
     // Definerer variabler:
     double dim = atof(argv[1]); // Her hentes stoorelsen på matrisen.
     int quant = atoi(argv[2]); // Her bestemmes det om vi skal ha kvantedel med.
+    double omega = atof(argv[3]); // Dette er omega verdien.
     mat A;
     double max = 1;
     double MaxNonDiag = 5.0E-5; // Den stoorste verdien for de ikke diagonale elementene.
@@ -19,7 +20,7 @@ int main(int argc, char const *argv[]) {
       R(i,i) = 1;
     }
 
-    Initialize(dim, 0, 5, A, quant);
+    Initialize(dim, 0, 5, A, quant, omega);
     check(dim, 5, A, filename_1, filename_3);
 
     clock_t start, end;

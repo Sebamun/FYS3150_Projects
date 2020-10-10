@@ -1,14 +1,13 @@
 #include "prosjekt2.hpp"
-int Initialize(int Dim, double Rmin, double Rmax, mat& A, int quantum)
+int Initialize(int Dim, double Rmin, double Rmax, mat& A, int quantum, double omega)
 {
     // Definerer variabler:
     int i, j; // Iterasjonselementene.
-    double Step, DiagConst, NondiagConst, h, omega, ledd, q;
+    double Step, DiagConst, NondiagConst, h, ledd, q;
     A = zeros<mat>(Dim, Dim); // Matrise av nuller som vi skal fylle opp.
     Step = Rmax / Dim; // Stegene i itereringen.
     DiagConst = 2.0 / (Step * Step); // Diagonalelementene.
     NondiagConst = -1.0 / (Step * Step); // Elementene som ikke ligger på diagonalen.
-    omega = 0.5; // Styrken av oscilator potensialet.
     h = Step; // Steglengde.
     // Her bestemmer man om vi skal ha med kvantedelen i utregningene:
     if (quantum==1){
