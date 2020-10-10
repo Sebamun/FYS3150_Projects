@@ -12,13 +12,13 @@ int main(int argc, char const *argv[]) {
     double MaxNonDiag = 5.0E-10;
     double eps = 1.0E-40;
     int p, q;
-    double dim = 150;
+    double dim = 101;
     mat R = arma::zeros<mat>(dim, dim);
     for (int i = 0; i < dim; i++){
       R(i,i) = 1;
     }
-    Initialize(dim, 0, 5, A, 0);
-    check(dim, 5, A, filename_1, filename_3);
+    Initialize(dim, 0, 10, A, 0);
+    check(dim, 10, A, filename_1, filename_3);
 
     clock_t start, end;
     start = clock();

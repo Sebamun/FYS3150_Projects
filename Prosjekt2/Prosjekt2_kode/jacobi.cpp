@@ -17,16 +17,16 @@ int Initialize(int Dim, double Rmin, double Rmax, mat& A, int quantum)
     else{
         h = 0.0;
     }
-    A(0, 0) = DiagConst + (i * h) * (i * h); //pow(i * h, 2);
+    A(0, 0) = DiagConst; //+ (i * h) * (i * h)*0.5*0.5  + 1/(i*h); //pow(i * h, 2);
     A(0, 1) = NondiagConst;
     for (i = 1; i < Dim - 1; i++)
     {
         A(i, i - 1) = NondiagConst;
-        A(i, i) = DiagConst + (i * h) * (i * h); //DiagConst + pow(i*h, 2);
+        A(i, i) = DiagConst + ((i * h) * (i * h))*0.5*0.5 + 1/(i*h); //DiagConst + pow(i*h, 2);
         A(i, i + 1) = NondiagConst;
     }
     A(Dim - 1, Dim - 2) = NondiagConst;
-    A(Dim - 1, Dim - 1) = DiagConst + (i * h) * (i * h); //DiagConst + pow(i * h, 2);
+    A(Dim - 1, Dim - 1) = DiagConst + (i * h) * (i * h)*0.5*0.5  + 1/(i*h); //DiagConst + pow(i * h, 2);
 
     return 0;
 }
