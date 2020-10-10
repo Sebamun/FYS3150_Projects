@@ -20,11 +20,10 @@ eig_vec = np.zeros(len(lines)-1) # Her lagrer vi verdiene.
 for i in range(len(lines)-1): # Løper gjennom hver linje.
     eig_vec[i] = float(lines[i]) # Legger til egenvektor verdier fra filen.
 rho = np.linspace(0,1, len(eig_vec)) # Lengden vi studerer.
-#u = np.zeros(len(eig_vec))
-n = np.arange(0,len(eig_vec)) # Regner ut den teoretiske egenvektoren.
-u = np.sin(n*np.pi/len(eig_vec))
+n = np.arange(0,len(eig_vec))
+u = np.sin(n*np.pi/len(eig_vec)) # Regner ut den teoretiske egenvektoren.
 # Plotting for egenvektor for den laveste egenverdien:
-if switch=='0': # Bestemmer hvilken teoretisk løsning vi skal ta med. 
+if switch=='0': # Bestemmer hvilken teoretisk løsning vi skal ta med.
     plt.title("Eigenvector for the lowest eigenvalue")
     plt.plot(rho, u/np.linalg.norm(u), label='teor')
 else:

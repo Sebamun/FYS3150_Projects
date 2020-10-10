@@ -8,13 +8,13 @@ int main(int argc, char const *argv[]) {
     string filename_4 = "Egenvektorer_2";
     // Definerer variabler:
     double dim = atof(argv[1]); // Her hentes stoorelsen på matrisen.
-    int quant = atoi(argv[2]); // Her bestemmes det om vi skal ha kvantedel med. 
+    int quant = atoi(argv[2]); // Her bestemmes det om vi skal ha kvantedel med.
     mat A;
     double max = 1;
-    double MaxNonDiag = 5.0E-10;
-    double eps = 1.0E-15;
+    double MaxNonDiag = 5.0E-5; // Den stoorste verdien for de ikke diagonale elementene.
+    double eps = 1.0E-5;
     int p, q;
-    mat R = arma::zeros<mat>(dim, dim);
+    mat R = arma::zeros<mat>(dim, dim); // Fylles opp med egenverdiene.
     for (int i = 0; i < dim; i++){
       R(i,i) = 1;
     }
