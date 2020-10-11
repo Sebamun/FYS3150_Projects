@@ -1,21 +1,22 @@
 #include "prosjekt2.hpp"
-int Initialize(int Dim, double Rmin, double Rmax, mat& A, int quantum)
+int Initialize(int Dim, double Rmin, double Rmax, mat &A, int quantum, double omega)
 {
     // Definerer variabler:
     int i, j; // Iterasjonselementene.
-    double Step, DiagConst, NondiagConst, h, omega, ledd, q;
-    A = zeros<mat>(Dim, Dim); // Matrise av nuller som vi skal fylle opp.
-    Step = Rmax / Dim; // Stegene i itereringen.
-    DiagConst = 2.0 / (Step * Step); // Diagonalelementene.
+    double Step, DiagConst, NondiagConst, h, ledd, q;
+    A = zeros<mat>(Dim, Dim);            // Matrise av nuller som vi skal fylle opp.
+    Step = Rmax / Dim;                   // Stegene i itereringen.
+    DiagConst = 2.0 / (Step * Step);     // Diagonalelementene.
     NondiagConst = -1.0 / (Step * Step); // Elementene som ikke ligger på diagonalen.
-    omega = 0.5; // Styrken av oscilator potensialet.
-    h = Step; // Steglengde.
+    h = Step;                            // Steglengde.
     // Her bestemmer man om vi skal ha med kvantedelen i utregningene:
-    if (quantum==1){
-      q = 1.0; // Kvantetilfellet.
+    if (quantum == 1)
+    {
+        q = 1.0; // Kvantetilfellet.
     }
-    else{
-      q = 0.0; // Ikke- kvantetilfellet.
+    else
+    {
+        q = 0.0; // Ikke- kvantetilfellet.
     }
     // Finner initialverdiene for matrisen:
     A(0, 0) = DiagConst;
@@ -23,28 +24,29 @@ int Initialize(int Dim, double Rmin, double Rmax, mat& A, int quantum)
     for (i = 1; i < Dim - 1; i++)
     {
         A(i, i - 1) = NondiagConst;
-        A(i, i) = DiagConst + q*(omega * omega * (i*h) * (i*h) + (1.0/(i*h)));
+        A(i, i) = DiagConst + q * (omega * omega * (i * h) * (i * h) + (1.0 / (i * h)));
         A(i, i + 1) = NondiagConst;
     }
     A(Dim - 1, Dim - 2) = NondiagConst;
-    A(Dim - 1, Dim - 1) = DiagConst + q*(omega * omega * (i*h) * (i*h) + (1.0/(i*h)));
+    A(Dim - 1, Dim - 1) = DiagConst + q * (omega * omega * (i * h) * (i * h) + (1.0 / (i * h)));
     return 0;
 }
-int check(int Dim, double Rmax, mat& A, string filename, string filename2){
+int check(int Dim, double Rmax, mat &A, string filename, string filename2)
+{
     // Diagonaliser og finn egenverdier:
     double Step, DiagConst, NondiagConst; // Variabler.
-    Step = Rmax / Dim; // Steglengde.
-    DiagConst = 2.0 / (Step * Step); // Diagonalelementene.
-    NondiagConst = -1.0 / (Step * Step); // Ikke diagonalelementene
-    vec Eigval(Dim); // Egenverdiene lagret.
-    mat Eigvec; // Egenvektorene lagret.
-    eig_sym(Eigval, Eigvec, A); // Finner egenverdier/egenvektorer.
+    Step = Rmax / Dim;                    // Steglengde.
+    DiagConst = 2.0 / (Step * Step);      // Diagonalelementene.
+    NondiagConst = -1.0 / (Step * Step);  // Ikke diagonalelementene
+    vec Eigval(Dim);                      // Egenverdiene lagret.
+    mat Eigvec;                           // Egenvektorene lagret.
+    eig_sym(Eigval, Eigvec, A);           // Finner egenverdier/egenvektorer.
     double pi = acos(-1.0);
     // Her skriver vi til fil:
     ofstream ofile;
     ofile.open(filename); // Åpner filen.
     ofile << "Results" << endl;
-    ofile << "-------"<<endl;
+    ofile << "-------" << endl;
     ofile << setiosflags(ios::showpoint | ios::uppercase);
     ofile << "Number of Eigenvalues = " << setw(15) << Dim << endl;
     ofile << endl;
@@ -53,7 +55,8 @@ int check(int Dim, double Rmax, mat& A, string filename, string filename2){
     for (int i = 0; i < Dim; i++) // Skriver ut egenverdiene til fil:
     {
         double Exact = DiagConst + 2 * NondiagConst * cos((i + 1) * pi / (Dim + 1));
-        ofile << setprecision(8) << Exact << setw(21) << Eigval[i] << setw(24) << fabs(Eigval[i] - Exact) << endl;;
+        ofile << setprecision(8) << Exact << setw(21) << Eigval[i] << setw(24) << fabs(Eigval[i] - Exact) << endl;
+        ;
     }
     ofile.close();
     ofile.open(filename2);
@@ -62,25 +65,26 @@ int check(int Dim, double Rmax, mat& A, string filename, string filename2){
     return 0;
 }
 // Finner elementene som ikke ligger på diagonalen:
-int offdiag(mat A, int &p, int &q, int n, double& max){
+int offdiag(mat A, int &p, int &q, int n, double &max)
+{
     max = 0.0; // Finner verdier som er stoorre enn dette.
     for (int i = 0; i < n; ++i)
     {
         for (int j = i + 1; j < n; ++j)
         {
             double aij = fabs(A(i, j)); // Absoluttverdi for etthvert matriseelement.
-            if (aij > max) // Hvis denne verdien er større enn 0.0:
+            if (aij > max)              // Hvis denne verdien er større enn 0.0:
             {
                 max = aij; // Ny grense for den stoorste verdien.
-                p = i; // Indeksen til denne verdien.
-                q = j; // Indeksen til denne verdien.
+                p = i;     // Indeksen til denne verdien.
+                q = j;     // Indeksen til denne verdien.
             }
         }
     }
     return 0;
 }
 
-void Jacobi_rotate(mat& A, mat &R, int k, int l, int n)
+void Jacobi_rotate(mat &A, mat &R, int k, int l, int n)
 {
     double s, c;
     if (A(k, l) != 0.0) // Her setter vi inn indeks fra offdiag.
