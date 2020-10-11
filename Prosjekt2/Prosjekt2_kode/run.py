@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import sys
 ns = [10, 25, 50, 75, 100, 125, 150, 175, 200, 225, 250, 275, 300] # De ulike dimensjonene.
+omega = [0.01, 0.5, 1, 5]
 iterations = [] # Her lagres iterasjonsverdier.
 CPU_time = [] # Her lagres CPU tiden for de ulike iterasjonstidene.
 switch = str(sys.argv[1]) # Her bestemmer man om vi skal ha med kvanteledd.
