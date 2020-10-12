@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.9.8)  11 OCT 2020 13:12
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.9.8)  12 OCT 2020 15:41
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -369,29 +369,53 @@ g the Schroedinger's
 
 [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./Oblig_2.bbl
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+<Egenvektorer1.png, id=42, 462.528pt x 346.896pt>
+File: Egenvektorer1.png Graphic file (type png)
+<use Egenvektorer1.png>
+Package pdftex.def Info: Egenvektorer1.png  used on input line 62.
+(pdftex.def)             Requested size: 390.0pt x 292.5128pt.
+<Iterasjoner.png, id=44, 462.528pt x 346.896pt>
+File: Iterasjoner.png Graphic file (type png)
+<use Iterasjoner.png>
+Package pdftex.def Info: Iterasjoner.png  used on input line 69.
+(pdftex.def)             Requested size: 390.0pt x 292.5128pt.
+ [2 <./Egenvektorer1.png>]
+<CPU_tid.png, id=53, 462.528pt x 346.896pt>
+File: CPU_tid.png Graphic file (type png)
+<use CPU_tid.png>
+Package pdftex.def Info: CPU_tid.png  used on input line 76.
+(pdftex.def)             Requested size: 390.0pt x 292.5128pt.
+ [3 <./Iterasjoner.png>]
+<Egenvektorer_omega.png, id=60, 462.528pt x 346.896pt>
+File: Egenvektorer_omega.png Graphic file (type png)
+<use Egenvektorer_omega.png>
+Package pdftex.def Info: Egenvektorer_omega.png  used on input line 85.
+(pdftex.def)             Requested size: 390.0pt x 292.5128pt.
+ [4 <./CPU_tid.png>] [5 <./Egenvektorer_omega.png>]
+(./Oblig_2.bbl
 
 LaTeX Warning: Empty `thebibliography' environment on input line 3.
 
 )
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 72.
- [2]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 72.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 97.
+ [6]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 97.
  (./Oblig_2.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 72.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 72.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 97.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 97.
 Package rerunfilecheck Info: File `Oblig_2.out' has not changed.
-(rerunfilecheck)             Checksum: 9833157CDE798A424BA3E160DA8CF5A0;370.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 72.
+(rerunfilecheck)             Checksum: 5FFF25D64F8112C2947E04739FFFC725;321.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 97.
  ) 
 Here is how much of TeX's memory you used:
- 6311 strings out of 483183
- 93238 string characters out of 5966293
- 347873 words of memory out of 5000000
- 21179 multiletter control sequences out of 15000+600000
- 559810 words of font info for 80 fonts, out of 8000000 for 9000
+ 6351 strings out of 483183
+ 93845 string characters out of 5966293
+ 349540 words of memory out of 5000000
+ 21207 multiletter control sequences out of 15000+600000
+ 561672 words of font info for 82 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 34i,6n,29p,488b,312s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 34i,6n,29p,1770b,316s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf
 -dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/
@@ -399,10 +423,10 @@ fonts/type1/public/mathpazo/fplmri.pfb></usr/share/texlive/texmf-dist/fonts/typ
 e1/urw/palatino/uplb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palat
 ino/uplr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplri8a.
 pfb>
-Output written on Oblig_2.pdf (2 pages, 63096 bytes).
+Output written on Oblig_2.pdf (6 pages, 163125 bytes).
 PDF statistics:
- 80 PDF objects out of 1000 (max. 8388607)
- 69 compressed objects within 1 object stream
- 13 named destinations out of 1000 (max. 500000)
- 65 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 110 PDF objects out of 1000 (max. 8388607)
+ 87 compressed objects within 1 object stream
+ 20 named destinations out of 1000 (max. 500000)
+ 77 words of extra memory for PDF output out of 10000 (max. 10000000)
 
