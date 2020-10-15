@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.9.8)  12 OCT 2020 15:41
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.9.8)  15 OCT 2020 13:27
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -369,64 +369,60 @@ g the Schroedinger's
 
 [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-<Egenvektorer1.png, id=42, 462.528pt x 346.896pt>
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3]
+<Egenvektorer1.png, id=65, 462.528pt x 346.896pt>
 File: Egenvektorer1.png Graphic file (type png)
 <use Egenvektorer1.png>
-Package pdftex.def Info: Egenvektorer1.png  used on input line 62.
+Package pdftex.def Info: Egenvektorer1.png  used on input line 167.
 (pdftex.def)             Requested size: 390.0pt x 292.5128pt.
-<Iterasjoner.png, id=44, 462.528pt x 346.896pt>
+ [4]
+<Iterasjoner.png, id=73, 462.528pt x 346.896pt>
 File: Iterasjoner.png Graphic file (type png)
 <use Iterasjoner.png>
-Package pdftex.def Info: Iterasjoner.png  used on input line 69.
+Package pdftex.def Info: Iterasjoner.png  used on input line 174.
 (pdftex.def)             Requested size: 390.0pt x 292.5128pt.
- [2 <./Egenvektorer1.png>]
-<CPU_tid.png, id=53, 462.528pt x 346.896pt>
+ [5 <./Egenvektorer1.png>]
+<CPU_tid.png, id=80, 462.528pt x 346.896pt>
 File: CPU_tid.png Graphic file (type png)
 <use CPU_tid.png>
-Package pdftex.def Info: CPU_tid.png  used on input line 76.
+Package pdftex.def Info: CPU_tid.png  used on input line 181.
 (pdftex.def)             Requested size: 390.0pt x 292.5128pt.
- [3 <./Iterasjoner.png>]
-<Egenvektorer_omega.png, id=60, 462.528pt x 346.896pt>
+ [6 <./Iterasjoner.png>]
+<Egenvektorer_omega.png, id=87, 462.528pt x 346.896pt>
 File: Egenvektorer_omega.png Graphic file (type png)
 <use Egenvektorer_omega.png>
-Package pdftex.def Info: Egenvektorer_omega.png  used on input line 85.
+Package pdftex.def Info: Egenvektorer_omega.png  used on input line 190.
 (pdftex.def)             Requested size: 390.0pt x 292.5128pt.
- [4 <./CPU_tid.png>] [5 <./Egenvektorer_omega.png>]
-(./Oblig_2.bbl
-
-LaTeX Warning: Empty `thebibliography' environment on input line 3.
-
-)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 97.
- [6]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 97.
+ [7 <./CPU_tid.png>] [8 <./Egenvektorer_omega.png>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 208.
+ [9]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 208.
  (./Oblig_2.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 97.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 97.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 208.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 208.
 Package rerunfilecheck Info: File `Oblig_2.out' has not changed.
-(rerunfilecheck)             Checksum: 5FFF25D64F8112C2947E04739FFFC725;321.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 97.
+(rerunfilecheck)             Checksum: 827B94D0818C20F80975AE6EE9667F36;318.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 208.
  ) 
 Here is how much of TeX's memory you used:
- 6351 strings out of 483183
- 93845 string characters out of 5966293
- 349540 words of memory out of 5000000
- 21207 multiletter control sequences out of 15000+600000
- 561672 words of font info for 82 fonts, out of 8000000 for 9000
+ 6379 strings out of 483183
+ 94034 string characters out of 5966293
+ 354756 words of memory out of 5000000
+ 21215 multiletter control sequences out of 15000+600000
+ 566873 words of font info for 98 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 34i,6n,29p,1770b,316s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 34i,7n,29p,2301b,320s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf
--dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/
-fonts/type1/public/mathpazo/fplmri.pfb></usr/share/texlive/texmf-dist/fonts/typ
-e1/urw/palatino/uplb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palat
-ino/uplr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplri8a.
-pfb>
-Output written on Oblig_2.pdf (6 pages, 163125 bytes).
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/mathpazo/fplmri.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw
+/palatino/uplb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/up
+lr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
+Output written on Oblig_2.pdf (9 pages, 187041 bytes).
 PDF statistics:
- 110 PDF objects out of 1000 (max. 8388607)
- 87 compressed objects within 1 object stream
- 20 named destinations out of 1000 (max. 500000)
+ 144 PDF objects out of 1000 (max. 8388607)
+ 116 compressed objects within 2 object streams
+ 28 named destinations out of 1000 (max. 500000)
  77 words of extra memory for PDF output out of 10000 (max. 10000000)
 
