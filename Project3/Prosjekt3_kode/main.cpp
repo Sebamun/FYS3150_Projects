@@ -13,16 +13,13 @@
 
 using namespace std;
 
-void PrintInitialValues(int, double, double, double *, double *, int);
-void PrintFinalValues(int, double *, double *);
-
 int main()
 {
     int IntegrationPoints; // No. of integration points
     double FinalTime;      // End time of calculation
     int Dimension;         // No. of spatial dimensions
 
-    //cout << "Earth-Sun binary system" << endl;
+    cout << "Earth-Sun binary system" << endl;
     Dimension = 3;
 
     IntegrationPoints = 10000;
@@ -38,16 +35,5 @@ int main()
     binary_vv.add(planet1);
     binary_vv.add(planet2);
 
-    PrintInitialValues(Dimension, TimeStep, FinalTime, x, v, IntegrationPoints);
-
-    cout << "Velocity Verlet results for the Sun-Earth system:" << endl;
-    binary_vv.VelocityVerlet(Dimension, IntegrationPoints, FinalTime, 1, 0.);
-
-    for (int j = 0; j < Dimension; j++)
-    {
-        x[j] = binary_vv.all_planets[0].position[j];
-        v[j] = binary_vv.all_planets[0].velocity[j];
-    }
-    PrintFinalValues(Dimension, x, v);
     return 0;
 }

@@ -5,8 +5,7 @@
 #include <vector>
 using std::vector;
 
-class planet
-{
+class planet{
 private:
 protected:
 public:
@@ -25,6 +24,6 @@ public:
     double Acceleration(planet otherPlanet, double Gconst);
     double KineticEnergy();
     double PotentialEnergy(planet &otherPlanet, double Gconst, double epsilon);
-}
+};
 
 #endif // PLANET_H
