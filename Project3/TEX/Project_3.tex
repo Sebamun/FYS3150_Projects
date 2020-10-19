@@ -16,11 +16,10 @@
 \usepackage{float}
 \newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
 
-
 \begin{document}
 
 \title{Project 3}
-\author{Sebastian Amundsen, Marcus Berget and Andreas Wetzel}
+\author{Kandidatnummer}
 \date{\today}
 
 \maketitle
@@ -59,12 +58,13 @@ Where $R(dt^2)$ is the local truncation error. Since the Forward Euler method is
 The velocity Verlet method is based on the kinematic equations for an moving object, which in our case is the earth's orbit around the sun. If we want to find the next time step for the velocity and position we do a approximation and uses Taylor-expansion   
 
 \begin{equation}
-    v_{t+dt}=v_t +\frac{dt}{2}(\frac{F_t}{m}+\frac{F_{t+m}}{m}) R(dt^3)
-\end{equation}\\
+v_{t+dt}=v_t +\frac{dt}{2}(\frac{F_t}{m}+\frac{F_{t+m}}{m}) R(dt^3)
+\label{eq:steps}
+\end{equation}
 
 We can also split the equation above and perform the calculation in several steps like this:
 
-\begin{equation}
+\begin{equation*}
 \begin{split}
 &v(t+\frac{1}{2}\Delta t)=v(t)+\frac{1}{2}a(t)\Delta t\\
 &x(t+\Delta t)=x(t)+v(t+\frac{1}{2}\Delta t)\Delta t\\
@@ -72,27 +72,33 @@ We can also split the equation above and perform the calculation in several step
 &v(t+\Delta t)=v(t+\frac{1}{2}\Delta t)+\frac{1}{2}a(t+\Delta t)\Delta t
 \end{split}
 \label{eq:steps}
-\end{equation}
+\end{equation*}
 
 \subsection{Conservation of angular momentum}
-The defination of Keeplers law is that a area, where a connecting line between a planet and the sun, is always the same for an equal time interval. Which is illustrated in the figure below.
+The defination of Keeplers law is that a area, where a connecting line between a planet and the sun, is always the same for an equal time interval. Which is illustrated in the figure below:
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{K2L.jpg}
 	\caption{Keeplers second law. Where the area is the same for the same time interval.}
 	\label{fig:1bplot}
 \end{figure}
-The best way to show that the angular momentum is conserved by using Keeplers second law is to make a drawing.
+
+The best way to show that the angular momentum is conserved by using Keeplers second law is to make a drawing:
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{sketch.jpg}
 	\caption{This square is the infinitesimal area dA that the planet has moved by a infinitesimal time interval dt}
 	\label{fig:1bplot}
 \end{figure}
-Figure 2 shows us that the area is 
-\begin{align}
+
+Figure 2 shows us that the area is:
+
+\begin{equation}
     dA=\frac{1}{2}r^2d\theta
-\end{align}
+\label{eq:dA}
+\end{equation}
 
 \end{multicols}
 
