@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.7.15)  19 OCT 2020 14:57
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.7.15)  19 OCT 2020 16:45
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -387,24 +387,31 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \float@box=\box59
 \@float@everytoks=\toks27
 \@floatcapt=\box60
-) (./Project_3.aux)
+) (./Project_3.aux
+
+LaTeX Warning: Label `eq:steps' multiply defined.
+
+
+LaTeX Warning: Label `fig:1bplot' multiply defined.
+
+)
 \openout1 = `Project_3.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Try loading font information for OT1+ppl on input line 18.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Try loading font information for OT1+ppl on input line 19.
  (/usr/local/texlive/2019/texmf-dist/tex/latex/psnfss/ot1ppl.fd
 File: ot1ppl.fd 2001/06/04 font definitions for OT1/ppl.
 )
@@ -439,7 +446,7 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 \AtBeginShipoutBox=\box62
-Package hyperref Info: Link coloring OFF on input line 18.
+Package hyperref Info: Link coloring OFF on input line 19.
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
@@ -449,124 +456,126 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
 \c@section@level=\count142
 )
-LaTeX Info: Redefining \ref on input line 18.
-LaTeX Info: Redefining \pageref on input line 18.
-LaTeX Info: Redefining \nameref on input line 18.
+LaTeX Info: Redefining \ref on input line 19.
+LaTeX Info: Redefining \pageref on input line 19.
+LaTeX Info: Redefining \nameref on input line 19.
 
 (./Project_3.out) (./Project_3.out)
 \@outlinefile=\write3
 \openout3 = `Project_3.out'.
 
 \c@lstlisting=\count143
-LaTeX Font Info:    Try loading font information for OML+zplm on input line 25.
+LaTeX Font Info:    Try loading font information for OML+zplm on input line 32.
 
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/psnfss/omlzplm.fd
 File: omlzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OML/zplm.
 )
-LaTeX Font Info:    Try loading font information for OMS+zplm on input line 25.
+LaTeX Font Info:    Try loading font information for OMS+zplm on input line 32.
 
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/psnfss/omszplm.fd
 File: omszplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMS/zplm.
 )
-LaTeX Font Info:    Try loading font information for OMX+zplm on input line 25.
+LaTeX Font Info:    Try loading font information for OMX+zplm on input line 32.
 
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/psnfss/omxzplm.fd
 File: omxzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMX/zplm.
 )
-LaTeX Font Info:    Try loading font information for OT1+zplm on input line 25.
+LaTeX Font Info:    Try loading font information for OT1+zplm on input line 32.
 
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/psnfss/ot1zplm.fd
 File: ot1zplm.fd 2002/09/08 Fontinst v1.914 font definitions for OT1/zplm.
 )
 LaTeX Font Info:    Font shape `OT1/ppl/bx/n' in size <9> not available
-(Font)              Font shape `OT1/ppl/b/n' tried instead on input line 26.
+(Font)              Font shape `OT1/ppl/b/n' tried instead on input line 33.
 LaTeX Font Info:    Font shape `OT1/ppl/bx/n' in size <14.4> not available
-(Font)              Font shape `OT1/ppl/b/n' tried instead on input line 32.
-LaTeX Font Info:    Font shape `OT1/ppl/bx/n' in size <12> not available
-(Font)              Font shape `OT1/ppl/b/n' tried instead on input line 34.
+(Font)              Font shape `OT1/ppl/b/n' tried instead on input line 39.
 
-Underfull \hbox (badness 10000) in paragraph at lines 61--62
+Underfull \hbox (badness 5548) in paragraph at lines 40--41
+\OT1/ppl/m/n/10 We as-sume that the earths or-bit
+ []
+
+LaTeX Font Info:    Font shape `OT1/ppl/bx/n' in size <12> not available
+(Font)              Font shape `OT1/ppl/b/n' tried instead on input line 62.
+[1
+
+{/usr/local/texlive/2019/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+Underfull \hbox (badness 10000) in paragraph at lines 89--90
 
  []
 
 
-Overfull \hbox (4.33875pt too wide) detected at line 73
+Overfull \hbox (4.33875pt too wide) detected at line 108
 []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 73--77
+Underfull \hbox (badness 10000) in paragraph at lines 108--112
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 73--77
+Underfull \hbox (badness 10000) in paragraph at lines 108--112
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 73--77
+Underfull \hbox (badness 10000) in paragraph at lines 108--112
 
  []
 
-<K2L.jpg, id=4, 1821.80624pt x 744.7825pt>
+<K2L.jpg, id=46, 1821.80624pt x 744.7825pt>
 File: K2L.jpg Graphic file (type jpg)
 <use K2L.jpg>
-Package pdftex.def Info: K2L.jpg  used on input line 82.
+Package pdftex.def Info: K2L.jpg  used on input line 123.
 (pdftex.def)             Requested size: 167.5pt x 68.47081pt.
-[1
-
-{/usr/local/texlive/2019/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-<sketch.jpg, id=23, 1362.08875pt x 614.295pt>
+<sketch.jpg, id=47, 1362.08875pt x 614.295pt>
 File: sketch.jpg Graphic file (type jpg)
 <use sketch.jpg>
-Package pdftex.def Info: sketch.jpg  used on input line 89.
+Package pdftex.def Info: sketch.jpg  used on input line 135.
 (pdftex.def)             Requested size: 167.5pt x 75.54002pt.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 102.
-
 [2pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) 
 has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.102 \end{document}
-                    pdfTeX warning (ext4): destination with the same identifier
- (name{figure.2}) has been already used, duplicate ignored
+l.139 F
+       igure 2 shows us that the area is <./K2L.jpg>] [3pdfTeX warning (ext4): 
+destination with the same identifier (name{figure.2}) has been already used, du
+plicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.102 \end{document}
-                     <./K2L.jpg> <./sketch.jpg>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 102.
+l.149 \clearpage
+                 <./sketch.jpg>]
+No file Project_3.bbl.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 158.
+[4
+
+]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 158.
  (./Project_3.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 102.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 102.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 158.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 158.
+Package rerunfilecheck Info: File `Project_3.out' has not changed.
+(rerunfilecheck)             Checksum: E522C75C9D21BE1F20ED5604CAB539C4;384.
 
 
-Package rerunfilecheck Warning: File `Project_3.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
+LaTeX Warning: There were multiply-defined labels.
 
-Package rerunfilecheck Info: Checksums for `Project_3.out':
-(rerunfilecheck)             Before: D41D8CD98F00B204E9800998ECF8427E;0
-(rerunfilecheck)             After:  1CA9C0739430B0844C563EF0E2DF86DD;255.
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 102.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 158.
  ) 
 Here is how much of TeX's memory you used:
- 8083 strings out of 492616
- 118694 string characters out of 6129481
- 221489 words of memory out of 5000000
- 11867 multiletter control sequences out of 15000+600000
+ 8105 strings out of 492616
+ 118931 string characters out of 6129481
+ 221825 words of memory out of 5000000
+ 11875 multiletter control sequences out of 15000+600000
  30589 words of font info for 85 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 33i,15n,32p,334b,486s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 33i,15n,32p,316b,459s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
 exlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/tex
 live/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texl
@@ -575,10 +584,10 @@ ive/2019/texmf-dist/fonts/type1/public/mathpazo/fplmr.pfb></usr/local/texlive/2
 texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/local/texlive/2019/texmf-d
 ist/fonts/type1/urw/palatino/uplr8a.pfb></usr/local/texlive/2019/texmf-dist/fon
 ts/type1/urw/palatino/uplri8a.pfb>
-Output written on Project_3.pdf (2 pages, 276544 bytes).
+Output written on Project_3.pdf (4 pages, 284681 bytes).
 PDF statistics:
- 62 PDF objects out of 1000 (max. 8388607)
- 48 compressed objects within 1 object stream
- 14 named destinations out of 1000 (max. 500000)
- 11 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 102 PDF objects out of 1000 (max. 8388607)
+ 86 compressed objects within 1 object stream
+ 27 named destinations out of 1000 (max. 500000)
+ 59 words of extra memory for PDF output out of 10000 (max. 10000000)
 
