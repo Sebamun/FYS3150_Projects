@@ -12,7 +12,7 @@
 #include "solver.hpp"
 
 using namespace std;
-
+/*
 int main()
 {
     int IntegrationPoints; // No. of integration points
@@ -34,6 +34,23 @@ int main()
     solver binary_vv(5.0);
     binary_vv.add(planet1);
     binary_vv.add(planet2);
+
+    return 0;
+}
+*/
+
+int main(){
+    int n = 1000;
+    double FinalTime = 50.;
+    int dim = 3;
+    double x[3], v[3];
+    planet planet1(0.000003, 1., 0.0, 0.0, 0.0, 6.3, 0.); // Earth: (mass,x,y,z,vx,vy,vz)
+    planet planet2(1., 0., 0., 0., 0., 0., 0.);           // Sun: (mass,x,y,z,vx,vy,vz)
+    solver binary_vv(5.0);
+    binary_vv.add(planet1);
+    binary_vv.add(planet2);
+
+    binary_vv.VelocityVerlet(dim, 10000, FinalTime, 1, 0.);
 
     return 0;
 }
