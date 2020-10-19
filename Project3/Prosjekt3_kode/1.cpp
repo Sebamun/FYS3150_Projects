@@ -1,4 +1,3 @@
-#include "Solar_system.hpp"
 
 using namespace std;
 
@@ -6,7 +5,7 @@ double G = 6.94e-11;
 double M_sun = 1.98e30;
 int N = 10;
 double dt = 0.1;
-/*
+
 void Euler(double G, double M_sun, int N, double dt){
 
 
@@ -33,7 +32,7 @@ void Euler(double G, double M_sun, int N, double dt){
   //return r[i][j]
 
 }
-*/
+
 
 void Verlet_solver(double G, double M_sun, int N, double dt){
   vec a[N][N];
