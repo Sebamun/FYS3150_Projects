@@ -41,10 +41,31 @@ The velocity Verlet method is based on the kinematic equations for an moving obj
 \end{align}\\
 \\
 We can also split the equation above and perform the calculation in several steps like this.
-\begin{align*}
+\begin{align}
     v(t+\frac{1}{2}\Delta t)&=v(t)+\frac{1}{2}a(t)\Delta t\\
     x(t+\Delta t)&=x(t)+v(t+\frac{1}{2}\Delta t)\Delta t\\
     a(t+\Delta t)&=f(x(t+\Delta t))\\
     v(t+\Delta t)&=v(t+\frac{1}{2}\Delta t)+\frac{1}{2}a(t+\Delta t)\Delta t
-\end{align*}
+\end{align}
+\\
+\\
+\subsection{Conservation of angular momentum}
+The defination of Keeplers law is that a area, where a connecting line between a planet and the sun, is always the same for an equal time interval. Which is illustrated in the figure below.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{K2L.jpg}
+	\caption{Keeplers second law. Where the area is the same for the same time interval.}
+	\label{fig:1bplot}
+\end{figure}
+The best way to show that the angular momentum is conserved by using Keeplers second law is to make a drawing.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{sketch.jpg}
+	\caption{This square is the infinitesimal area dA that the planet has moved by a infinitesimal time interval dt}
+	\label{fig:1bplot}
+\end{figure}
+Figure 2 shows us that the area is 
+\begin{align}
+    dA=\frac{1}{2}r^2d\theta
+\end{align}
 \end{document}

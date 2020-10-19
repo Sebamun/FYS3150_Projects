@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.7.15)  18 OCT 2020 12:27
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.7.15)  19 OCT 2020 11:15
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -369,35 +369,67 @@ Underfull \hbox (badness 10000) in paragraph at lines 41--44
 
  []
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 50.
-[2]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 50.
+
+Underfull \hbox (badness 10000) in paragraph at lines 49--52
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 49--52
+
+ []
+
+<K2L.jpg, id=28, 1821.80624pt x 744.7825pt>
+File: K2L.jpg Graphic file (type jpg)
+<use K2L.jpg>
+Package pdftex.def Info: K2L.jpg  used on input line 56.
+(pdftex.def)             Requested size: 390.0pt x 159.43188pt.
+<sketch.jpg, id=29, 1362.08875pt x 614.295pt>
+File: sketch.jpg Graphic file (type jpg)
+<use sketch.jpg>
+Package pdftex.def Info: sketch.jpg  used on input line 63.
+(pdftex.def)             Requested size: 390.0pt x 175.882pt.
+[2 <./K2L.jpg>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 71.
+ [3 <./sketch.jpg>]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 71.
  (./Project_3.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 50.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 50.
-Package rerunfilecheck Info: File `Project_3.out' has not changed.
-(rerunfilecheck)             Checksum: 22C6F80FA6E698FA8FE5E3B3320F1A27;174.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 50.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 71.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 71.
+
+
+Package rerunfilecheck Warning: File `Project_3.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `Project_3.out':
+(rerunfilecheck)             Before: 22C6F80FA6E698FA8FE5E3B3320F1A27;174
+(rerunfilecheck)             After:  1CA9C0739430B0844C563EF0E2DF86DD;255.
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 71.
  ) 
 Here is how much of TeX's memory you used:
- 6074 strings out of 492616
- 87363 string characters out of 6129481
+ 6098 strings out of 492616
+ 87634 string characters out of 6129481
  178881 words of memory out of 5000000
- 9908 multiletter control sequences out of 15000+600000
+ 9920 multiletter control sequences out of 15000+600000
  29530 words of font info for 70 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 28i,9n,28p,333b,334s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 28i,9n,28p,333b,347s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
 exlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/tex
 live/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texl
 ive/2019/texmf-dist/fonts/type1/public/mathpazo/fplmr.pfb></usr/local/texlive/2
-019/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/local/texlive/2019/tex
-mf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/local/texlive/2019/texmf-dist
-/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on Project_3.pdf (2 pages, 63335 bytes).
+019/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb></usr/local/texlive/2019/
+texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/local/texlive/2019/texmf-d
+ist/fonts/type1/urw/palatino/uplr8a.pfb></usr/local/texlive/2019/texmf-dist/fon
+ts/type1/urw/palatino/uplri8a.pfb>
+Output written on Project_3.pdf (3 pages, 277554 bytes).
 PDF statistics:
- 60 PDF objects out of 1000 (max. 8388607)
- 49 compressed objects within 1 object stream
- 9 named destinations out of 1000 (max. 500000)
- 25 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 79 PDF objects out of 1000 (max. 8388607)
+ 64 compressed objects within 1 object stream
+ 18 named destinations out of 1000 (max. 500000)
+ 35 words of extra memory for PDF output out of 10000 (max. 10000000)
 
