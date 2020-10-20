@@ -36,8 +36,9 @@ public:
     void GravitationalForce_RK(double x_rel, double y_rel, double z_rel, double &Fx, double &Fy, double &Fz, double mass1, double mass2);
     void KineticEnergySystem();
     void PotentialEnergySystem(double epsilon);
-    double EnergyLoss();
-    bool Bound(planet OnePlanet);
-};
+    void Euler(int dimension, int integration_points, double final_time, int print_number, double epsilon);
+        double EnergyLoss();
+        bool Bound(planet OnePlanet);
+    };
 
 #endif // SOLVER_H

@@ -334,3 +334,151 @@ double solver::EnergyLoss()
         EnergyLoss += all_planets[indices[i]].KineticEnergy();
     return EnergyLoss;
 }
+
+void solver::Euler(int dimension, int integration_points, double final_time, int print_number, double epsilon)
+{ /*  Velocity-Verlet solver for two coupeled ODEs in a given number of dimensions.
+    The algorithm is, exemplified in 1D for position x(t), velocity v(t) and acceleration a(t):
+    x(t+dt) = x(t) + v(t)*dt + 0.5*dt*dt*a(t);
+    v(t+dt) = v(t) + 0.5*dt*[a(t) + a(t+dt)];*/
+
+    // Define time step
+    double time_step = final_time / ((double)integration_points);
+    double time = 0.0;
+    double loss = 0.; // Possible energy loss
+    int lostPlanets[integration_points];
+
+    // Create files for data storage
+    char *filename = new char[1000];
+    char *filenameE = new char[1000];
+    char *filenameB = new char[1000];
+    char *filenameLost = new char[1000];
+    sprintf(filename, "PlanetsEu_%d_%.3f.txt", total_planets, time_step);
+    sprintf(filenameE, "PlanetsEu_energy_%d_%.3f.txt", total_planets, time_step);
+    sprintf(filenameB, "Planetsbound_Eu_%d_%.3f.txt", total_planets, time_step);
+    sprintf(filenameLost, "Planetslost_Eu_%d_%.3f.txt", total_planets, time_step);
+    std::ofstream output_file(filename);
+    std::ofstream output_energy(filenameE);
+    std::ofstream output_bound(filenameB);
+    std::ofstream output_lost(filenameLost);
+
+    // Set up arrays
+    double **acceleration = setup_matrix(total_planets, 3);
+    double **acceleration_new = setup_matrix(total_planets, 3);
+
+    // Initialize forces
+    double Fx, Fy, Fz, Fxnew, Fynew, Fznew; // Forces in each dimension
+
+    // Write initial values to file
+    print_position(output_file, dimension, time, print_number);
+    print_energy(output_energy, time, epsilon);
+
+    int n = 0;
+    lostPlanets[n] = 0;
+    output_lost << time << "\t" << lostPlanets[n] << std::endl;
+    n += 1;
+
+    // Set up clock to measure the time usage
+    clock_t planet_VV, finish_VV;
+    planet_VV = clock();
+
+    // PLANET CALCULATIONS
+    // Loop over time
+    time += time_step;
+    while (time < final_time)
+    {
+        lostPlanets[n] = 0;
+
+        // Loop over all planets
+        for (int nr1 = 0; nr1 < total_planets; nr1++)
+        {
+            planet &current = all_planets[nr1]; // Current planet we are looking at
+
+            Fx = Fy = Fz = Fxnew = Fynew = Fznew = 0.0; // Reset forces before each run
+
+            // Calculate forces in each dimension
+            for (int nr2 = nr1 + 1; nr2 < total_planets; nr2++)
+            {
+                planet &other = all_planets[nr2];
+                GravitationalForce(current, other, Fx, Fy, Fz, epsilon);
+            }
+
+            // Acceleration in each dimension for current planet
+            acceleration[nr1][0] = Fx / current.mass;
+            acceleration[nr1][1] = Fy / current.mass;
+            acceleration[nr1][2] = Fz / current.mass;
+
+            // Calculate new position for current planet
+            for (int j = 0; j < dimension; j++)
+            {
+                current.position[j] += current.velocity[j] * time_step ;
+            }
+
+            // Loop over all other planets
+            for (int nr2 = nr1 + 1; nr2 < total_planets; nr2++)
+            {
+                planet &other = all_planets[nr2];
+                GravitationalForce(current, other, Fxnew, Fynew, Fznew, epsilon);
+            }
+
+            // Acceleration each dimension exerted for current planet
+            acceleration_new[nr1][0] = Fxnew / current.mass;
+            acceleration_new[nr1][1] = Fynew / current.mass;
+            acceleration_new[nr1][2] = Fznew / current.mass;
+
+            // Calculate new velocity for current planet
+            for (int j = 0; j < dimension; j++)
+                current.velocity[j] += time_step * acceleration_new[nr1][j];
+        }
+
+        // Energy conservation
+
+        // Write current values to file and increase time
+        print_position(output_file, dimension, time, print_number);
+        print_energy(output_energy, time, epsilon);
+
+        loss += EnergyLoss();
+
+        for (int nr = 0; nr < total_planets; nr++)
+        {
+            planet &Current = all_planets[nr];
+            if (!(this->Bound(Current)))
+            {
+                lostPlanets[n] += 1;
+            }
+        }
+        output_lost << time << "\t" << lostPlanets[n] << std::endl;
+        n += 1;
+        time += time_step;
+    }
+    // Stop clock and print out time usage
+    finish_VV = clock();
+    std::cout << "Total time = "
+              << "\t" << ((float)(finish_VV - planet_VV) / CLOCKS_PER_SEC) << " seconds" << std::endl; // print elapsed time
+    std::cout << "One time step = "
+              << "\t" << ((float)(finish_VV - planet_VV) / CLOCKS_PER_SEC) / integration_points << " seconds" << std::endl; // print elapsed time
+
+    //loss = EnergyLoss();
+    std::cout << "Total energyloss due to unbound planets: " << loss << std::endl;
+
+    double boundPlanets = 0;
+    for (int nr = 0; nr < total_planets; nr++)
+    {
+        planet &Current = all_planets[nr];
+        if (this->Bound(Current))
+        {
+            output_bound << nr << std::endl;
+            boundPlanets += 1;
+        }
+    }
+    std::cout << "There are " << boundPlanets << " bound planets at the end of the run" << std::endl;
+
+    // Close files
+    output_file.close();
+    output_energy.close();
+    output_bound.close();
+    output_lost.close();
+
+    // Clear memory
+    delete_matrix(acceleration);
+    delete_matrix(acceleration_new);
+}
