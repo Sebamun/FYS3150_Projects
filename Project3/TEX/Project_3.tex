@@ -110,9 +110,6 @@ We can also split the equation above and perform the calculation in several step
 \\
 \\
 
-\subsection{Conservation of angular momentum}
-The defination of Keeplers law is that a area, where a connecting line between a planet and the sun, is always the same for an equal time interval. Which is illustrated in the figure below.
-
 
 \subsection{Conservation of angular momentum}
 The definition of Keeplers law is that a area, where a connecting line between a planet and the sun, is always the same for an equal time interval. Which is illustrated in the figure below:
@@ -140,9 +137,23 @@ Figure 2 shows us that the area is
 \begin{align}
     dA=\frac{1}{2}r^2d\theta
 \end{align}
-
-
-
+We now want to find an infinitesimal area where the planet has moved around the sun, over an infinitesimal time step, where we use equation 12.
+\begin{align}
+    \frac{dA}{dt}&=\frac{1}2{r^2}\frac{d\theta}{dt}\\
+    &=\frac{1}{2}rv_\theta
+\end{align}
+And the definition of angular momentum is given as
+\begin{align}
+    L=mrv_\theta
+\end{align}
+With equation 14 and 15 we can show that the angular momentum is conserved.  
+\section{Results}
+\subsection{Conservation of angular momentum}
+If we substitute equation 15 into equation 14 
+\begin{align}
+    \frac{dA}{dt}=\frac{1}{2}\frac{L}{m}
+\end{align}
+Sine $\frac{dA}{dt}$=constant and the mass m is constant means that the angular momentum also is constant and therefore also conserved.  
 \end{multicols}
 
 

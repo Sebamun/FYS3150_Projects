@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.7.15)  19 OCT 2020 16:45
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.7.15)  20 OCT 2020 12:51
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -530,64 +530,72 @@ Underfull \hbox (badness 10000) in paragraph at lines 108--112
 <K2L.jpg, id=46, 1821.80624pt x 744.7825pt>
 File: K2L.jpg Graphic file (type jpg)
 <use K2L.jpg>
-Package pdftex.def Info: K2L.jpg  used on input line 123.
+Package pdftex.def Info: K2L.jpg  used on input line 120.
 (pdftex.def)             Requested size: 167.5pt x 68.47081pt.
 <sketch.jpg, id=47, 1362.08875pt x 614.295pt>
 File: sketch.jpg Graphic file (type jpg)
 <use sketch.jpg>
-Package pdftex.def Info: sketch.jpg  used on input line 135.
+Package pdftex.def Info: sketch.jpg  used on input line 132.
 (pdftex.def)             Requested size: 167.5pt x 75.54002pt.
 [2pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) 
 has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.139 F
-       igure 2 shows us that the area is <./K2L.jpg>] [3pdfTeX warning (ext4): 
-destination with the same identifier (name{figure.2}) has been already used, du
-plicate ignored
+l.139 \end{align}
+                  <./K2L.jpg>] [3pdfTeX warning (ext4): destination with the sa
+me identifier (name{figure.2}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.149 \clearpage
+l.160 \clearpage
                  <./sketch.jpg>]
 No file Project_3.bbl.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 158.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 169.
 [4
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 158.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 169.
  (./Project_3.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 158.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 158.
-Package rerunfilecheck Info: File `Project_3.out' has not changed.
-(rerunfilecheck)             Checksum: E522C75C9D21BE1F20ED5604CAB539C4;384.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 169.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 169.
 
+
+Package rerunfilecheck Warning: File `Project_3.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `Project_3.out':
+(rerunfilecheck)             Before: E522C75C9D21BE1F20ED5604CAB539C4;384
+(rerunfilecheck)             After:  49D47C00244E57F5D3A066BF2C53D0B6;426.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 158.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 169.
  ) 
 Here is how much of TeX's memory you used:
- 8105 strings out of 492616
- 118931 string characters out of 6129481
- 221825 words of memory out of 5000000
+ 8111 strings out of 492616
+ 119006 string characters out of 6129481
+ 225827 words of memory out of 5000000
  11875 multiletter control sequences out of 15000+600000
  30589 words of font info for 85 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 33i,15n,32p,316b,459s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
-exlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/tex
-live/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texl
-ive/2019/texmf-dist/fonts/type1/public/mathpazo/fplmr.pfb></usr/local/texlive/2
-019/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb></usr/local/texlive/2019/
-texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/local/texlive/2019/texmf-d
-ist/fonts/type1/urw/palatino/uplr8a.pfb></usr/local/texlive/2019/texmf-dist/fon
-ts/type1/urw/palatino/uplri8a.pfb>
-Output written on Project_3.pdf (4 pages, 284681 bytes).
+ 33i,15n,32p,316b,469s stack positions out of 5000i,500n,10000p,200000b,80000s
+pdfTeX warning (dest): name{subsection.1.4} has been referenced but does not 
+exist, replaced by a fixed one
+
+{/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/tex
+live/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texli
+ve/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texliv
+e/2019/texmf-dist/fonts/type1/public/mathpazo/fplmr.pfb></usr/local/texlive/201
+9/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb></usr/local/texlive/2019/te
+xmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/local/texlive/2019/texmf-dis
+t/fonts/type1/urw/palatino/uplr8a.pfb></usr/local/texlive/2019/texmf-dist/fonts
+/type1/urw/palatino/uplri8a.pfb>
+Output written on Project_3.pdf (4 pages, 285600 bytes).
 PDF statistics:
- 102 PDF objects out of 1000 (max. 8388607)
- 86 compressed objects within 1 object stream
- 27 named destinations out of 1000 (max. 500000)
+ 109 PDF objects out of 1000 (max. 8388607)
+ 93 compressed objects within 1 object stream
+ 33 named destinations out of 1000 (max. 500000)
  59 words of extra memory for PDF output out of 10000 (max. 10000000)
 
