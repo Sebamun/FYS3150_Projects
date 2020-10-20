@@ -13,18 +13,18 @@
 \bibliographystyle{plain}
 
 \begin{document}
-\title{FYS3150-Project 2}
+\title{Using the Jacobi algorithm for solving eigenvalue problems}
 \author{Marcus Berget, Sebastian Amundsen, Andreas Wetzel}
 \date{August 2020}
 \maketitle
 
 \begin{abstract}
-
+The aim of this project is solving eigenvalue/eigenvector problems using the Jacobi algorithm. Specifically, we will look at solving the Schroedinger's equation with a three-dimensional harmonic oscillator potential. We were able to develop a code which solves the eigenvalue problem for the buckling beam problem with an accuracy of 1e-14, but only an accuracy of 0.1 for the quantum case. When solving eigenvalue problems with the Jacobi method, the number of iterations needed increases quadratic with the dimension of the matrix used. In other words, there is a trade-off between precision and time which needs to be taken into account when solving eigenvalue problems with the Jacobi algorithm. 
 \end{abstract}
 
 \section{Introduction}
 
-The aim of this project is solving eigenvalue/eigenvector problems using the Jacobi algorithm. Specifically, we will look at solving the Schroedinger's equation with a three-dimensional harmonic oscillator potential. We will look at how a quantum mechanics problem can be solved as a diagonalization problem. 
+The aim of this project is solving eigenvalue/eigenvector problems using the Jacobi algorithm. Specifically, we will look at solving the Schroedinger's equation with a three-dimensional harmonic oscillator potential. 
 
 \section{Theory}
 
@@ -105,6 +105,7 @@ which gives us the variables c and s:
    \label{eq:s} 
 \end{equation*}
 
+
 The general expression for the new matrix elements are:
 $$
 b_{ii}=a_{ii}, i\neq k, i\neq l \\
@@ -145,6 +146,9 @@ and the center-of-mass coordinate $\mathbf{R}=1/2(\mathbf{r}_1+\mathbf{r}_2)$. W
 Where $\omega_r$ is a parameter which reflects the strength of the oscillator potential.
 
 \section{Method}
+All the code can be found at: \\
+\url{https://github.com/Sebamun/FYS3150_Projekter/tree/master/Prosjekt2/Prosjekt2_kode}
+\\
 
 
 In the case of the buckling beam problem the matrix becomes very simple, the diagonal elements are all equal (d in equation \ref{eq:matrix}), and the non-diagonal elements are all equal (a in equation \ref{eq:matrix}). 
@@ -160,16 +164,44 @@ We will solve equation \ref{eq:SE} using the values $\omega_r = 0.01$, $\omega_r
 
 \section{Implementation}
 
-
-
 \section{Results}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{Egenvektorer1.png}
+	\caption{Above we see a plot of the eigenvector for computed with the armadillo function $\text{eig\_sym}$ ($\text{Num}$), vs. the theoretical eigenvector (teor). This is for the buckling beam problem.}
+	\label{fig:egen1}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{Iterasjoner.png}
+	\caption{Above we have plotted the number of Jacobi rotations needed to make the non-diagonal elements essentially zero against the dimension of the matrix. (Buckling beam)}
+	\label{fig:iter}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{CPU_tid.png}
+	\caption{Above we have plotted the CPU-time needed to make the non-diagonal elements essentially zero against the dimension of the matrix. (buckling beam)}
+	\label{fig:CPU}
+\end{figure}
+
+For the buckling beam eigenvalue problem we were able to reproduce the eigenvalues with an accuracy of 1e-14 compared to the analytical values. For the case with quantum dots in three dimensions and one electron, we tried to find how many integration points was needed to reproduce the analytical results with four leading digits after the decimal point. For some reason, we weren't able to reproduce the analytical results with more than one leading digit after the decimal point. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{Egenvektorer_omega.png}
+	\caption{Above we have plotted the eigenvectors for the quantum case with different values for $\omega$}
+	\label{fig:omega}
+\end{figure}
 
 \section{Discussion}
-
+From Figure (\ref{fig:egen1}) we can see that armadillo's function for computing eigenvectors seem to be very accurate which gives a good comparison tool when checking whether our code works. When looking at Figure (\ref{fig:iter}), it seems that the number of iterations against the dimension increases in a quadratic fashion. This might make sense, given the fact that the elements of a matrix also increases quadratic with the dimension. When looking at Figure (\ref{fig:CPU}), we can see that the CPU-time needed, seems to increase at an even faster rate. This might be due to the fact that at higher dimensions, the RAM might max out making the time needed per iteration higher for higher dimensions. As stated above, we weren't able to reproduce the analytical eigenvalues for the quantum case with one electron with more than one leading digit after the decimal point. We couldn't find the reason for why we couldn't, even though we tried different values for $\rho_{max}$ between 1 and 10, increasing the dimension, and adjusting the tolerance for the Jacobi algorithm. In addition, due to poor workflow management and a quite chaotic code we lost the data for the eigenvalues in both the buckling beam problem and the quantum case. We could've tried to reproduce them, but at this point we simply don't have the time for that. We believe that better planning and by using object oriented code, we could've avoided this specific problem. Finally, looking at Figure (\ref{fig:omega}) we see the eigenvectors for the quantum case using different values for $\omega$. Unfortunately we couldn't access the analytical solutions for the eigenvectors (due to every group member being in quarantine), so we are unable to tell if the eigenvectors we found represent the correct solutions. Furthermore, we would like to comment on the overall unrefined touch of the report/code. The unexpected sickness in addition to group members being infected with the COVID-19 disease caught us by surprise and we were not ready for it. Though we are not using these events as an excuse, we have learned that with better workflow planning, communication and organizing we would've been more prepared for it. This is definitely an experience we will bring with us to future projects.  
 
 \section{Concluding remarks}
 
-\bibliography{References}
+We were able to develop a code which solves the eigenvalue problem for the buckling beam problem with great accuracy, but encountered problems achieving the same accuracy for the quantum case. When solving eigenvalue problems with the Jacobi method, the number of iterations needed increases quadratic with the dimension of the matrix used. In other words, there is a trade-off between precision and time which needs to be taken into account when solving eigenvalue problems with the Jacobi algorithm. 
+
 \begin{thebibliography}{9}
 \bibitem{94}
 	Department of Physics, University of Oslo, Norway, 2020 Project 2 (Computational Physics I FYS3150/FYS4150)

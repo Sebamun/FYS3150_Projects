@@ -4,6 +4,7 @@ import numpy as np
 import sys
 switch = str(sys.argv[1]) # Her bestemmer man om vi skal ha med kvanteledd.
 ns = [10, 25, 50, 75, 100, 125, 150, 175, 200, 225, 250, 275, 300] # De ulike dimensjonene.
+omega = [0.01, 0.5, 1, 5]
 iterations = [] # Her lagres iterasjonsverdier.
 CPU_time = [] # Her lagres CPU tiden for de ulike iterasjonstidene.
 if switch =='0':
@@ -24,22 +25,25 @@ if switch =='0':
     n = np.arange(0,len(eig_vec))
     u = np.sin(n*np.pi/len(eig_vec)) # Regner ut den teoretiske egenvektoren.
     plt.title("Eigenvector for the lowest eigenvalue")
-    plt.plot(rho, u/np.linalg.norm(u), label='teor')
-    plt.plot(rho, eig_vec, label='Num')
+    plt.plot(rho, u/np.linalg.norm(u), 'r-', label='teor')
+    plt.plot(rho, eig_vec, 'b--', label='Num')
+    plt.legend()
     plt.xlabel('rho')
     plt.ylabel('Eigenvec')
-    plt.legend()
+    plt.savefig('Egenvektorer1')
     plt.show()
     #Plotting for antall iterasjoner og CPU tid:
     plt.title('Number of iterations')
     plt.plot(ns, iterations,'bo')
     plt.xlabel('Dimension')
     plt.ylabel('Iterations')
+    plt.savefig('Iterasjoner')
     plt.show()
     plt.title('The CPU time')
     plt.plot(ns, CPU_time,'bo')
     plt.xlabel('Dimension')
     plt.ylabel('CPU time')
+    plt.savefig('CPU_tid')
     plt.show()
 else: # Dette er for kvantetilfellet.
     omega = [0.01, 0.5, 1, 5] # Ulike verdiene for omega.
@@ -56,4 +60,5 @@ else: # Dette er for kvantetilfellet.
     plt.xlabel('rho')
     plt.ylabel('Eigenvec')
     plt.legend()
+    plt.savefig('Egenvektorer_omega')
     plt.show()
