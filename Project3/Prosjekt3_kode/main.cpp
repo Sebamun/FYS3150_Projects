@@ -14,7 +14,7 @@
 using namespace std;
 
 int main(){
-    int n = 1000;
+    int n = 100000;
     double FinalTime = 50.;
     int dim = 3;
     double x[3], v[3];

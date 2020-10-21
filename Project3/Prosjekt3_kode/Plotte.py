@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
-infileVV = open('PlanetsVV_2_0.050.txt', 'r')
-infileEU = open('PlanetsEu_2_0.050.txt', 'r')
+infileVV = open('PlanetsVV_2.txt', 'r')
+infileEU = open('PlanetsEu_2.txt', 'r')
 lines = infileVV.readlines()
 xVV = np.zeros(len(lines))
 yVV = np.zeros(len(lines))
@@ -35,17 +35,18 @@ for i in range(1,len(lines)):
     y1EU[i] = float(vals[7])
     z1EU[i] = float(vals[8])
 
-
 #ax = plt.axes(projection='3d')
 #ax.plot3D(x, y, z, 'gray')
 #plt.show()
-plt.plot(xEU[1:], yEU[1:])
+plt.plot(xEU[1:], yEU[1:], label=f'N={len(lines)}')
 plt.axis('equal')
 plt.tight_layout()
+plt.legend()
 plt.show()
 
-plt.plot(xVV[1:], yVV[1:])
+plt.plot(xVV[1:], yVV[1:], label=f'N={len(lines)}')
 #plt.plot(x1,y1)
 plt.axis('equal')
 plt.tight_layout()
+plt.legend()
 plt.show()
