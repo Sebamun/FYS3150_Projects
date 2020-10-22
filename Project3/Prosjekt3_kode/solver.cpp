@@ -12,7 +12,6 @@ solver::solver(double radi)
     G = 4 * M_PI * M_PI;
     totalKinetic = 0;
     totalPotential = 0;
-    beta = 3.99;
 }
 
 void solver::add(planet newplanet)
@@ -65,7 +64,7 @@ void solver::print_energy(std::ofstream &output, double time, double epsilon)
     }
 }
 
-void solver::Euler(int dimension, int integration_points, double final_time, int print_number, double epsilon)
+void solver::Euler(int dimension, int integration_points, double final_time, int print_number, double epsilon, double beta)
 { // Define time step
     double time_step = final_time / ((double)integration_points);
     double time = 0.0;
@@ -194,7 +193,7 @@ void solver::Euler(int dimension, int integration_points, double final_time, int
     delete_matrix(acceleration);
 }
 
-void solver::VelocityVerlet(int dimension, int integration_points, double final_time, int print_number, double epsilon)
+void solver::VelocityVerlet(int dimension, int integration_points, double final_time, int print_number, double epsilon, double beta)
 { /*  Velocity-Verlet solver for two coupeled ODEs in a given number of dimensions.
     The algorithm is, exemplified in 1D for position x(t), velocity v(t) and acceleration a(t):
     x(t+dt) = x(t) + v(t)*dt + 0.5*dt*dt*a(t);
