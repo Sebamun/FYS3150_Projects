@@ -3,7 +3,6 @@
 #include <iostream>
 #include <cmath>
 #include "time.h"
-#include <math.h> /* pow */
 
 solver::solver(double radi)
 {
@@ -67,33 +66,31 @@ void solver::print_energy(std::ofstream &output, double time, double epsilon)
 }
 
 void solver::Euler(int dimension, int integration_points, double final_time, int print_number, double epsilon)
-{
-    // Define time step
+{ // Define time step
     double time_step = final_time / ((double)integration_points);
     double time = 0.0;
     double loss = 0.; // Possible energy loss
     int lostPlanets[integration_points];
 
     // Create files for data storage
-    char *filename = new char[1000];
-    char *filenameE = new char[1000];
-    char *filenameB = new char[1000];
-    char *filenameLost = new char[1000];
-    sprintf(filename, "PlanetsEu_%d.txt", total_planets);
-    sprintf(filenameE, "PlanetsEu_energy_%d.txt", total_planets);
-    sprintf(filenameB, "Planetsbound_Eu_%d.txt", total_planets);
-    sprintf(filenameLost, "Planetslost_Eu_%d.txt", total_planets);
-    std::ofstream output_file(filename);
-    std::ofstream output_energy(filenameE);
-    std::ofstream output_bound(filenameB);
-    std::ofstream output_lost(filenameLost);
+    char *filename_EU = new char[1000];
+    char *filenameE_EU = new char[1000];
+    char *filenameB_EU = new char[1000];
+    char *filenameLost_EU = new char[1000];
+    sprintf(filename_EU, "PlanetsEU_%d.txt", total_planets);
+    sprintf(filenameE_EU, "PlanetsEU_energy_%d.txt", total_planets);
+    sprintf(filenameB_EU, "Planetsbound_%d.txt", total_planets);
+    sprintf(filenameLost_EU, "Planetslost_%d.txt", total_planets);
+    std::ofstream output_file(filename_EU);
+    std::ofstream output_energy(filenameE_EU);
+    std::ofstream output_bound(filenameB_EU);
+    std::ofstream output_lost(filenameLost_EU);
 
     // Set up arrays
     double **acceleration = setup_matrix(total_planets, 3);
-    double **acceleration_new = setup_matrix(total_planets, 3);
 
     // Initialize forces
-    double Fx, Fy, Fz, Fxnew, Fynew, Fznew; // Forces in each dimension
+    double Fx, Fy, Fz; // Forces in each dimension
 
     // Write initial values to file
     print_position(output_file, dimension, time, print_number);
@@ -120,7 +117,13 @@ void solver::Euler(int dimension, int integration_points, double final_time, int
         {
             planet &current = all_planets[nr1]; // Current planet we are looking at
 
-            Fx = Fy = Fz = Fxnew = Fynew = Fznew = 0.0; // Reset forces before each run
+            // Calculate new position for current planet
+            for (int j = 0; j < dimension; j++)
+            {
+                current.position[j] += current.velocity[j] * time_step;
+            }
+
+            Fx = Fy = Fz = 0.0; // Reset forces before each run
 
             // Calculate forces in each dimension
             for (int nr2 = nr1 + 1; nr2 < total_planets; nr2++)
@@ -134,27 +137,9 @@ void solver::Euler(int dimension, int integration_points, double final_time, int
             acceleration[nr1][1] = Fy / current.mass;
             acceleration[nr1][2] = Fz / current.mass;
 
-            // Calculate new position for current planet
-            for (int j = 0; j < dimension; j++)
-            {
-                current.position[j] += current.velocity[j] * time_step ;
-            }
-
-            // Loop over all other planets
-            for (int nr2 = nr1 + 1; nr2 < total_planets; nr2++)
-            {
-                planet &other = all_planets[nr2];
-                GravitationalForce(current, other, Fxnew, Fynew, Fznew, epsilon, beta);
-            }
-
-            // Acceleration each dimension exerted for current planet
-            acceleration_new[nr1][0] = Fxnew / current.mass;
-            acceleration_new[nr1][1] = Fynew / current.mass;
-            acceleration_new[nr1][2] = Fznew / current.mass;
-
             // Calculate new velocity for current planet
             for (int j = 0; j < dimension; j++)
-                current.velocity[j] += time_step * acceleration_new[nr1][j];
+                current.velocity[j] += time_step * acceleration[nr1][j];
         }
 
         // Energy conservation
@@ -207,7 +192,6 @@ void solver::Euler(int dimension, int integration_points, double final_time, int
 
     // Clear memory
     delete_matrix(acceleration);
-    delete_matrix(acceleration_new);
 }
 
 void solver::VelocityVerlet(int dimension, int integration_points, double final_time, int print_number, double epsilon)
@@ -285,7 +269,7 @@ void solver::VelocityVerlet(int dimension, int integration_points, double final_
             // Calculate new position for current planet
             for (int j = 0; j < dimension; j++)
             {
-                current.position[j] += current.velocity[j] * time_step + 0.5 * time_step * time_step * acceleration[nr1][j];
+                current.position[j] += current.velocity[j] * time_step ;
             }
 
             // Loop over all other planets
@@ -302,11 +286,10 @@ void solver::VelocityVerlet(int dimension, int integration_points, double final_
 
             // Calculate new velocity for current planet
             for (int j = 0; j < dimension; j++)
-                current.velocity[j] += 0.5 * time_step * (acceleration[nr1][j] + acceleration_new[nr1][j]);
+                current.velocity[j] += time_step * acceleration_new[nr1][j];
         }
 
         // Energy conservation
-
         // Write current values to file and increase time
         print_position(output_file, dimension, time, print_number);
         print_energy(output_energy, time, epsilon);
