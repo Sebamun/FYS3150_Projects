@@ -16,6 +16,7 @@ public:
     vector<planet> all_planets;
     double totalKinetic;
     double totalPotential;
+    double beta;
 
     // constants
 
@@ -32,12 +33,13 @@ public:
     void VelocityVerlet(int dimension, int integration_points, double final_time, int print_number, double epsilon);
     double **setup_matrix(int height, int width);
     void delete_matrix(double **matrix);
-    void GravitationalForce(planet &current, planet &other, double &Fx, double &Fy, double &Fz, double epsilon);
+    void GravitationalForce(planet &current, planet &other, double &Fx, double &Fy, double &Fz, double epsilon, double beta);
     void GravitationalForce_RK(double x_rel, double y_rel, double z_rel, double &Fx, double &Fy, double &Fz, double mass1, double mass2);
     void KineticEnergySystem();
     void PotentialEnergySystem(double epsilon);
-    double EnergyLoss();
-    bool Bound(planet OnePlanet);
-};
+    void Euler(int dimension, int integration_points, double final_time, int print_number, double epsilon);
+        double EnergyLoss();
+        bool Bound(planet OnePlanet);
+    };
 
 #endif // SOLVER_H

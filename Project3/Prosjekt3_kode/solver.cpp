@@ -12,6 +12,7 @@ solver::solver()
     G = 4 * M_PI * M_PI;
     totalKinetic = 0;
     totalPotential = 0;
+    beta = 3.0;
 }
 
 solver::solver(double radi)
@@ -22,6 +23,7 @@ solver::solver(double radi)
     G = 4 * M_PI * M_PI;
     totalKinetic = 0;
     totalPotential = 0;
+    beta = 3.0;
 }
 
 void solver::add(planet newplanet)
@@ -74,6 +76,135 @@ void solver::print_energy(std::ofstream &output, double time, double epsilon)
     }
 }
 
+void solver::Euler(int dimension, int integration_points, double final_time, int print_number, double epsilon)
+{ // Define time step
+    double time_step = final_time / ((double)integration_points);
+    double time = 0.0;
+    double loss = 0.; // Possible energy loss
+    int lostPlanets[integration_points];
+
+    // Create files for data storage
+    char *filename_EU = new char[1000];
+    char *filenameE_EU = new char[1000];
+    char *filenameB_EU = new char[1000];
+    char *filenameLost_EU = new char[1000];
+    sprintf(filename_EU, "PlanetsEU_%d.txt", total_planets);
+    sprintf(filenameE_EU, "PlanetsEU_energy_%d.txt", total_planets);
+    sprintf(filenameB_EU, "Planetsbound_%d.txt", total_planets);
+    sprintf(filenameLost_EU, "Planetslost_%d.txt", total_planets);
+    std::ofstream output_file(filename_EU);
+    std::ofstream output_energy(filenameE_EU);
+    std::ofstream output_bound(filenameB_EU);
+    std::ofstream output_lost(filenameLost_EU);
+
+    // Set up arrays
+    double **acceleration = setup_matrix(total_planets, 3);
+
+    // Initialize forces
+    double Fx, Fy, Fz; // Forces in each dimension
+
+    // Write initial values to file
+    print_position(output_file, dimension, time, print_number);
+    print_energy(output_energy, time, epsilon);
+
+    int n = 0;
+    lostPlanets[n] = 0;
+    output_lost << time << "\t" << lostPlanets[n] << std::endl;
+    n += 1;
+
+    // Set up clock to measure the time usage
+    clock_t planet_VV, finish_VV;
+    planet_VV = clock();
+
+    // PLANET CALCULATIONS
+    // Loop over time
+    time += time_step;
+    while (time < final_time)
+    {
+        lostPlanets[n] = 0;
+
+        // Loop over all planets
+        for (int nr1 = 0; nr1 < total_planets; nr1++)
+        {
+            planet &current = all_planets[nr1]; // Current planet we are looking at
+
+            // Calculate new position for current planet
+            for (int j = 0; j < dimension; j++)
+            {
+                current.position[j] += current.velocity[j] * time_step;
+            }
+
+            Fx = Fy = Fz = 0.0; // Reset forces before each run
+
+            // Calculate forces in each dimension
+            for (int nr2 = nr1 + 1; nr2 < total_planets; nr2++)
+            {
+                planet &other = all_planets[nr2];
+                GravitationalForce(current, other, Fx, Fy, Fz, epsilon, beta);
+            }
+
+            // Acceleration in each dimension for current planet
+            acceleration[nr1][0] = Fx / current.mass;
+            acceleration[nr1][1] = Fy / current.mass;
+            acceleration[nr1][2] = Fz / current.mass;
+
+            // Calculate new velocity for current planet
+            for (int j = 0; j < dimension; j++)
+                current.velocity[j] += time_step * acceleration[nr1][j];
+        }
+
+        // Energy conservation
+
+        // Write current values to file and increase time
+        print_position(output_file, dimension, time, print_number);
+        print_energy(output_energy, time, epsilon);
+
+        loss += EnergyLoss();
+
+        for (int nr = 0; nr < total_planets; nr++)
+        {
+            planet &Current = all_planets[nr];
+            if (!(this->Bound(Current)))
+            {
+                lostPlanets[n] += 1;
+            }
+        }
+        output_lost << time << "\t" << lostPlanets[n] << std::endl;
+        n += 1;
+        time += time_step;
+    }
+    // Stop clock and print out time usage
+    finish_VV = clock();
+    std::cout << "Total time = "
+              << "\t" << ((float)(finish_VV - planet_VV) / CLOCKS_PER_SEC) << " seconds" << std::endl; // print elapsed time
+    std::cout << "One time step = "
+              << "\t" << ((float)(finish_VV - planet_VV) / CLOCKS_PER_SEC) / integration_points << " seconds" << std::endl; // print elapsed time
+
+    //loss = EnergyLoss();
+    std::cout << "Total energyloss due to unbound planets: " << loss << std::endl;
+
+    double boundPlanets = 0;
+    for (int nr = 0; nr < total_planets; nr++)
+    {
+        planet &Current = all_planets[nr];
+        if (this->Bound(Current))
+        {
+            output_bound << nr << std::endl;
+            boundPlanets += 1;
+        }
+    }
+    std::cout << "There are " << boundPlanets << " bound planets at the end of the run" << std::endl;
+
+    // Close files
+    output_file.close();
+    output_energy.close();
+    output_bound.close();
+    output_lost.close();
+
+    // Clear memory
+    delete_matrix(acceleration);
+}
+
 void solver::VelocityVerlet(int dimension, int integration_points, double final_time, int print_number, double epsilon)
 { /*  Velocity-Verlet solver for two coupeled ODEs in a given number of dimensions.
     The algorithm is, exemplified in 1D for position x(t), velocity v(t) and acceleration a(t):
@@ -91,10 +222,10 @@ void solver::VelocityVerlet(int dimension, int integration_points, double final_
     char *filenameE = new char[1000];
     char *filenameB = new char[1000];
     char *filenameLost = new char[1000];
-    sprintf(filename, "PlanetsVV_%d_%.3f.txt", total_planets, time_step);
-    sprintf(filenameE, "PlanetsVV_energy_%d_%.3f.txt", total_planets, time_step);
-    sprintf(filenameB, "Planetsbound_%d_%.3f.txt", total_planets, time_step);
-    sprintf(filenameLost, "Planetslost_%d_%.3f.txt", total_planets, time_step);
+    sprintf(filename, "PlanetsVV_%d.txt", total_planets);
+    sprintf(filenameE, "PlanetsVV_energy_%d.txt", total_planets);
+    sprintf(filenameB, "Planetsbound_%d.txt", total_planets);
+    sprintf(filenameLost, "Planetslost_%d.txt", total_planets);
     std::ofstream output_file(filename);
     std::ofstream output_energy(filenameE);
     std::ofstream output_bound(filenameB);
@@ -138,7 +269,7 @@ void solver::VelocityVerlet(int dimension, int integration_points, double final_
             for (int nr2 = nr1 + 1; nr2 < total_planets; nr2++)
             {
                 planet &other = all_planets[nr2];
-                GravitationalForce(current, other, Fx, Fy, Fz, epsilon);
+                GravitationalForce(current, other, Fx, Fy, Fz, epsilon, beta);
             }
 
             // Acceleration in each dimension for current planet
@@ -156,7 +287,7 @@ void solver::VelocityVerlet(int dimension, int integration_points, double final_
             for (int nr2 = nr1 + 1; nr2 < total_planets; nr2++)
             {
                 planet &other = all_planets[nr2];
-                GravitationalForce(current, other, Fxnew, Fynew, Fznew, epsilon);
+                GravitationalForce(current, other, Fxnew, Fynew, Fznew, epsilon, beta);
             }
 
             // Acceleration each dimension exerted for current planet
@@ -170,7 +301,6 @@ void solver::VelocityVerlet(int dimension, int integration_points, double final_
         }
 
         // Energy conservation
-
         // Write current values to file and increase time
         print_position(output_file, dimension, time, print_number);
         print_energy(output_energy, time, epsilon);
@@ -252,7 +382,7 @@ void solver::delete_matrix(double **matrix)
     delete[] matrix;
 }
 
-void solver::GravitationalForce(planet &current, planet &other, double &Fx, double &Fy, double &Fz, double epsilon)
+void solver::GravitationalForce(planet &current, planet &other, double &Fx, double &Fy, double &Fz, double epsilon, double beta)
 { // Function that calculates the gravitational force between two objects, component by component.
 
     // Calculate relative distance between current planet and all other planets
@@ -264,9 +394,9 @@ void solver::GravitationalForce(planet &current, planet &other, double &Fx, doub
     double smoothing = epsilon * epsilon * epsilon;
 
     // Calculate the forces in each direction
-    Fx -= this->G * current.mass * other.mass * relative_distance[0] / ((r * r * r) + smoothing);
-    Fy -= this->G * current.mass * other.mass * relative_distance[1] / ((r * r * r) + smoothing);
-    Fz -= this->G * current.mass * other.mass * relative_distance[2] / ((r * r * r) + smoothing);
+    Fx -= this->G * current.mass * other.mass * relative_distance[0] / (pow(r,beta) + smoothing);
+    Fy -= this->G * current.mass * other.mass * relative_distance[1] / (pow(r,beta) + smoothing);
+    Fz -= this->G * current.mass * other.mass * relative_distance[2] / (pow(r,beta) + smoothing);
 }
 
 void solver::GravitationalForce_RK(double x_rel, double y_rel, double z_rel, double &Fx, double &Fy, double &Fz, double mass1, double mass2)
