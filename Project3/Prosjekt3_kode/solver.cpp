@@ -13,7 +13,7 @@ solver::solver(double radi)
     G = 4 * M_PI * M_PI;
     totalKinetic = 0;
     totalPotential = 0;
-    beta = 3.9;
+    beta = 3.99;
 }
 
 void solver::add(planet newplanet)
