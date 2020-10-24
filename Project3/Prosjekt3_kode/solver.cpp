@@ -6,10 +6,11 @@
 
 solver::solver(double radi)
 {
-    total_planets = 0;
+    total_planets = 0; // Her legger vi til antall planeter.
     radius = radi;
+    //std::cout<<radi<<std::endl;
     total_mass = 0;
-    G = 4 * M_PI * M_PI;
+    G = 4 * M_PI * M_PI; // Gravitasjonskonstanten.
     totalKinetic = 0;
     totalPotential = 0;
 }
@@ -30,6 +31,7 @@ void solver::addM(planet newplanet)
 void solver::GravitationalConstant()
 {
     G = (4 * M_PI * M_PI / 32) * radius * radius * radius / total_mass;
+    //std::cout<<G<<std::endl;
 }
 
 void solver::print_position(std::ofstream &output, int dimension, double time, int number)
@@ -268,7 +270,8 @@ void solver::VelocityVerlet(int dimension, int integration_points, double final_
             // Calculate new position for current planet
             for (int j = 0; j < dimension; j++)
             {
-                current.position[j] += current.velocity[j] * time_step ;
+                //current.position[j] += current.velocity[j] * time_step ;
+                current.position[j] += current.velocity[j]*time_step + 0.5*time_step*time_step*acceleration[nr1][j];
             }
 
             // Loop over all other planets
@@ -285,7 +288,8 @@ void solver::VelocityVerlet(int dimension, int integration_points, double final_
 
             // Calculate new velocity for current planet
             for (int j = 0; j < dimension; j++)
-                current.velocity[j] += time_step * acceleration_new[nr1][j];
+                //current.velocity[j] += time_step * acceleration_new[nr1][j];
+                current.velocity[j] += 0.5*time_step*(acceleration[nr1][j] + acceleration_new[nr1][j]);
         }
 
         // Energy conservation
@@ -376,15 +380,16 @@ void solver::GravitationalForce(planet &current, planet &other, double &Fx, doub
     // Calculate relative distance between current planet and all other planets
     double relative_distance[3];
 
-    for (int j = 0; j < 3; j++)
-        relative_distance[j] = current.position[j] - other.position[j];
-    double r = current.distance(other);
+    for (int j = 0; j < 3; j++) // Finner retningsvektoren i tre dimensjoner.
+        relative_distance[j] = current.position[j] - other.position[j]; // Dette er vektoren (med retning)
+    double r = current.distance(other); // Lengden av vektoren.
     double smoothing = epsilon * epsilon * epsilon;
 
     // Calculate the forces in each direction
     Fx -= this->G * current.mass * other.mass * relative_distance[0] / (pow(r,beta) + smoothing);
     Fy -= this->G * current.mass * other.mass * relative_distance[1] / (pow(r,beta) + smoothing);
     Fz -= this->G * current.mass * other.mass * relative_distance[2] / (pow(r,beta) + smoothing);
+    //std::cout<<this->G<<std::endl;
 }
 
 void solver::GravitationalForce_RK(double x_rel, double y_rel, double z_rel, double &Fx, double &Fy, double &Fz, double mass1, double mass2)

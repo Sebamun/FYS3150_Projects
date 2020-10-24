@@ -16,11 +16,10 @@ int main(){
     double beta = 3.0; // For 3.99 så forlot den banen.
     //string Initial_values = "Initial_values.txt"; // Her henter vi initialbetingelser.
     int n = 100000;
-    double FinalTime = 50.;
+    double FinalTime = 1.; //50
     int dim = 3;
 
     solver binary_vv(5.0);
-    solver binary_eu(5.0);
 
     double *x, *y, *z, *vx, *vy, *vz; //To store initial conditions for each object.
     double *mass; //Store mass of particles.
@@ -41,7 +40,8 @@ int main(){
     for (int i = 0; i < Nobjects; i++){
     	fscanf(fp_init, "%lf %lf %lf %lf %lf %lf", &x[i], &y[i], &z[i], &vx[i], &vy[i], &vz[i]); // One %lf (lf=long float or double) for each floating point number on each line of the file.
       fscanf(fp_mass, "%lf", &mass[i]); //Extract mass for particle i.
-      planet planet_(mass[i], x[i], y[i], z[i], vx[i], vy[i], vz[i]);
+      planet planet_(mass[i], x[i], y[i], z[i], vx[i]*365, vy[i]*365, vz[i]*365);
+      //cout<<mass[i]<<','<<x[i]<<','<<y[i]<<','<<z[i]<<','<<vx[i]*365<<','<<vy[i]*365<<','<<vz[i]*365<<endl;
       binary_vv.add(planet_);
     }
     fclose(fp_init); //Close file with initial conditions

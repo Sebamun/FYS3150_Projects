@@ -23,7 +23,6 @@ int main(){
     planet planet2(1., 0., 0., 0., 0., 0., 0.);           // Sun: (mass,x,y,z,vx,vy,vz)
     planet planet3(0.003, 5.20, 0.0, 0.0, 0.0 , 10.0, 0.); //Jupiter
 
-
     solver binary_vv(5.0);
     solver binary_eu(5.0);
     binary_vv.add(planet1);
@@ -34,7 +33,6 @@ int main(){
 
     binary_eu.Euler(dim, n, FinalTime, 1, 0., beta);
     binary_vv.VelocityVerlet(dim, n, FinalTime, 1, 0., beta);
-
 
     return 0;
 }
