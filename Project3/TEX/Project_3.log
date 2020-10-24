@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.7.15)  22 OCT 2020 14:51
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.7.15)  24 OCT 2020 12:35
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -504,63 +504,43 @@ Underfull \hbox (badness 5548) in paragraph at lines 41--42
 LaTeX Font Info:    Font shape `OT1/ppl/bx/n' in size <12> not available
 (Font)              Font shape `OT1/ppl/b/n' tried instead on input line 71.
 
-Underfull \hbox (badness 10000) in paragraph at lines 98--99
-
- []
-
-
-Overfull \hbox (4.33875pt too wide) detected at line 117
-[]
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 117--121
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 117--121
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 117--121
-
- []
-
 [2]
-<K2L.jpg, id=71, 1821.80624pt x 744.7825pt>
+Underfull \hbox (badness 10000) in paragraph at lines 132--134
+
+ []
+
+<K2L.jpg, id=79, 1821.80624pt x 744.7825pt>
 File: K2L.jpg Graphic file (type jpg)
 <use K2L.jpg>
-Package pdftex.def Info: K2L.jpg  used on input line 129.
+Package pdftex.def Info: K2L.jpg  used on input line 140.
 (pdftex.def)             Requested size: 167.5pt x 68.47081pt.
-<sketch.jpg, id=72, 1362.08875pt x 614.295pt>
+<sketch.jpg, id=80, 1362.08875pt x 614.295pt>
 File: sketch.jpg Graphic file (type jpg)
 <use sketch.jpg>
-Package pdftex.def Info: sketch.jpg  used on input line 141.
+Package pdftex.def Info: sketch.jpg  used on input line 152.
 (pdftex.def)             Requested size: 167.5pt x 75.54002pt.
- [3pdfTeX warning (ext4): destination with the same identifier (name{figure.1})
- has been already used, duplicate ignored
+[3pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) 
+has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.181 \end{align}
+l.164 \end{align}
                  pdfTeX warning (ext4): destination with the same identifier (n
 ame{figure.2}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.181 \end{align}
+l.164 \end{align}
                   <./K2L.jpg> <./sketch.jpg>] [4]
 No file Project_3.bbl.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 195.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 211.
 [5
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 195.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 211.
  (./Project_3.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 195.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 195.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 211.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 211.
 
 
 Package rerunfilecheck Warning: File `Project_3.out' has changed.
@@ -568,34 +548,33 @@ Package rerunfilecheck Warning: File `Project_3.out' has changed.
 (rerunfilecheck)                or use package `bookmark'.
 
 Package rerunfilecheck Info: Checksums for `Project_3.out':
-(rerunfilecheck)             Before: FB2C3F9FC508148CF82A9ABC4D57598E;579
-(rerunfilecheck)             After:  73C9C866CD19CE6D28F7780AE6AA7EF7;655.
+(rerunfilecheck)             Before: 73C9C866CD19CE6D28F7780AE6AA7EF7;655
+(rerunfilecheck)             After:  C386A1B608A9D26DD64D6298E7F8B330;718.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 195.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 211.
  ) 
 Here is how much of TeX's memory you used:
- 8134 strings out of 492616
- 119244 string characters out of 6129481
- 223830 words of memory out of 5000000
- 11882 multiletter control sequences out of 15000+600000
- 33582 words of font info for 94 fonts, out of 8000000 for 9000
+ 8152 strings out of 492616
+ 119460 string characters out of 6129481
+ 236830 words of memory out of 5000000
+ 11883 multiletter control sequences out of 15000+600000
+ 34728 words of font info for 97 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 33i,15n,32p,1139b,473s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 33i,19n,32p,1139b,473s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
 exlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/te
 xlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texl
 ive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texli
-ve/2019/texmf-dist/fonts/type1/public/mathpazo/fplmr.pfb></usr/local/texlive/20
-19/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb></usr/local/texlive/2019/t
-exmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/local/texlive/2019/texmf-di
-st/fonts/type1/urw/palatino/uplr8a.pfb></usr/local/texlive/2019/texmf-dist/font
-s/type1/urw/palatino/uplri8a.pfb>
-Output written on Project_3.pdf (5 pages, 299341 bytes).
+ve/2019/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb></usr/local/texlive/2
+019/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/local/texlive/2019/tex
+mf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/local/texlive/2019/texmf-dist
+/fonts/type1/urw/palatino/uplri8a.pfb>
+Output written on Project_3.pdf (5 pages, 302752 bytes).
 PDF statistics:
- 141 PDF objects out of 1000 (max. 8388607)
- 122 compressed objects within 2 object streams
- 42 named destinations out of 1000 (max. 500000)
- 91 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 157 PDF objects out of 1000 (max. 8388607)
+ 139 compressed objects within 2 object streams
+ 56 named destinations out of 1000 (max. 500000)
+ 99 words of extra memory for PDF output out of 10000 (max. 10000000)
 

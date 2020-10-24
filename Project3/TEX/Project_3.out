@@ -2,10 +2,11 @@
 \BOOKMARK [1][-]{section.2}{Introduction}{}% 2
 \BOOKMARK [1][-]{section.3}{Theory}{}% 3
 \BOOKMARK [2][-]{subsection.3.1}{Forward Euler}{section.3}% 4
-\BOOKMARK [2][-]{subsection.3.2}{Velocity Verlet method}{section.3}% 5
+\BOOKMARK [2][-]{subsection.3.2}{Velocity Verlet}{section.3}% 5
 \BOOKMARK [2][-]{subsection.3.3}{Conservation of angular momentum}{section.3}% 6
 \BOOKMARK [2][-]{subsection.3.4}{Testing forms of the force}{section.3}% 7
 \BOOKMARK [2][-]{subsection.3.5}{Escape velocity}{section.3}% 8
-\BOOKMARK [1][-]{section.4}{Results}{}% 9
-\BOOKMARK [2][-]{subsection.4.1}{Conservation of angular momentum}{section.4}% 10
-\BOOKMARK [1][-]{appendix.A}{Calculations}{}% 11
+\BOOKMARK [2][-]{subsection.3.6}{Perihelion precision}{section.3}% 9
+\BOOKMARK [1][-]{section.4}{Results}{}% 10
+\BOOKMARK [2][-]{subsection.4.1}{Conservation of angular momentum}{section.4}% 11
+\BOOKMARK [1][-]{appendix.A}{Calculations}{}% 12
