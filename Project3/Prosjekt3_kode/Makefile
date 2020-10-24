@@ -4,3 +4,5 @@ compile1:
 	c++ -O3 -o test.x main.cpp planet.cpp solver.cpp -larmadillo -llapack -lblas
 compile2:
 	c++ -O3 -o test2.x main2.cpp planet.cpp solver.cpp -larmadillo -llapack -lblas
+compile3:
+	c++ -O3 -o test3.x main3.cpp planet.cpp solver.cpp -larmadillo -llapack -lblas

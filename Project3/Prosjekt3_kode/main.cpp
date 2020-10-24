@@ -33,7 +33,7 @@ int main(){
     binary_eu.add(planet2);
 
     binary_eu.Euler(dim, n, FinalTime, 1, 0., beta);
-    binary_vv.VelocityVerlet(dim, n, FinalTime, 1, 0., beta);
+    binary_vv.VelocityVerlet(dim, n, FinalTime, 1, 0., beta, 0);
 
 
     return 0;

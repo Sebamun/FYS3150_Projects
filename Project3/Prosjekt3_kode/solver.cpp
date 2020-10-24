@@ -128,7 +128,7 @@ void solver::Euler(int dimension, int integration_points, double final_time, int
             for (int nr2 = nr1 + 1; nr2 < total_planets; nr2++)
             {
                 planet &other = all_planets[nr2];
-                GravitationalForce(current, other, Fx, Fy, Fz, epsilon, beta);
+                GravitationalForce(current, other, Fx, Fy, Fz, epsilon, beta, GR);
             }
 
             // Acceleration in each dimension for current planet
@@ -193,7 +193,7 @@ void solver::Euler(int dimension, int integration_points, double final_time, int
     delete_matrix(acceleration);
 }
 
-void solver::VelocityVerlet(int dimension, int integration_points, double final_time, int print_number, double epsilon, double beta)
+void solver::VelocityVerlet(int dimension, int integration_points, double final_time, int print_number, double epsilon, double beta, int GR)
 { /*  Velocity-Verlet solver for two coupeled ODEs in a given number of dimensions.
     The algorithm is, exemplified in 1D for position x(t), velocity v(t) and acceleration a(t):
     x(t+dt) = x(t) + v(t)*dt + 0.5*dt*dt*a(t);
@@ -257,7 +257,7 @@ void solver::VelocityVerlet(int dimension, int integration_points, double final_
             for (int nr2 = nr1 + 1; nr2 < total_planets; nr2++)
             {
                 planet &other = all_planets[nr2];
-                GravitationalForce(current, other, Fx, Fy, Fz, epsilon, beta);
+                GravitationalForce(current, other, Fx, Fy, Fz, epsilon, beta, GR);
             }
 
             // Acceleration in each dimension for current planet
@@ -275,7 +275,7 @@ void solver::VelocityVerlet(int dimension, int integration_points, double final_
             for (int nr2 = nr1 + 1; nr2 < total_planets; nr2++)
             {
                 planet &other = all_planets[nr2];
-                GravitationalForce(current, other, Fxnew, Fynew, Fznew, epsilon, beta);
+                GravitationalForce(current, other, Fxnew, Fynew, Fznew, epsilon, beta, GR);
             }
 
             // Acceleration each dimension exerted for current planet
@@ -370,21 +370,36 @@ void solver::delete_matrix(double **matrix)
     delete[] matrix;
 }
 
-void solver::GravitationalForce(planet &current, planet &other, double &Fx, double &Fy, double &Fz, double epsilon, double beta)
+void solver::GravitationalForce(planet &current, planet &other, double &Fx, double &Fy, double &Fz, double epsilon, double beta, int GR)
 { // Function that calculates the gravitational force between two objects, component by component.
 
     // Calculate relative distance between current planet and all other planets
     double relative_distance[3];
+    double relative_velocity[3];
+    double rel_cor;
+    double l;
+    double c = 63197.8;
 
-    for (int j = 0; j < 3; j++)
+    for (int j = 0; j < 3; j++){
         relative_distance[j] = current.position[j] - other.position[j];
+        relative_velocity[j] = current.velocity[j] - other.velocity[j];
+    }
     double r = current.distance(other);
+    l = r * sqrt(relative_velocity[0] * relative_velocity[0] + relative_velocity[1] * relative_velocity[1] + relative_velocity[2] * relative_velocity[2]);
     double smoothing = epsilon * epsilon * epsilon;
+    if (GR == 0)
+    {
+        rel_cor = 1.0 + (3.0 * l * l) / (r * r * r * c * c);
+    }
+    else{
+        rel_cor = 1.0;
+    }
+    std::cout << rel_cor << std::endl;
 
     // Calculate the forces in each direction
-    Fx -= this->G * current.mass * other.mass * relative_distance[0] / (pow(r,beta) + smoothing);
-    Fy -= this->G * current.mass * other.mass * relative_distance[1] / (pow(r,beta) + smoothing);
-    Fz -= this->G * current.mass * other.mass * relative_distance[2] / (pow(r,beta) + smoothing);
+    Fx -= (this->G * current.mass * other.mass * relative_distance[0] / (pow(r, beta) + smoothing))*rel_cor;
+    Fy -= (this->G * current.mass * other.mass * relative_distance[1] / (pow(r, beta) + smoothing))*rel_cor;
+    Fz -= (this->G * current.mass * other.mass * relative_distance[2] / (pow(r, beta) + smoothing))*rel_cor;
 }
 
 void solver::GravitationalForce_RK(double x_rel, double y_rel, double z_rel, double &Fx, double &Fy, double &Fz, double mass1, double mass2)
@@ -451,4 +466,9 @@ double solver::EnergyLoss()
     for (int i = 0; i < indices.size(); i++)
         EnergyLoss += all_planets[indices[i]].KineticEnergy();
     return EnergyLoss;
+}
+double solver::cross_length(double* pos, double* vel){
+    double l;
+    l = sqrt((pos[1] * vel[2] - pos[2] * vel[1]) * (pos[1] * vel[2] - pos[2] * vel[1]) + (pos[2] * vel[0] - pos[0] * vel[2]) * (pos[2] * vel[0] - pos[0] * vel[2]) + (pos[0] * vel[1] - pos[1] * vel[0]) * (pos[0] * vel[1] - pos[1] * vel[0]));
+    return l;
 }
