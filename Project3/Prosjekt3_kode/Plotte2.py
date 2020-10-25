@@ -10,10 +10,15 @@ planet_dfs = []
 for guy in df.groupby("n"):
     planet_dfs.append(guy)
 
+#sun = planet_dfs[0][1]
+#plt.plot(mercury['x'], mercury['y'])
+
+name = ['Neptun', 'Uranus', 'Saturn', 'Jupiter', 'Mars', 'Jorden', 'Venus', 'Merkur', 'Sola']
+
 for i in range(Nobjects):
     object = planet_dfs[i][1]
-    plt.plot(object['x'], object['y'])
-
+    plt.plot(object['x'], object['y'], label=f'{name[i]}')
+plt.legend()
 plt.show()
 
 
