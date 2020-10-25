@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 Nobjects = 9 # Antall planeter vi plotter for.
 # Skriver om til dataframe:
-df = pd.read_csv("PlanetsVV_9.txt", delim_whitespace=True, \
+df = pd.read_csv("Textfiles/PlanetsVV_9.txt", delim_whitespace=True, \
 index_col=False, names=["t","n","m","x","y","z","vx","vy","vz"]) # Leser av tekstfilen.
 planet_dfs = [] # legger verdiene til denne.
 for guy in df.groupby("n"): # Her grupperer vi etter hvilke objekt vi ser på n.

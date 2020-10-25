@@ -25,7 +25,7 @@ int main(){
     vx = new double[Nobjects];
     vy = new double[Nobjects];
     vz = new double[Nobjects];
-    char* filename_pos_and_vel = "Initial.txt"; // Tekstfil på form m,x,y,z,vx,vy,vz
+    char* filename_pos_and_vel = "Textfiles/Initial.txt"; // Tekstfil på form m,x,y,z,vx,vy,vz
     FILE *fp_init = fopen(filename_pos_and_vel, "r"); // Åpner filen.
     for (int i = 0; i < Nobjects; i++){ // Her hentes initialbetingelsene:
     	fscanf(fp_init, "%lf %lf %lf %lf %lf %lf %lf",

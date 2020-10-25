@@ -30,4 +30,4 @@ for i in range(9): # Her trekker vi fra hastigheten til massesenteret for alle h
     objects[i][4] = objects[i][4]-v_mc_x
     objects[i][5] = objects[i][5]-v_mc_y
     objects[i][6] = objects[i][6]-v_mc_z
-np.savetxt("Initial.txt", objects, fmt="%s") # Skriver til fil.
+np.savetxt("Textfiles/Initial.txt", objects, fmt="%s") # Skriver til fil.

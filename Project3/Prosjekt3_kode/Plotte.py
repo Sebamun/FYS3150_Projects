@@ -1,8 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-infileEU = open('PlanetsEU_2.txt', 'r')
-infileVV = open('PlanetsVV_3.txt', 'r')
+infileEU = open('Textfiles/PlanetsEU_3.txt', 'r')
+infileVV = open('Textfiles/PlanetsVV_3.txt', 'r')
 
 lines = infileVV.readlines()
 xVV = np.zeros(len(lines))

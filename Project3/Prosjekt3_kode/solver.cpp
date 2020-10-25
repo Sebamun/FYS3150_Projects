@@ -5,6 +5,7 @@
 #include "time.h"
 
 // Initialiserer og legger til objekter:
+//---------------------------------------
 
 solver::solver(double radi)
 { // Definerer globale variabler:
@@ -24,6 +25,7 @@ void solver::add(planet newplanet)
 }
 
 // Regner ut gravitasjonskraft og setter opp matrise for å lagre akselerasjonsverdier:
+//------------------------------------------------------------------------------------
 
 void solver::GravitationalForce(planet &current, planet &other,
   double &Fx, double &Fy, double &Fz, double epsilon, double beta)
@@ -68,6 +70,7 @@ void solver::delete_matrix(double **matrix)
 }
 
 // Finner antall planeter som er bundet og energien i systemet:
+//--------------------------------------------------------------
 
 bool solver::Bound(planet OnePlanet)
 { // Dette er en betingelse som bestemmer om et objekt har forlatt systemet.
@@ -124,6 +127,7 @@ double solver::EnergyLoss()
 }
 
 // Numeriske løsningsmetoder:
+//---------------------------
 
 void solver::Euler(int dimension, int integration_points, double final_time,
   int print_number, double epsilon, double beta)
@@ -137,10 +141,10 @@ void solver::Euler(int dimension, int integration_points, double final_time,
     char *filenameE_EU = new char[1000];
     char *filenameB_EU = new char[1000];
     char *filenameLost_EU = new char[1000];
-    sprintf(filename_EU, "PlanetsEU_%d.txt", total_planets);
-    sprintf(filenameE_EU, "PlanetsEU_energy_%d.txt", total_planets);
-    sprintf(filenameB_EU, "Planetsbound_%d.txt", total_planets);
-    sprintf(filenameLost_EU, "Planetslost_%d.txt", total_planets);
+    sprintf(filename_EU, "Textfiles/PlanetsEU_%d.txt", total_planets);
+    sprintf(filenameE_EU, "Textfiles/PlanetsEU_energy_%d.txt", total_planets);
+    sprintf(filenameB_EU, "Textfiles/Planetsbound_%d.txt", total_planets);
+    sprintf(filenameLost_EU, "Textfiles/Planetslost_%d.txt", total_planets);
     std::ofstream output_file(filename_EU);
     std::ofstream output_energy(filenameE_EU);
     std::ofstream output_bound(filenameB_EU);
@@ -250,10 +254,10 @@ void solver::VelocityVerlet(int dimension, int integration_points,
     char *filenameE = new char[1000];
     char *filenameB = new char[1000];
     char *filenameLost = new char[1000];
-    sprintf(filename, "PlanetsVV_%d.txt", total_planets);
-    sprintf(filenameE, "PlanetsVV_energy_%d.txt", total_planets);
-    sprintf(filenameB, "Planetsbound_%d.txt", total_planets);
-    sprintf(filenameLost, "Planetslost_%d.txt", total_planets);
+    sprintf(filename, "Textfiles/PlanetsVV_%d.txt", total_planets);
+    sprintf(filenameE, "Textfiles/PlanetsVV_energy_%d.txt", total_planets);
+    sprintf(filenameB, "Textfiles/Planetsbound_%d.txt", total_planets);
+    sprintf(filenameLost, "Textfiles/Planetslost_%d.txt", total_planets);
     std::ofstream output_file(filename);
     std::ofstream output_energy(filenameE);
     std::ofstream output_bound(filenameB);
@@ -366,6 +370,7 @@ void solver::VelocityVerlet(int dimension, int integration_points,
 }
 
 // Her skriver vi til filer:
+//--------------------------
 
 void solver::print_position(std::ofstream &output, int dimension, double time,
   int number)
