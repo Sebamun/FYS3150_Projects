@@ -1,20 +1,8 @@
 #include "planet.hpp"
-/*
-planet::planet()
-{
-    mass = 1.;
-    position[0] = 1.;
-    position[1] = 0.;
-    position[2] = 0.;
-    velocity[0] = 0.;
-    velocity[1] = 0.;
-    velocity[2] = 0.;
-    potential = 0.;
-    kinetic = 0.;
-}
-*/
-planet::planet(double M, double x, double y, double z, double vx, double vy, double vz)
-{
+
+planet::planet(double M, double x, double y, double z,
+  double vx, double vy, double vz)
+{ // Initialiserer hver planet.
     mass = M;
     position[0] = x;
     position[1] = y;
@@ -26,22 +14,18 @@ planet::planet(double M, double x, double y, double z, double vx, double vy, dou
     kinetic = 0.;
 }
 
-double planet::distance(planet otherPlanet) // Her regner vi ut lengden av vektoren, uten retning.
-{
+double planet::distance(planet otherPlanet)
+{ // Her regner vi ut lengden av vektoren, uten retning.
     double x1, y1, z1, x2, y2, z2, xx, yy, zz;
-
     x1 = this->position[0];
     y1 = this->position[1];
     z1 = this->position[2];
-
     x2 = otherPlanet.position[0];
     y2 = otherPlanet.position[1];
     z2 = otherPlanet.position[2];
-
     xx = x1 - x2;
     yy = y1 - y2;
     zz = z1 - z2;
-
     return sqrt(xx * xx + yy * yy + zz * zz);
 }
 
@@ -65,14 +49,19 @@ double planet::Acceleration(planet otherPlanet, double Gconst)
 
 double planet::KineticEnergy()
 {
-    double velocity2 = (this->velocity[0] * this->velocity[0]) + (this->velocity[1] * this->velocity[1]) + (this->velocity[2] * this->velocity[2]);
+    double velocity2 = (this->velocity[0] * this->velocity[0]) +
+     (this->velocity[1] * this->velocity[1]) + (this->velocity[2] *
+       this->velocity[2]);
     return 0.5 * this->mass * velocity2;
 }
 
-double planet::PotentialEnergy(planet &otherPlanet, double Gconst, double epsilon)
+double planet::PotentialEnergy(planet &otherPlanet, double Gconst,
+  double epsilon)
 {
     if (epsilon == 0.0)
-        return -Gconst * this->mass * otherPlanet.mass / this->distance(otherPlanet);
+        return -Gconst * this->mass * otherPlanet.mass
+        / this->distance(otherPlanet);
     else
-        return (Gconst * this->mass * otherPlanet.mass / epsilon) * (atan(this->distance(otherPlanet) / epsilon) - (0.5 * M_PI));
+        return (Gconst * this->mass * otherPlanet.mass / epsilon)
+        * (atan(this->distance(otherPlanet) / epsilon) - (0.5 * M_PI));
 }

@@ -1,30 +1,18 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
-
-Nobjects = 9 # Antall planeter vi plotter for. 
-
-df = pd.read_csv("PlanetsVV_9.txt", delim_whitespace=True, index_col=False, names=["t","n","m","x","y","z","vx","vy","vz"])
-planet_dfs = []
-
-for guy in df.groupby("n"):
+Nobjects = 9 # Antall planeter vi plotter for.
+# Skriver om til dataframe:
+df = pd.read_csv("PlanetsVV_9.txt", delim_whitespace=True, \
+index_col=False, names=["t","n","m","x","y","z","vx","vy","vz"]) # Leser av tekstfilen.
+planet_dfs = [] # legger verdiene til denne.
+for guy in df.groupby("n"): # Her grupperer vi etter hvilke objekt vi ser på n.
     planet_dfs.append(guy)
-
-#sun = planet_dfs[0][1]
-#plt.plot(mercury['x'], mercury['y'])
-
-name = ['Neptun', 'Uranus', 'Saturn', 'Jupiter', 'Mars', 'Jorden', 'Venus', 'Merkur', 'Sola']
-
+name = ['Neptun', 'Uranus', 'Saturn', 'Jupiter', \
+'Mars', 'Jorden', 'Venus', 'Merkur', 'Sola'] # Navn på objektene.
+# PLotting:
 for i in range(Nobjects):
     object = planet_dfs[i][1]
     plt.plot(object['x'], object['y'], label=f'{name[i]}')
 plt.legend()
 plt.show()
-
-
-#sun = planet_dfs[0][1]
-#mercury = planet_dfs[1][1]
-#jupiter = planet_dfs[5][1]
-
-#plt.plot(sun.x, sun.y)
-#for i in range():

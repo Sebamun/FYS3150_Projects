@@ -27,13 +27,8 @@ int main(){
     planet planet2(0.16601E-6, 3.269770816268355E-01, 7.809178409376630E-02, -2.460897254319929E-02, 365*-1.137000888603457E-02-v_cm_x, 365*2.875571677398091E-02-v_cm_y, 365*3.392751290933102E-03-v_cm_z); //Merkur
     planet planet1(2.4478383E-6,-3.335486637448234E-01, 6.454434722443811E-01, 2.775278968391979E-02, 365*-1.807712391477036E-02-v_cm_x, 365*-9.341060307773352E-03-v_cm_y, 365*9.148436818834693E-04-v_cm_z); //Sola
 
-    /*
-    planet planet1(0.000003, 1., 0.0, 0.0, 0.0, 6.3, 0.); // Earth: (mass,x,y,z,vx,vy,vz)
-    planet planet2(1., 0., 0., 0., 0., 0., 0.);           // Sun: (mass,x,y,z,vx,vy,vz)
-    planet planet3(0.003, 5.20, 0.0, 0.0, 0.0 , 10.0, 0.); //Jupiter
-*/
     solver binary_vv(5.0);
-    //solver binary_eu(5.0);
+    solver binary_eu(5.0);
     binary_vv.add(planet1);
     binary_vv.add(planet2);
     binary_vv.add(planet3);
