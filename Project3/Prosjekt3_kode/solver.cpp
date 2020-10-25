@@ -8,7 +8,6 @@ solver::solver(double radi)
 {
     total_planets = 0; // Her legger vi til antall planeter.
     radius = radi;
-    //std::cout<<radi<<std::endl;
     total_mass = 0;
     G = 4 * M_PI * M_PI; // Gravitasjonskonstanten.
     totalKinetic = 0;
@@ -35,7 +34,7 @@ void solver::GravitationalConstant()
 }
 
 void solver::print_position(std::ofstream &output, int dimension, double time, int number)
-{ // Writes mass, position and velocity to a file "output"
+{ // Skrice masse, posisjon og hastighet til OUTPUT fil. 
     if (dimension > 3 || dimension <= 0)
         dimension = 3;
     else

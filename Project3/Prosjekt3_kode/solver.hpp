@@ -17,8 +17,6 @@ public:
     double totalKinetic;
     double totalPotential;
 
-    // constants
-
     // initializers
     solver();
     solver(double radi);

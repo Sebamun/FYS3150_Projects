@@ -1,6 +1,6 @@
 import numpy as np
 
-objects = np.zeros((9,7)) # Planet, x,y,z,vx,vy,vz
+objects = np.zeros((9,7)) # Planet, m,x,y,z,vx,vy,vz
 #                       m                  x                        y                     z                     vx                    vy                       vz
 objects[8] = np.array([1.0, -6.151489682016204E-03, 6.389988001518661E-03, 9.024482263224161E-05, -7.240886699697975E-06, -5.140115343860045E-06, 2.177046161642180E-07])
 objects[7] = np.array([0.16601E-6, 3.269770816268355E-01, 7.809178409376630E-02, -2.460897254319929E-02, -1.137000888603457E-02, 2.875571677398091E-02, 3.392751290933102E-03])
@@ -22,13 +22,11 @@ for i in range(9):
     objects[i][5] = objects[i][5]*365
     objects[i][6] = objects[i][6]*365
     numerator_x += objects[i][4] * objects[i][0]
-    Total_mass += objects[i][0]
     numerator_x += objects[i][5] * objects[i][0]
-    Total_mass += objects[i][0]
     numerator_x += objects[i][6] * objects[i][0]
     Total_mass += objects[i][0]
 
-v_mc_x = numerator_x / Total_mass
+v_mc_x = numerator_x / Total_mass # Hastigheten til massesenteret. 
 v_mc_y = numerator_y / Total_mass
 v_mc_z = numerator_z / Total_mass
 
@@ -36,7 +34,5 @@ for i in range(9):
     objects[i][4] = objects[i][4]-v_mc_x
     objects[i][5] = objects[i][5]-v_mc_y
     objects[i][6] = objects[i][6]-v_mc_z
-
-  #double v_cm_x = 365 * (-7.240886699697975E-06 *1.0 - 1.137000888603457E-02 * 0.16601E-6) / (1.0 + 0.16601E-6);
 
 np.savetxt("Initial.txt", objects, fmt="%s") # Skriver til fil.
