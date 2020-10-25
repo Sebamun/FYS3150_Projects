@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 
-Nobjects = 9
+Nobjects = 9 # Antall planeter vi plotter for. 
 
 df = pd.read_csv("PlanetsVV_9.txt", delim_whitespace=True, index_col=False, names=["t","n","m","x","y","z","vx","vy","vz"])
 planet_dfs = []
