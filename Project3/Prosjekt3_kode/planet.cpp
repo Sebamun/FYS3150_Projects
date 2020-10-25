@@ -1,5 +1,5 @@
 #include "planet.hpp"
-
+/*
 planet::planet()
 {
     mass = 1.;
@@ -12,7 +12,7 @@ planet::planet()
     potential = 0.;
     kinetic = 0.;
 }
-
+*/
 planet::planet(double M, double x, double y, double z, double vx, double vy, double vz)
 {
     mass = M;
@@ -26,7 +26,7 @@ planet::planet(double M, double x, double y, double z, double vx, double vy, dou
     kinetic = 0.;
 }
 
-double planet::distance(planet otherPlanet)
+double planet::distance(planet otherPlanet) // Her regner vi ut lengden av vektoren, uten retning.
 {
     double x1, y1, z1, x2, y2, z2, xx, yy, zz;
 

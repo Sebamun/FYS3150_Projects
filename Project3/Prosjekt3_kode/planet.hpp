@@ -16,7 +16,7 @@ public:
     double potential;
     double kinetic;
     //Initializer
-    planet();
+    //planet();
     planet(double M, double x, double y, double z, double vx, double vy, double vz);
     // Functions
     double distance(planet otherPlanet);

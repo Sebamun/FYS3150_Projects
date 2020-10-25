@@ -14,13 +14,19 @@
 using namespace std;
 
 int main(){
-    int n = 100000;
+    double beta = 3.0; // For 3.99 så forlot den banen.
+    int n = 100000; // Integrasjonspunkter.
     double FinalTime = 50.;
     int dim = 3;
     double x[3], v[3];
     planet planet1(0.000003, 1., 0.0, 0.0, 0.0, 6.3, 0.); // Earth: (mass,x,y,z,vx,vy,vz)
     planet planet2(1., 0., 0., 0., 0., 0., 0.);           // Sun: (mass,x,y,z,vx,vy,vz)
+<<<<<<< HEAD
     //planet planet3(0.003, 5.20, 0.0, 0.0, 0.0 , 10.0, 0.); //Jupiter
+=======
+    planet planet3(0.003, 5.20, 0.0, 0.0, 0.0 , 10.0, 0.); //Jupiter
+
+>>>>>>> 7d50c1a0f4dec85c9c0a8ff74d28661abd3f07a7
     solver binary_vv(5.0);
     solver binary_eu(5.0);
     binary_vv.add(planet1);
@@ -29,9 +35,8 @@ int main(){
     binary_eu.add(planet1);
     binary_eu.add(planet2);
 
-    binary_eu.Euler(dim, n, FinalTime, 1, 0.);
-    binary_vv.VelocityVerlet(dim, n, FinalTime, 1, 0.);
-
+    binary_eu.Euler(dim, n, FinalTime, 1, 0., beta);
+    binary_vv.VelocityVerlet(dim, n, FinalTime, 1, 0., beta);
 
     return 0;
 }

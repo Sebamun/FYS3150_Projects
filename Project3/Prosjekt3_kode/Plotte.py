@@ -1,9 +1,9 @@
-
-
 import numpy as np
 import matplotlib.pyplot as plt
-infileVV = open('PlanetsVV_3.txt', 'r')
+
 infileEU = open('PlanetsEU_2.txt', 'r')
+infileVV = open('PlanetsVV_3.txt', 'r')
+
 lines = infileVV.readlines()
 xVV = np.zeros(len(lines))
 yVV = np.zeros(len(lines))
@@ -19,7 +19,6 @@ for i in range(1,len(lines)):
     x1VV[i] = float(vals[6])
     y1VV[i] = float(vals[7])
     z1VV[i] = float(vals[8])
-
 
 lines = infileEU.readlines()
 xEU = np.zeros(len(lines))
@@ -37,17 +36,25 @@ for i in range(1,len(lines)):
     y1EU[i] = float(vals[7])
     z1EU[i] = float(vals[8])
 
-
 #ax = plt.axes(projection='3d')
 #ax.plot3D(x, y, z, 'gray')
 #plt.show()
+<<<<<<< HEAD
 #plt.plot(xEU[1:], yEU[1:])
 plt.axis('equal')
 plt.tight_layout()
 #plt.show()
+=======
+plt.plot(xEU[1:], yEU[1:], label=f'N={len(lines)}')
+plt.axis('equal')
+plt.tight_layout()
+plt.legend()
+plt.show()
+>>>>>>> 7d50c1a0f4dec85c9c0a8ff74d28661abd3f07a7
 
-plt.plot(xVV[1:], yVV[1:])
+plt.plot(xVV[1:], yVV[1:], label=f'N={len(lines)}')
 #plt.plot(x1,y1)
 plt.axis('equal')
 plt.tight_layout()
+plt.legend()
 plt.show()
