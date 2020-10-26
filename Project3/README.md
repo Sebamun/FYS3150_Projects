@@ -16,13 +16,25 @@ We have used the following programming languages and packages: <br />
 
 To access the code of this project go to the Prosjekt3_kode folder. Here you will find a makefile, which will compile all our c++ programs. Use command `make all` to compile. You run the three body system of objects and plot their positions with the commands:<br />
 ```terminal
-./1.x
-python3 Plotte.py
+./1.x # Run the executable
+python3 Plotte.py # Plotting
 ```
 
 You run and plot the system of all the planets and the sun with the commands: <br />
 
 ```terminal
-./2.x
-python3 Plotte2.py
+./2.x # Run the executable
+python3 Plotte2.py # Plotting 
 ```
+
+Our data can be viewed in the folder `Textfiles`, where the positions and velocities are stored in the different textfiles. The method is given as vv_ (velocity verlet) or eu_ (euler) for the different methods and the number after _ is the number of objects in the system.
+
+The number after the _ indicates how many planets 
+
+We have also used a python script to intiallize our initial positions and velocities. 
+
+```terminal
+python3 Initial.py # Plotting 
+```
+
+Which produces the textfile ´Initial.txt´.
