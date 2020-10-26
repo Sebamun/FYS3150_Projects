@@ -8,9 +8,12 @@ You can find the report document Project_3.pdf in the TEX folder.
 
 We have used the following programming languages and packages:
 
-C++ | Python
------------- | -------------
-_USE_MATH_DEFINES | Numpy
+C++ |
+------------
+
+ Python
+------------ 
+| Numpy
 | Matplotlib
 | Pandas
 
