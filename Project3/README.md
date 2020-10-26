@@ -12,7 +12,7 @@ You run and plot the system of all the planets and the sun with the commands: <b
 >./2.x <br />
 >python3 Plotte2.py <br />
 
-```javascript
+```terminal
 function fancyAlert(arg) {
   if(arg) {
     $.facebox({div:'#foo'})
