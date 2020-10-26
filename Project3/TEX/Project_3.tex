@@ -31,17 +31,17 @@
 
 \section{Introduction}
 
-Though simulating a solar system is interesting and fun enough on it's own, it is naturally also quite useful for the study of astrodynamics. In addition, being able to simulate a solar system provides a good set of tools applicable to many other scientific areas. These tools include having a good understanding of different numerical integration methods, and being able to write a structured and fast code. In this project we wish to explore a model of our own solar system, beginning with simulating the simple two-body system including the Earth and the Sun. We will use this system to compare two different methods of numerical integration, the forward Euler method and the verlocity Verlet method. This simple system also makes a good testing ground for exploring whether our model is consistent with known physical laws such as energy conservation and Kepler's laws of planetary motion. We will also test the stability of the velocity Verlet method by including Jupiter and playing around with it's mass. From there we will include the rest of the planets in our solar system, and blah blah blag general relativity. 
+Though simulating a solar system is interesting and fun enough on it's own, it is naturally also quite useful for the study of astrodynamics. In addition, being able to simulate a solar system provides a good set of tools applicable to many other scientific areas. These tools include having a good understanding of different numerical integration methods, and being able to write a structured and fast code. In this project we wish to explore a model of our own solar system, beginning with simulating the simple two-body system including the Earth and the Sun. We will use this system to compare two different methods of numerical integration, the forward Euler method and the velocity Verlet method. This simple system also makes a good testing ground for exploring whether our model is consistent with known physical laws such as energy conservation and Kepler's laws of planetary motion. We will also test the stability of the velocity Verlet method by including Jupiter and playing around with it's mass. From there we will include the rest of the planets in our solar system, and blah blah blag general relativity. 
 
 \section{Theory}
 
-\subsection{Forward Euler}
-The forward Euler method is a algorithm to estimate the solution of a differential equation. The Forward Euler method wants to find the next point. To find the next point, it uses the point it is at, $r_n$, a small time step, $dt$, and the derivative of its position. Which can be expressed like this
+The forward Euler method is an algorithm to estimate the solution of a differential equation. The Forward Euler method wants to find the next point $\mathbf{r}_{i+1}$. To find the next point, it uses the point it is at, $\mathbf{r}_{n}$, a small time step $dt$ and the derivative of its position. Which can be expressed as:
 
 \begin{equation}
-y_{n+1}=y_n + y_n'\cdot dt
+\mathbf{r}_{n+1}=\mathbf{r}_n + \mathbf{r}_n'\cdot dt
 \label{eq:yn1}
 \end{equation}
+
 
 Where $y_{n+1}$ is the next step, $y_n$ is the current step, $y_n'$ is the derived of the current step and $dt$ is the time step.\\
 This algorithm is really based abbreviated version of a Taylor expansion, where we only expand the series one step at a time. But by only taking one step at a time, we will also get a local truncation error, which causes an error for each step we take. 
