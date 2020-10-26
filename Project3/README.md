@@ -3,18 +3,16 @@
 ## Code
 
 To access the code of this project go to the Prosjekt3_kode folder. Here you will find a makefile, which will compile all our c++ programs. Use command `make all` to compile. You run the three body system of objects and plot their positions with the commands:<br />
->./1.x <br />
->python3 Plotte.py <br />
+```terminal
+./1.x
+python3 Plotte.py
+```
 
 You run and plot the system of all the planets and the sun with the commands: <br />
 
-
->./2.x <br />
->python3 Plotte2.py <br />
-
 ```terminal
-./2.x <br />
-python3 Plotte2.py <br />
+./2.x
+python3 Plotte2.py
 ```
 
 ## Report
