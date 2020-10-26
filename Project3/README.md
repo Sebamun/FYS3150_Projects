@@ -6,13 +6,19 @@ To access the code of this project go to the Prosjekt3_kode folder. Here you wil
 >./1.x <br />
 >python3 Plotte.py <br />
 
-You run and plot the system of allthe planets and the sun with the commands: <br />
+You run and plot the system of all the planets and the sun with the commands: <br />
 
 
 >./2.x <br />
 >python3 Plotte2.py <br />
 
-
+```javascript
+function fancyAlert(arg) {
+  if(arg) {
+    $.facebox({div:'#foo'})
+  }
+}
+```
 
 ## Report
 
