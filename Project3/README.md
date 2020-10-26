@@ -12,3 +12,5 @@ To access the code of this project go to the Prosjekt3_kode folder. Here you wil
 ## Report
 
 To access the report document got to the TEX folder. 
+I think you should use an
+`<addr>` element here instead.
