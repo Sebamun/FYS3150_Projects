@@ -241,7 +241,6 @@ void solver::Euler(int dimension, int integration_points, double final_time,
     delete_matrix(acceleration);
 }
 
-
 void solver::VelocityVerlet(int dimension, int integration_points,
   double final_time, int print_number, double epsilon, double beta)
 { // Velocity Verlet metoden.
