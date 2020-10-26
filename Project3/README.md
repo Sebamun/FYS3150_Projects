@@ -11,8 +11,8 @@ We have used the following programming languages and packages:
 C++ | Python
 ------------ | -------------
 _USE_MATH_DEFINES | Numpy
-Content in the first column | Matplotlib
-Content in the first column | Pandas
+| Matplotlib
+| Pandas
 
 To access the code of this project go to the Prosjekt3_kode folder. Here you will find a makefile, which will compile all our c++ programs. Use command `make all` to compile. You run the three body system of objects and plot their positions with the commands:<br />
 ```terminal
