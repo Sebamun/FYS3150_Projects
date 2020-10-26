@@ -11,7 +11,7 @@ We have used the following programming languages and packages:
 C++ |
 ------------
 
- Python
+ Python|
 ------------ 
 | Numpy
 | Matplotlib
