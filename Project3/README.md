@@ -6,7 +6,7 @@ You can find the report document Project_3.pdf in the TEX folder.
 
 ## Code
 
-We have used the following programming languages and packages:
+We have used the following programming languages and packages: <br />
 
  Markup : * C++
           * Python
