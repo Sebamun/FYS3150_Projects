@@ -27,7 +27,7 @@ You run and plot the system of all the planets and the sun with the commands: <b
 python3 Plotte2.py # Plotting.
 ```
 
-Our data can be viewed in the folder `Textfiles`, where the positions and velocities are stored in the different textfiles. The method is given as vv_ (velocity verlet) or eu_ (euler) for the different methods and the number after _ is the number of objects in the system.
+Our data can be viewed in the folder Textfiles, where the positions and velocities are stored in the different textfiles. The method is given as vv_ (velocity verlet) or eu_ (euler) for the different methods and the number after _ is the number of objects in the system.
 
 We have also used a python script to intiallize our initial positions and velocities. 
 
@@ -35,4 +35,4 @@ We have also used a python script to intiallize our initial positions and veloci
 python3 Initial.py # Write initial values to file. 
 ```
 
-Which produces the textfile `Initial.txt`.
+Which produces the textfile Initial.txt.
