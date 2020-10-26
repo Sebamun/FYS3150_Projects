@@ -35,4 +35,4 @@ We have also used a python script to intiallize our initial positions and veloci
 python3 Initial.py # Write initial values to file. 
 ```
 
-Which produces the textfile ´Initial.txt´.
+Which produces the textfile `Initial.txt`.
