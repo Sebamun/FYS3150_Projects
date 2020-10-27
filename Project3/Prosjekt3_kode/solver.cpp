@@ -66,11 +66,11 @@ void solver::print_energy(std::ofstream &output, double time, double epsilon)
     for (int nr = 0; nr < total_planets; nr++)
     {
         planet &Current = all_planets[nr];
-        output << time << "\t" << nr << "\t";
+        output << (float)time << "\t" << nr << "\t";
         output << Current.kinetic << "\t" << Current.potential << std::endl;
     }
 }
-
+/*
 void solver::Euler(int dimension, int integration_points, double final_time, int print_number, double epsilon, double beta)
 { // Define time step
     double time_step = final_time / ((double)integration_points);
@@ -199,7 +199,7 @@ void solver::Euler(int dimension, int integration_points, double final_time, int
     // Clear memory
     delete_matrix(acceleration);
 }
-
+*/
 void solver::VelocityVerlet(int dimension, int integration_points, double final_time, int print_number, double epsilon, double beta)
 { /*  Velocity-Verlet solver for two coupeled ODEs in a given number of dimensions.
     The algorithm is, exemplified in 1D for position x(t), velocity v(t) and acceleration a(t):
@@ -221,6 +221,7 @@ void solver::VelocityVerlet(int dimension, int integration_points, double final_
     sprintf(filenameE, "PlanetsVV_energy_%d.txt", total_planets);
     sprintf(filenameB, "Planetsbound_%d.txt", total_planets);
     sprintf(filenameLost, "Planetslost_%d.txt", total_planets);
+
     std::ofstream output_file(filename);
     std::ofstream output_energy(filenameE);
     std::ofstream output_bound(filenameB);

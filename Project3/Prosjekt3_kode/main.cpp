@@ -40,20 +40,20 @@ int main(){
 >>>>>>> 7d50c1a0f4dec85c9c0a8ff74d28661abd3f07a7
 =======
 */
->>>>>>> b94c93b40f159d6663c6348e5ea26505f25537db
+
     solver binary_vv(5.0);
     //solver binary_eu(5.0);
-    binary_vv.add(planet1);
+    //binary_vv.add(planet1);
     binary_vv.add(planet2);
-<<<<<<< HEAD
-    //binary_vv.add(planet3);
-    binary_eu.add(planet1);
-    binary_eu.add(planet2);
-=======
+
     binary_vv.add(planet3);
     //binary_eu.add(planet1);
     //binary_eu.add(planet2);
->>>>>>> b94c93b40f159d6663c6348e5ea26505f25537db
+
+    //binary_vv.add(planet3);
+    //binary_eu.add(planet1);
+    //binary_eu.add(planet2);
+
 
     //binary_eu.Euler(dim, n, FinalTime, 1, 0., beta);
     binary_vv.VelocityVerlet(dim, n, FinalTime, 3, 0., beta);

@@ -1,21 +1,16 @@
-<<<<<<< HEAD
-\BOOKMARK [1][-]{section.1}{Method}{}% 1
-\BOOKMARK [1][-]{section.2}{Introduction}{}% 2
-\BOOKMARK [1][-]{section.3}{Theory}{}% 3
-\BOOKMARK [2][-]{subsection.3.1}{Forward Euler}{section.3}% 4
-\BOOKMARK [2][-]{subsection.3.2}{Velocity Verlet}{section.3}% 5
-\BOOKMARK [2][-]{subsection.3.3}{Conservation of angular momentum}{section.3}% 6
-\BOOKMARK [2][-]{subsection.3.4}{Testing forms of the force}{section.3}% 7
-\BOOKMARK [2][-]{subsection.3.5}{Escape velocity}{section.3}% 8
-\BOOKMARK [2][-]{subsection.3.6}{Perihelion precision}{section.3}% 9
-\BOOKMARK [1][-]{section.4}{Results}{}% 10
-\BOOKMARK [2][-]{subsection.4.1}{Conservation of angular momentum}{section.4}% 11
-\BOOKMARK [1][-]{appendix.A}{Calculations}{}% 12
-=======
 \BOOKMARK [1][-]{section.1}{Introduction}{}% 1
 \BOOKMARK [1][-]{section.2}{Theory}{}% 2
 \BOOKMARK [2][-]{subsection.2.1}{Forward Euler}{section.2}% 3
-\BOOKMARK [2][-]{subsection.2.2}{Velocity Verlet method}{section.2}% 4
-\BOOKMARK [2][-]{subsection.2.3}{Conservation of angular momentum}{section.2}% 5
-\BOOKMARK [1][-]{appendix.A}{Calculations}{}% 6
->>>>>>> 7d50c1a0f4dec85c9c0a8ff74d28661abd3f07a7
+\BOOKMARK [2][-]{subsection.2.2}{Velocity Verlet}{section.2}% 4
+\BOOKMARK [1][-]{section.3}{Method}{}% 5
+\BOOKMARK [2][-]{subsection.3.1}{The Earth-Sun system}{section.3}% 6
+\BOOKMARK [2][-]{subsection.3.2}{Conservation of angular momentum}{section.3}% 7
+\BOOKMARK [2][-]{subsection.3.3}{Testing forms of the force}{section.3}% 8
+\BOOKMARK [2][-]{subsection.3.4}{Escape velocity}{section.3}% 9
+\BOOKMARK [2][-]{subsection.3.5}{Perihelion precision}{section.3}% 10
+\BOOKMARK [1][-]{section.4}{Results}{}% 11
+\BOOKMARK [2][-]{subsection.4.1}{Conservation of angular momentum}{section.4}% 12
+\BOOKMARK [1][-]{section.5}{Discussion}{}% 13
+\BOOKMARK [2][-]{subsection.5.1}{Testing forms of the force}{section.5}% 14
+\BOOKMARK [2][-]{subsection.5.2}{Escape velocity}{section.5}% 15
+\BOOKMARK [1][-]{appendix.A}{Calculations}{}% 16
