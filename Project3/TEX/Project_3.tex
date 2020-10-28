@@ -15,11 +15,13 @@
 \usepackage{mathpazo}
 \usepackage{float}
 \newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+\usepackage[left=20mm,right=20mm,top=33.95mm,bottom=33.95mm]{geometry} % Justerer bredden på columns.
+
 
 \begin{document}
 
 \title{Project 3}
-\author{Kandidatnummer}
+\author{Sebastian Amundsen, Marcus Berget and Andreas Wetzel}
 
 \maketitle
 
@@ -35,60 +37,146 @@ Though simulating a solar system is interesting and fun enough on it's own, it i
 
 \section{Theory}
 
-The forward Euler method is an algorithm to estimate the solution of a differential equation. The Forward Euler method wants to find the next point $\mathbf{r}_{i+1}$. To find the next point, it uses the point it is at, $\mathbf{r}_{n}$, a small time step $dt$ and the derivative of its position. Which can be expressed as:
+\subsection{Forward Euler}
+The forward Euler method is an algorithm to estimate the solution of a differential equation. The Forward Euler method  finds the next positions $\mathbf{r}_{i+1}$ by using the position we are at $\mathbf{r}_{n}$, a small time step $dt$ and the derivative of its position. Which can be expressed as:
 
 \begin{equation}
 \mathbf{r}_{n+1}=\mathbf{r}_n + \mathbf{r}_n'\cdot dt
 \label{eq:yn1}
 \end{equation}
 
-
-Where $y_{n+1}$ is the next step, $y_n$ is the current step, $y_n'$ is the derived of the current step and $dt$ is the time step.\\
-This algorithm is really based abbreviated version of a Taylor expansion, where we only expand the series one step at a time. But by only taking one step at a time, we will also get a local truncation error, which causes an error for each step we take. 
+Where $\mathbf{r}_n'$ is the derived of the current position. This algorithm is an abbreviated version of a Taylor expansion, where we only expand the series one step at a time. By doing this we will get a local truncation error, which causes an error for each step we take:
 
 \begin{equation}
 \begin{split}
-&y(t_n+dt)=y_{n+1}\\
-&=y(t_n)+y_n'\cdot dt + R(dt^2)
+&\mathbf{r}(t_n+dt)=\mathbf{r}_{n+1}\\
+=&\mathbf{r}(t_n)+dt\bigg(\mathbf{r}'(t_n) + \frac{\mathbf{r}''(t_n)}{2!}dt + ... + \frac{\mathbf{r}^p(t_n)}{p!}dt^{p-1}\bigg) \\
+&+ O(dt^{p+1})
 \end{split}
 \label{eq:ytndt}
 \end{equation} 
 
-Where $R(dt^2)$ is the local truncation error. Since the Forward Euler method is a first-order method, will the local truncation error be proportional to the square of the step size. 
+Where $O(dt^2)$ is the local truncation error. Since the Forward Euler method is a first-order method, the local truncation error will be proportional to the square of the step size.
+
+In our case $\mathbf{r}(t_n) \rightarrow \mathbf{r}_n$ is the position, $\mathbf{r}'(t_n)=\mathbf{v}(t_n) \rightarrow \mathbf{r}'_n=\mathbf{v}_n$ is the velocity and $\mathbf{r}''(t_n)=\mathbf{a}(t_n,r_n) \rightarrow \mathbf{v}_n'=\mathbf{a}_n$ is the acceleration. The update of our position and velocity with a  time step is then given as  
+\begin{align*}
+    \mathbf{r}(t_{n+1})&=\mathbf{r}(t_n) + \mathbf{v}(t_n)dt + O(dt^2)\\
+    \mathbf{r}_{n+1}&=r_{n} + v_{n}dt + O(dt^2)\\
+    \mathbf{v}(t_{n+1})&=\mathbf{v}(t_n)+\mathbf{a}_ndt + O(dt^2)\\
+    \mathbf{v}_{n+1}&=\mathbf{v}_n +\mathbf{a}_n dt + O(dt^2)
+\end{align*}
+Hence, the forward Euler algorithm will look like:
+\begin{align*}
+    \mathbf{r}_{n+1}&=\mathbf{r}_n+\mathbf{v}_ndt\\
+    \mathbf{v}_{n+1}&=\mathbf{v}_n+\mathbf{a}_ndt\\
+    t_{n+1}&=t_n + dt
+\end{align*}
+The number of FLOPS in the Forward Euler method is 4 for each time step, when we look at the addition and multiplication of this algorithm. The number of total FLOPS is $4N$, since we are looping over a time period N. It is also important to notice that the forward Euler method does not conserve energy. This is due to the position being updated before the velocity.  
+
 
 \subsection{Velocity Verlet method}
 
-The velocity Verlet method is based on the kinematic equations for an moving object, which in our case is the earth's orbit around the sun. If we want to find the next time step for the velocity and position we do a approximation and uses Taylor-expansion   
+The Velocity Verlet method is based on the kinematic equations for a moving object, which in our case is a planets orbit around the sun. If we want to find the next time step for the velocity and position we do an approximation and use a Taylor-expansion:    
 
+\begin{align*}
+\mathbf{r}(t\pm dt)&=\mathbf{r}(t)\pm \mathbf{r}'(t)dt + \frac{\mathbf{r}''(t)}{2}dt\\ + O(dt^3)
+\end{align*}
+
+This gives us the position and velocity:
+
+\begin{align}
+    \mathbf{r}_{n+1}&=\mathbf{r_n}+\mathbf{v}_n dt + \frac{\mathbf{a}_n}{2}dt^2+O(dt^3)
+    \label{eq:r_n+1}
+    \end{align}
+    \begin{align}
+    \mathbf{v}_{n+1}&=\mathbf{v}_n+\mathbf{a}_ndt+\frac{\mathbf{v}''_n}{2}dt^2 + O(dt^3)
+     \label{eq:v_n+1}
+\end{align}
+
+We need to define $\mathbf{v}''_n$. We do this by by defining the next step in acceleration $\mathbf{a}_{n+1}$:
+
+\begin{align*}
+    \mathbf{a}_{n+1}=\mathbf{v}'_{n+1}=\mathbf{v}'_n+\mathbf{v}''_ndt + ...
+\end{align*}
+
+We can rewrite this as:
+
+\begin{align}
+        \mathbf{v}''_n=\frac{\mathbf{v}'_{n+1}-\mathbf{v}_n'}{dt}
+    =\frac{\mathbf{a}_{n+1}-\mathbf{a}_n}{dt}
+    \label{eq:v_n}
+\end{align}
+
+By inserting equation \ref{eq:v_n} into equation \ref{eq:v_n+1} we get the general algorithm for the Velocity Verlet:
+
+\begin{align*}
+    \mathbf{r}_{n+1}&=\mathbf{r}_n+\mathbf{v}_ndt+\frac{\mathbf{a}_n}{2}dt^2+O(dt^2)\\
+    \mathbf{v}_{n+1}&=\mathbf{v}_n+\frac{\mathbf{a}_{n+1}-\mathbf{a}_n}{2}dt+O(dt^3)
+\end{align*}
+NUMBER OF FLOPS
+
+
+
+\section{Method}
+
+\subsection{The Earth-Sun system}
+We assume that the earths orbit around the sun is circular. Circular motion and Newtons gravitational force gives us:
 \begin{equation}
-v_{t+dt}=v_t +\frac{dt}{2}(\frac{F_t}{m}+\frac{F_{t+m}}{m}) R(dt^3)
-\label{eq:steps}
+    F_G=G\frac{M_EM_{\odot}}{r^2}=\frac{M_Ev^2}{r}
+    \label{eq:G}
 \end{equation}
+Where G is the gravitational constant, $M_\odot$ is the mass of the sun, $M_E$ is the mass of the earth, $r$ is the distance between the earth and the sun, and $v$ is the velocity of the moving object (earth). 
 
+We want to show that the velocity $v$ can be written as:
 
-We can also split the equation above and perform the calculation in several steps like this:
+\begin{align}
+    v^2r=GM_{\odot}=4\pi^2\frac{AU^3}{yr^2}
+    \label{eq:vr}
+\end{align}
 
-\begin{equation*}
-\begin{split}
-&v(t+\frac{1}{2}\Delta t)=v(t)+\frac{1}{2}a(t)\Delta t\\
-&x(t+\Delta t)=x(t)+v(t+\frac{1}{2}\Delta t)\Delta t\\
-&a(t+\Delta t)=f(x(t+\Delta t))\\
-&v(t+\Delta t)=v(t+\frac{1}{2}\Delta t)+\frac{1}{2}a(t+\Delta t)\Delta t
-\end{split}
-\label{eq:steps}
-\end{equation*}
+We can use the centripetal force to rewrite equation \ref{eq:G}, since we are assuming circular orbits:
+
+\begin{align*}
+    M_E\omega^2r=G\frac{M_EM_{\odot}}{r^2}
+\end{align*}
+
+Where $\omega^2$ is the angular velocity of the earth. Which is given by $\omega^2=2\pi / P$: 
+
+\begin{align*}
+    M_E\bigg(\frac{2\pi}{P}\bigg)^2r=G\frac{M_EM_{\odot}}{r^2}\\
+\end{align*}
+
+Where $P=1$ year is the period of earth's orbit around the sun.
+Now we can use Kepler's third law, which states that the square of an orbital period $P^2$ equals the semi-major axis as it orbits the sun cubed $a^3$. This gives us:
+
+\begin{align}
+    P^2=\frac{4\pi^2}{GM_\odot}a^3
+\end{align}
+
+Where the circular radius $r$ is substituted with the semi-major axis $a$. In our case $a = 1AU$.  
 
 \subsection{Conservation of angular momentum}
-The definition of Keeplers law is that a area, where a connecting line between a planet and the sun, is always the same for an equal time interval. Which is illustrated in the figure below.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{K2L.jpg}
-	\caption{Keeplers second law. Where the area is the same for the same time interval.}
-	\label{fig:1bplot}
+	\caption{The area $\partial A$ is the same for the two time intervals.}
+	\label{fig:Kep}
 \end{figure}
 
-The best way to show that the angular momentum is conserved by using Keeplers second law is to make a drawing:
+The definition of Keplers law is that the area $A$, which is formed from a connecting line between a planet and the sun is always the same for a given time interval. This is illustrated in Figure \ref{fig:Kep}.
+
+
+
+
+
+
+
+
+
+We have that the angular momentum is 
+
+The best way to show that the angular momentum is conserved by using Keplers second law is to make a drawing:
 
 \begin{figure}[H]
 	\centering
@@ -104,6 +192,80 @@ Figure 2 shows us that the area is:
     dA=\frac{1}{2}r^2d\theta
 \label{eq:dA}
 \end{equation}
+
+We now want to find an infinitesimal area where the planet has moved around the sun, over an infinitesimal time step, where we use equation 12.
+
+\begin{align}
+    \frac{dA}{dt}&=\frac{1}2{r^2}\frac{d\theta}{dt}\\
+    &=\frac{1}{2}rv_\theta
+\end{align}
+And the definition of angular momentum is given as
+\begin{align}
+    L=mrv_\theta
+\end{align}
+With equation 14 and 15 we can show that the angular momentum is conserved.
+\subsection{Testing forms of the force}
+Until now we have looked at the movement for the planet with the gravitational force with the square of r. We will now try to change the gravitational force where the power of r is in the range $\beta in [2,3]$ The gravitational force is then given as
+\begin{align}
+    \mathbf{F}_G=-\frac{GM_{\odot}M_{planet}}{r^{\beta}}\frac{\mathbf{r}}{r}
+\end{align}
+\subsection{Escape velocity}
+We will now look at a planet which begins at a distance 1 AU from the sun, 
+and see how fast the initial velocity must be for the planet to be able to escape the sun. We find the analytical solution to compare it to our numerical solution. \\
+The analytical expression is given as 
+\begin{align}
+    \mid{\mathbf{V}_{esc}}\mid=\sqrt{\frac{2GM_{\odot}}{r}}
+\end{align}
+By plugging equation 2 into 16, and use that our initial position of the planet is $r=AU$ we get
+\begin{align}
+\mid{\mathbf{V}_{esc}^2}\mid&=\frac{2\cdot 4\pi^2AU^3}{yr^2}\cdot\frac{1}{r}\\
+&=\frac{2\cdot 4\pi^2AU^3}{yr^2}\cdot\frac{1}{AU}\\
+\mid{\mathbf{V}_{esc}}\mid&=2\sqrt{2}\pi\cdot\frac{AU}{yr}
+\end{align}
+\subsection{Perihelion precision}
+LES GJENNOM DETTE MARCUS\\
+The definition of perihelion precision is that the perihelion point of an objects, in our case Mercury, changes its position because of 
+the gravitational field deflection from light. RIKTIG? The perihelion point for Mercury changes with $43''$ arcseconds for each century. \\
+\\
+Mercury's orbit has a small prescision for each century. This comes from that Mercury is the nearest planet to the sun, and therefore its acceleration and velocity will be large, which means that the space time will wrap    and we have to obey the rules of General Relativity. Hrnce, we rewrite the expression for Newtons gravitational force to a relativistic gravitational force.
+\begin{align}
+    \mathbf{F}=-G\frac{M_{\odot}M_{Mercury}}{r^2}\Bigg[1+\Bigg(\frac{3l^2}{r^2c^2}\bigg)\bigg]\frac{\mathbf{r}}{r}
+\end{align}
+
+\section{Results}
+\subsection{The Earth-Sun system}
+From Keeplers third law we have
+\begin{align}
+    P^2&=\frac{4\pi^2}{GM_\odot}a^3\\
+    GM_\odot&=4\pi^2\frac{AU^3}{yr^2}
+\end{align}
+\subsection{Conservation of angular momentum}
+If we substitute equation 15 into equation 14 
+\begin{align}
+    \frac{dA}{dt}=\frac{1}{2}\frac{L}{m}
+\end{align}
+Sine $\frac{dA}{dt}$=constant and the mass m is constant means that the angular momentum also is constant and therefore also conserved.  
+\\
+\subsection{Escape velocity}
+In the figure below we can see the behavior for the Sun-Earth system with different initial velocities. 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{esc_vel_plot.png}
+	\caption{Escape velocity for the Sun-Earth system for different initial velocity}
+	\label{fig:1bplot}
+\end{figure}
+\section{Discussion}
+\subsection{The Earth-Sun system}
+It is important to note that Keepler thrird law is given as ADD NEWTON. 
+\begin{align}
+    P^2=a^3
+\end{align}
+\subsection{Testing forms of the force}
+When we let $\beta$ varies between $[2,3]$ we get different results depending on the initial values for position and velocity. If we for example set the distance between the sun and earth $|\mathbf{r}|>AU$ larger then 1 AU, will the gravitational force decrease when we increase $\beta$, and the orbit will get more and more elliptical. \\
+If we say that the distance $|\mathbf{r}|<AU$, is larger then 1 AU, the Earth will move towards the sun since the gravitational force will increase when we increase $\beta$.    
+\subsection{Escape velocity}
+If we increase the initial velocity we see that the orbit of the earth changes from circular orbit to an elliptical orbit, and when the elliptical orbit increase will the position between the two object increase. Hence, will the force of gravity decrease. And when the initial velocity to the planet make it to the escape velocity it will be tear loose from the gravitational field.\\
+It is also important to add that we say the center of mass does not move, which means that the center of mass will be constant and it will be very close to the Sun.  
 
 \end{multicols}
 
