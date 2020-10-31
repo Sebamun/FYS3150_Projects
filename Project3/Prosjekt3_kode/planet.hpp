@@ -6,7 +6,7 @@
 using std::vector;
 
 class planet{
-
+  
 public:
     // Globale verdier:
     double mass;

@@ -2,7 +2,7 @@
 
 planet::planet(double M, double x, double y, double z,
   double vx, double vy, double vz)
-{ // Initialiserer hver planet.
+{ // Initialiserer for hver planet.
     mass = M;
     position[0] = x;
     position[1] = y;
