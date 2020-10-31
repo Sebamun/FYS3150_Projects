@@ -15,10 +15,55 @@ solver::solver(double radi)
 }
 
 void solver::add(planet newplanet)
+<<<<<<< HEAD
 {
     total_planets += 1;
     total_mass += newplanet.mass;
     all_planets.push_back(newplanet);
+=======
+{ // Legger til planeter.
+    total_planets += 1; // Legger til det totale antallet objekter.
+    total_mass += newplanet.mass; // Legger til den totale massen.
+    all_planets.push_back(newplanet); // Legger objektet til systemet av objekter.
+}
+
+// Regner ut gravitasjonskraft og setter opp matrise for å lagre akselerasjonsverdier:
+//------------------------------------------------------------------------------------
+
+void solver::GravitationalForce(planet &current, planet &other,
+  double &Fx, double &Fy, double &Fz, double epsilon, double beta, int GR)
+{ // Funksjon som regner ut gravitasjonskraften mellom to objekter.
+    double relative_distance[3]; // Den relative avstanden mellom nåverende objekt og alle andre planeter.
+    for (int j = 0; j < 3; j++) // Finner retningsvektoren i tre dimensjoner.
+        relative_distance[j] = current.position[j] - other.position[j]; // Dette er vektoren (med retning)
+    double r = current.distance(other); // Lengden av vektoren.
+    double smoothing = epsilon * epsilon * epsilon;
+
+    // Regner ut krefter i alle retninger.
+    Fx -= this->G * current.mass * other.mass * relative_distance[0]
+    / (pow(r,beta) + smoothing);
+    Fy -= this->G * current.mass * other.mass * relative_distance[1]
+    / (pow(r,beta) + smoothing);
+    Fz -= this->G * current.mass * other.mass * relative_distance[2]
+    / (pow(r,beta) + smoothing);
+}
+
+double **solver::setup_matrix(int height, int width)
+{ // Setter opp en matrise som skal brukes til å lagre akselerasjonsverdier.
+    double **matrix;
+    matrix = new double *[height];
+    for (int i = 0; i < height; i++)
+        matrix[i] = new double[width];
+    // Setter alle verdier i matrisen til null:
+    for (int i = 0; i < height; i++)
+    {
+        for (int j = 0; j < width; j++)
+        {
+            matrix[i][j] = 0.0;
+        }
+    }
+    return matrix;
+>>>>>>> 8e4ae35b1654e3f94165e115ebc099adc78f5a52
 }
 
 void solver::addM(planet newplanet)
@@ -65,11 +110,23 @@ void solver::print_energy(std::ofstream &output, double time, double epsilon)
     }
 }
 
+<<<<<<< HEAD
 void solver::Euler(int dimension, int integration_points, double final_time, int print_number, double epsilon, double beta)
 { // Define time step
     double time_step = final_time / ((double)integration_points);
     double time = 0.0;
     double loss = 0.; // Possible energy loss
+=======
+// Numeriske løsningsmetoder:
+//---------------------------
+
+void solver::Euler(int dimension, int integration_points, double final_time,
+  int print_number, double epsilon, double beta, int GR)
+{ // Euler metoden.
+    double time_step = final_time / ((double)integration_points); // Definerer tidssteg.
+    double time = 0.0; // Her lagrer vi den totale tiden.
+    double loss = 0.; // Her lagrer vi potensielt energitap.
+>>>>>>> 8e4ae35b1654e3f94165e115ebc099adc78f5a52
     int lostPlanets[integration_points];
 
     // Create files for data storage
@@ -129,7 +186,7 @@ void solver::Euler(int dimension, int integration_points, double final_time, int
             for (int nr2 = nr1 + 1; nr2 < total_planets; nr2++)
             {
                 planet &other = all_planets[nr2];
-                GravitationalForce(current, other, Fx, Fy, Fz, epsilon, beta);
+                GravitationalForce(current, other, Fx, Fy, Fz, epsilon, beta,GR);
             }
 
             // Acceleration in each dimension for current planet
@@ -194,6 +251,7 @@ void solver::Euler(int dimension, int integration_points, double final_time, int
     delete_matrix(acceleration);
 }
 
+<<<<<<< HEAD
 void solver::VelocityVerlet(int dimension, int integration_points, double final_time, int print_number, double epsilon, double beta)
 { /*  Velocity-Verlet solver for two coupeled ODEs in a given number of dimensions.
     The algorithm is, exemplified in 1D for position x(t), velocity v(t) and acceleration a(t):
@@ -204,6 +262,14 @@ void solver::VelocityVerlet(int dimension, int integration_points, double final_
     double time_step = final_time / ((double)integration_points);
     double time = 0.0;
     double loss = 0.; // Possible energy loss
+=======
+void solver::VelocityVerlet(int dimension, int integration_points,
+  double final_time, int print_number, double epsilon, double beta, int GR)
+{ // Velocity Verlet metoden.
+    double time_step = final_time / ((double)integration_points); // Definerer tidssteg.
+    double time = 0.0; // Her lagrer vi den totale tiden.
+    double loss = 0.; // Her lagrer vi potensielt energitap.
+>>>>>>> 8e4ae35b1654e3f94165e115ebc099adc78f5a52
     int lostPlanets[integration_points];
 
     // Create files for data storage
@@ -250,6 +316,7 @@ void solver::VelocityVerlet(int dimension, int integration_points, double final_
         // Loop over all planets
         for (int nr1 = 0; nr1 < total_planets; nr1++)
         {
+<<<<<<< HEAD
             planet &current = all_planets[nr1]; // Current planet we are looking at
 
             Fx = Fy = Fz = Fxnew = Fynew = Fznew = 0.0; // Reset forces before each run
@@ -262,6 +329,20 @@ void solver::VelocityVerlet(int dimension, int integration_points, double final_
             }
 
             // Acceleration in each dimension for current planet
+=======
+            planet &current = all_planets[nr1]; // Nåverende planet.
+            Fx = Fy = Fz = Fxnew = Fynew = Fznew = 0.0; // Nullstiller krefter.
+            // Regner ut krefter i hver dimensjon:
+            // Calculate forces in each dimension
+            for (int nr2 = 0; nr2 < total_planets; nr2++){
+                if ( nr2 != nr1){
+                    planet &other = all_planets[nr2];
+                    GravitationalForce(current, other, Fx, Fy, Fz, epsilon, beta, GR);
+                }
+            }
+
+            // Akselerasjon for nåverende planet i hver dimensjon.
+>>>>>>> 8e4ae35b1654e3f94165e115ebc099adc78f5a52
             acceleration[nr1][0] = Fx / current.mass;
             acceleration[nr1][1] = Fy / current.mass;
             acceleration[nr1][2] = Fz / current.mass;
@@ -274,10 +355,20 @@ void solver::VelocityVerlet(int dimension, int integration_points, double final_
             }
 
             // Loop over all other planets
+<<<<<<< HEAD
             for (int nr2 = nr1 + 1; nr2 < total_planets; nr2++)
             {
                 planet &other = all_planets[nr2];
                 GravitationalForce(current, other, Fxnew, Fynew, Fznew, epsilon, beta);
+=======
+            for (int nr2 = 0; nr2 < total_planets; nr2++)
+            {
+                if (nr2 != nr1)
+                {
+                    planet &other = all_planets[nr2];
+                    GravitationalForce(current, other, Fxnew, Fynew, Fznew, epsilon, beta, GR);
+                }
+>>>>>>> 8e4ae35b1654e3f94165e115ebc099adc78f5a52
             }
 
             // Acceleration each dimension exerted for current planet

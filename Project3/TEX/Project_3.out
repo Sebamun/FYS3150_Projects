@@ -1,0 +1,27 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Theory}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Forward Euler}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Verlet integration}{section.2}% 4
+\BOOKMARK [1][-]{section.3}{Method}{}% 5
+\BOOKMARK [2][-]{subsection.3.1}{Program flow}{section.3}% 6
+\BOOKMARK [2][-]{subsection.3.2}{Comparison of the algorithms}{section.3}% 7
+\BOOKMARK [2][-]{subsection.3.3}{Earth-Sun system}{section.3}% 8
+\BOOKMARK [2][-]{subsection.3.4}{Many-body system}{section.3}% 9
+\BOOKMARK [2][-]{subsection.3.5}{Perihelion precession of mercury}{section.3}% 10
+\BOOKMARK [1][-]{section.4}{Results}{}% 11
+\BOOKMARK [2][-]{subsection.4.1}{The Earth-Sun system}{section.4}% 12
+\BOOKMARK [2][-]{subsection.4.2}{Conservation of angular momentum}{section.4}% 13
+\BOOKMARK [2][-]{subsection.4.3}{Escape velocity}{section.4}% 14
+\BOOKMARK [1][-]{section.5}{Discussion}{}% 15
+\BOOKMARK [2][-]{subsection.5.1}{Testing forms of the force}{section.5}% 16
+\BOOKMARK [2][-]{subsection.5.2}{Escape velocity}{section.5}% 17
+\BOOKMARK [1][-]{appendix.A}{Appendix A}{}% 18
+\BOOKMARK [2][-]{subsection.A.1}{The Earth-Sun system}{appendix.A}% 19
+\BOOKMARK [2][-]{subsection.A.2}{Conservation of angular momentum}{appendix.A}% 20
+\BOOKMARK [2][-]{subsection.A.3}{Testing forms of the force}{appendix.A}% 21
+\BOOKMARK [2][-]{subsection.A.4}{Escape velocity}{appendix.A}% 22
+\BOOKMARK [2][-]{subsection.A.5}{Perihelion precision}{appendix.A}% 23
+\BOOKMARK [1][-]{appendix.B}{Appendix B}{}% 24
+\BOOKMARK [2][-]{subsection.B.1}{Forward Euler}{appendix.B}% 25
+\BOOKMARK [2][-]{subsection.B.2}{Velocity Verlet method}{appendix.B}% 26
+\BOOKMARK [1][-]{appendix.C}{Calculations}{}% 27
