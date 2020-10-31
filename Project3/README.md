@@ -16,11 +16,11 @@ We have used the following programming languages and packages: <br />
 
 To access the code of this project go to the Prosjekt3_kode folder. Here you will find a makefile, which will compile all our c++ programs. Use command `make all` to compile. You run the three body system of objects and plot their positions with the commands:<br />
 ```terminal
-./1.x # Run the executable.
+./1.x beta # Run the executable and specify beta.
 python3 Plotte.py # Plotting.
 ```
 
-You run and plot the system of all the planets and the sun with the commands: <br />
+Here we have run the program for beta = 3, 3.5 and 3.99. You run and plot the system of all the planets and the sun with the commands: <br />
 
 ```terminal
 ./2.x # Run the executable.
