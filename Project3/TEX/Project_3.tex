@@ -114,6 +114,21 @@ In the figure below we can see the behavior for the Sun-Earth system with differ
 	\caption{Escape velocity for the Sun-Earth system for different initial velocity}
 	\label{fig:1bplot}
 \end{figure}
+
+\subsection{The speed of the algorithms}
+
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{  |c|c|c|c|c|c| } \hline
+Algorithm&N=100000&N=1000000&N=10000000 \\ \hline
+Euler&0.30419 s&2.89849 s&38.3016 s\\ \hline
+Verlet&0.37503 s&3.16336 s &33.3088 s \\ \hline
+\end{tabular}
+\caption{The speed of the different algorithms.}
+\label{tab:Algo_N}
+\end{center}
+\end{table}
+
 \section{Discussion}
 \subsection{Testing forms of the force}
 When we let $\beta$ varies between $[2,3]$ we get different results depending on the initial values for position and velocity. If we for example set the distance between the sun and earth $|\mathbf{r}|>AU$ larger then 1 AU, will the gravitational force decrease when we increase $\beta$, and the orbit will get more and more elliptical. \\
@@ -121,6 +136,7 @@ If we say that the distance $|\mathbf{r}|<AU$, is larger then 1 AU, the Earth wi
 \subsection{Escape velocity}
 If we increase the initial velocity we see that the orbit of the earth changes from circular orbit to an elliptical orbit, and when the elliptical orbit increase will the position between the two object increase. Hence, will the force of gravity decrease. And when the initial velocity to the planet make it to the escape velocity it will be tear loose from the gravitational field.\\
 It is also important to add that we say the center of mass does not move, which means that the center of mass will be constant and it will be very close to the Sun.  
+
 
 \end{multicols}
 

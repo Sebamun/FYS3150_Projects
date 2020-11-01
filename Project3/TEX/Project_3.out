@@ -12,16 +12,17 @@
 \BOOKMARK [2][-]{subsection.4.1}{The Earth-Sun system}{section.4}% 12
 \BOOKMARK [2][-]{subsection.4.2}{Conservation of angular momentum}{section.4}% 13
 \BOOKMARK [2][-]{subsection.4.3}{Escape velocity}{section.4}% 14
-\BOOKMARK [1][-]{section.5}{Discussion}{}% 15
-\BOOKMARK [2][-]{subsection.5.1}{Testing forms of the force}{section.5}% 16
-\BOOKMARK [2][-]{subsection.5.2}{Escape velocity}{section.5}% 17
-\BOOKMARK [1][-]{appendix.A}{Appendix A}{}% 18
-\BOOKMARK [2][-]{subsection.A.1}{The Earth-Sun system}{appendix.A}% 19
-\BOOKMARK [2][-]{subsection.A.2}{Conservation of angular momentum}{appendix.A}% 20
-\BOOKMARK [2][-]{subsection.A.3}{Testing forms of the force}{appendix.A}% 21
-\BOOKMARK [2][-]{subsection.A.4}{Escape velocity}{appendix.A}% 22
-\BOOKMARK [2][-]{subsection.A.5}{Perihelion precision}{appendix.A}% 23
-\BOOKMARK [1][-]{appendix.B}{Appendix B}{}% 24
-\BOOKMARK [2][-]{subsection.B.1}{Forward Euler}{appendix.B}% 25
-\BOOKMARK [2][-]{subsection.B.2}{Velocity Verlet method}{appendix.B}% 26
-\BOOKMARK [1][-]{appendix.C}{Calculations}{}% 27
+\BOOKMARK [2][-]{subsection.4.4}{The speed of the algorithms}{section.4}% 15
+\BOOKMARK [1][-]{section.5}{Discussion}{}% 16
+\BOOKMARK [2][-]{subsection.5.1}{Testing forms of the force}{section.5}% 17
+\BOOKMARK [2][-]{subsection.5.2}{Escape velocity}{section.5}% 18
+\BOOKMARK [1][-]{appendix.A}{Appendix A}{}% 19
+\BOOKMARK [2][-]{subsection.A.1}{The Earth-Sun system}{appendix.A}% 20
+\BOOKMARK [2][-]{subsection.A.2}{Conservation of angular momentum}{appendix.A}% 21
+\BOOKMARK [2][-]{subsection.A.3}{Testing forms of the force}{appendix.A}% 22
+\BOOKMARK [2][-]{subsection.A.4}{Escape velocity}{appendix.A}% 23
+\BOOKMARK [2][-]{subsection.A.5}{Perihelion precision}{appendix.A}% 24
+\BOOKMARK [1][-]{appendix.B}{Appendix B}{}% 25
+\BOOKMARK [2][-]{subsection.B.1}{Forward Euler}{appendix.B}% 26
+\BOOKMARK [2][-]{subsection.B.2}{Velocity Verlet method}{appendix.B}% 27
+\BOOKMARK [1][-]{appendix.C}{Calculations}{}% 28

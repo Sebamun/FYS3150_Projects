@@ -39,4 +39,11 @@ We have also used a python script to intiallize our initial positions and veloci
 python3 Initial.py # Write initial values to file. 
 ```
 
-Which produces the textfile Initial.txt.
+Which produces the textfile Initial.txt. We also want to test the speed of our algorithm. This is done by goin into the folder "Runtime_test" and use the commands:
+
+```terminal
+make all
+./kjor_euler.x N # Here we run the executable for the Euler method.
+./kjor_verlet.x N # Here we runt the executable for the Verlet method.
+```
+We compile these programmes with N=100000, N=1000000 and N=10000000.

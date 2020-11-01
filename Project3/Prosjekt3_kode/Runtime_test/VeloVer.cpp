@@ -5,12 +5,11 @@
 #include <time.h>
 using namespace std;
 using namespace arma;
-
-int main()
+int main(int argc, char const *argv[])
 {
     double G = 4 * M_PI * M_PI;
     double M_sun = 1.0;
-    int N = 1000000;
+    int N = atoi(argv[1]);
     vec x(2);
     vec v(2);
     vec a0(2);
