@@ -37,8 +37,7 @@ We have also used a python script to intiallize our initial positions and veloci
 ```terminal
 python3 Initial.py # Write initial values to file. 
 ```
-
-Which produces the textfile Initial.txt. We also want to test the speed of our algorithms. This is done by goin into the folder "Runtime_test" and use the commands:
+Which produces the textfile Initial.txt. We also want to test the speed of our algorithms. This is done by going into the folder "Runtime_test" and use the commands:
 
 ```terminal
 make all
@@ -63,5 +62,9 @@ We also have the plotting for the earth's orbit at different initial velocities.
 python3 photesc_vel.py # Plotting of earth's orbit with different initial velocities 
 ```
 
+Finally, we run the program for perihelion precession of mercury:
 
-
+```terminal
+./4.x # Run the executable.
+python3 Perihelion.py # Finds perihelion precession angle
+```
