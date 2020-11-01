@@ -39,7 +39,7 @@ We have also used a python script to intiallize our initial positions and veloci
 python3 Initial.py # Write initial values to file. 
 ```
 
-Which produces the textfile Initial.txt. We also want to test the speed of our algorithm. This is done by goin into the folder "Runtime_test" and use the commands:
+Which produces the textfile Initial.txt. We also want to test the speed of our algorithms. This is done by goin into the folder "Runtime_test" and use the commands:
 
 ```terminal
 make all
