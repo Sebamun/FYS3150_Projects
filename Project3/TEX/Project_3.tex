@@ -47,7 +47,7 @@ The forward Euler algorithm will look like:
     t_{n+1}&=t_n + dt
 \end{align*}
 The number of FLOPS in the Forward Euler method is 4 for each time step, when we look at the addition and multiplication of this algorithm. The number of total FLOPS is $4N$, since we are looping over a time period N. It is also important to notice that the forward Euler method does not conserve energy. This is due to the position being updated before the velocity.  \\
-For more details see Appendix B.
+For more details see Appendix C.
 \\
 \subsection{Verlet integration}
 The Velocity Verlet method is based on the kinematic equations for a moving object, which in our case is a planets orbit around the sun. For the Velocity Verlet algorithm will the velocity be updated before the position, this leads to conservation of energy.\\   
@@ -71,11 +71,11 @@ The timing and counting of number of FLOPS of the algorithms is done by writing 
 
 \subsection{Earth-Sun system}
 
-We have used the Earth-Sun system to compare the two algorithms, but we will now proceed by ditching the forward Euler method, using only the velocity Verlet method instead. Kepler's second law of planetary motion states that the imaginary line joining a planet and the suns sweeps equal areas of space during equal time intervals as the planet orbits \cite{94}. As shown in the appendix, this is equivalent to conservation of angular momentum. [noe mer om dette]. 
+We have used the Earth-Sun system to compare the two algorithms, but we will now proceed by ditching the forward Euler method, using only the velocity Verlet method instead. Kepler's second law of planetary motion states that the imaginary line joining a planet and the suns sweeps equal areas of space during equal time intervals as the planet orbits \cite{94}. As shown in the appendix, this is equivalent to conservation of angular momentum.  
 
 \subsection{Testing forms of the force}
 
-We know that the gravitational force is an inverse square force. We wish to know what would occur if we changed this force to a higher order inverse force. This is explained in appendix A.
+We know that the gravitational force is an inverse square force. We wish to know what would occur if we changed this force to a higher order inverse force. This is explained in appendix B.
 
 \subsection{Many-body system}
 
@@ -100,84 +100,37 @@ where $M_\odot\ $ is the mass of the Sun, $M_{Mercury}$ is the mass of Mercury, 
 
 \section{Results}
 
+Figures are given in appendix A. 
+
 \subsection{Comparison of the algorithms}
 
 \begin{table}[H]
 \begin{center}
+\caption{The speed of the different algorithms.}
 \begin{tabular}{  |c|c|c|c|c|c| } \hline
 Algorithm&$N=10^5$&$N=10^6$&$N=10^7$ \\ \hline
 Euler&0.30419 s&2.89849 s&38.3016 s\\ \hline
 Verlet&0.37503 s&3.16336 s &33.3088 s \\ \hline
 \end{tabular}
-\caption{The speed of the different algorithms.}
 \label{tab:Algo_N}
 \end{center}
 \end{table}
 
-The time it took to run the different algorithms is given in Table \ref{tab:Algo_N}.
+The time it took to run the different algorithms is given in Table \ref{tab:Algo_N}. The plots for the different algorithms with different integration points is given in Figure \ref{fig:Acc}.
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=\linewidth]{Acc}
-	\caption{The accuracy of the different algorithms at different time steps.}
-	\label{fig:Acc}
-\end{figure}
+\subsection{Earth -Sun system}
 
-The plots for the different algorithms with different integration points is given in Figure \ref{fig:Acc}.
-
-\subsection{The Earth-Sun system}
-From Keeplers third law we have
-\begin{align}
-    P^2&=\frac{4\pi^2}{GM_\odot}a^3\\
-    GM_\odot&=4\pi^2\frac{AU^3}{yr^2}
-\end{align}
-\subsection{Conservation of angular momentum}
-If we substitute equation 15 into equation 14 
-\begin{align}
-    \frac{dA}{dt}=\frac{1}{2}\frac{L}{m}
-\end{align}
-Sine $\frac{dA}{dt}$=constant and the mass m is constant means that the angular momentum also is constant and therefore also conserved.  
-\\
-\subsection{Escape velocity}
-In the figure below we can see the behavior for the Sun-Earth system with different initial velocities. 
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=\linewidth]{esc_vel_plot.png}
-	\caption{Escape velocity for the Sun-Earth system for different initial velocity}
-	\label{fig:1bplot}
-\end{figure}
-
-\subsection{Testing forms of the force}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=\linewidth]{Force_beta}
-	\caption{The planetary motion of earth at different $\beta$.}
-	\label{fig:Force_beta}
-\end{figure}
+We can see the behavior for the Sun-Earth system with different initial velocities in Figure \ref{fig:esc}.
 
 We can see the different planetary motion of earth as we adjust $\beta$ in Figure \ref{fig:Force_beta}.
 
+The angular momentum is given in Figure \ref{fig:angmon} for the Velocity Verlet algorithm. 
+
+The energy for the Velocity Verlet is given in Figure \ref{fig:Energy}.
 
 \subsection{Many-body system}
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=\linewidth]{Jup_mass}
-	\caption{Three body problem with varying Jupiter masses.}
-	\label{fig:Jup_mass}
-\end{figure}
-
-We can see the different orbits of the three body problem with varying masses for Jupiter in Figure \ref{fig:Jup_mass}. 
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=\linewidth]{Solar}
-	\caption{The solar system.}
-	\label{fig:Solar}
-\end{figure}
-
-We solved the many body problem with 8 planets and the sun and the plot is given in Figure \ref{fig:Solar}. 
+We can see the different orbits of the three body problem with varying masses for Jupiter in Figure \ref{fig:Jup_mass}. We solved the many body problem with 8 planets and the sun and the plot is given in Figure \ref{fig:Solar}. 
 
 \section{Discussion}
 
@@ -197,13 +150,71 @@ It is also important to add that we say the center of mass does not move, which 
 
 When we increase the mass of Jupiter we will see that the force that is exerted on the sun and earth increases. This leads to a more unstable orbit for all objects. For the mass of Jupiter $\times 10$ we stil have an orbit around the sun, but it is somewhat more unstable. When we increase the mass of Jupiter by 1000 we lose our elliptical orbits. We can see the earth being "slinged" out of the system. This is due to the drastically increased force from Jupiter. When the earth gets close to the two other objects, the forces on the earth accumulate and gives the planet an acceleration which is big enough to escape the gravitational pull from the sun (Figure \ref{fig:Jup_mass}). 
 
-We wanted to have a full rotation around the sun for all the planets. The outer most planet Neptune reached a full orbit after a period of 170 years, which became the time we run our simulation with. In this time span the inner planets managed to preform multiple orbits around the sun. The later orbits changed relative to their original orbit, which is to be expected given that the sun and planets move over time. That is why the lines become thicker towards the center of the plot (Figure \ref{fig:Solar}. 
+We wanted to have a full rotation around the sun for all the planets. The outer most planet Neptune reached a full orbit after a period of 170 years, which became the time we run our simulation with. In this time span the inner planets managed to preform multiple orbits around the sun. The later orbits changed relative to their original orbit, which is to be expected given that the sun and planets move over time. That is why the lines become thicker towards the center of the plot (Figure \ref{fig:Solar}). 
+
+\subsection{Angular momentum and energy}
+
+The analytical part shows that the angular momentum is conserved. But when we look at Figure \ref{fig:angmon} it looks as if the angular momentum has not been conserved. This is because the algorithm fails to preserve angular momentum exactly. There will also be numerical errors, such as small deviations in the calculation. The change in angular momentum between each peak is really small, when taking into account the amount of time we run the simulation for. We can therefore say that the angular momentum is conserved. 
 
 \end{multicols}
 
 \clearpage
 
-\appendix \section{Appendix A} % Her kommer appendix.
+\appendix \section*{Appendix A} % Her kommer appendix.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=120mm]{Acc}
+	\caption{The accuracy of the different algorithms at different time steps.}
+	\label{fig:Acc}
+\end{figure}
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=120mm]{Force_beta}
+	\caption{The planetary motion of earth at different $\beta$.}
+	\label{fig:Force_beta}
+\end{figure}
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=120mm]{esc_vel_plot.png}
+	\caption{Escape velocity for the Sun-Earth system for different initial velocity}
+	\label{fig:esc}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=120mm]{Jup_mass}
+	\caption{Three body problem with varying Jupiter masses.}
+	\label{fig:Jup_mass}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=120mm]{Solar}
+	\caption{The solar system.}
+	\label{fig:Solar}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=120mm]{ang_mom_con.png}
+	\caption{Conservation of angular momentum, Velocity Verlet algorithm  }
+	\label{fig:angmon}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=120mm]{Energy}
+	\caption{The kinetic and potential energy for Velocity Verlet.}
+	\label{fig:Energy}
+\end{figure}
+
+
+\section*{Appendix B} % Her kommer appendix.
 \subsection{The Earth-Sun system}
 We assume that the earths orbit around the sun is circular. Circular motion and Newtons gravitational force gives us:
 \begin{equation}
@@ -235,10 +246,9 @@ Where $P=1$ year is the period of earth's orbit around the sun.
 Now we can use Kepler's third law, which states that the square of an orbital period $P^2$ equals the semi-major axis as it orbits the sun cubed $a^3$. This gives us:
 
 \begin{align}
-    P^2=\frac{4\pi^2}{GM_\odot}a^3
+    P^2&=\frac{4\pi^2}{GM_\odot}a^3\\
+    GM_\odot&=4\pi^2\frac{AU^3}{yr^2}
 \end{align}
-
-Where the circular radius $r$ is substituted with the semi-major axis $a$. In our case $a = 1AU$.  
 
 \subsection{Conservation of angular momentum}
 
@@ -277,11 +287,17 @@ We now want to find an infinitesimal area where the planet has moved around the 
     \label{eq:dadt}
 \end{align}
 And the definition of angular momentum is given as
-\begin{align*}
+\begin{align}
     L=mrv_\theta
-\end{align*}
+     \label{eq:L}
+\end{align}
 
-With equation \ref{eq:dadt} and \ref{eq:dA} we can show that the angular momentum is conserved.
+With equation \ref{eq:L} and \ref{eq:dadt} we can show that the angular momentum is conserved:
+\begin{align}
+    \frac{dA}{dt}=\frac{1}{2}\frac{L}{m}
+\end{align}
+
+Since $\frac{dA}{dt}$=constant and the mass m is constant it means that the angular momentum also is constant and therefore also conserved.  
 
 \subsection{Testing forms of the force}
 
@@ -315,7 +331,7 @@ Mercury's orbit has a small prescision for each century. This comes from that Me
     \mathbf{F}=-G\frac{M_{\odot}M_{Mercury}}{r^2}\Bigg[1+\Bigg(\frac{3l^2}{r^2c^2}\bigg)\bigg]\frac{\mathbf{r}}{r}
 \end{align}
 
-\section{Appendix B} % Her kommer appendix.
+\section*{Appendix C} % Her kommer appendix.
 \subsection{Forward Euler}
 The forward Euler method is an algorithm to estimate the solution of a differential equation. The Forward Euler method  finds the next positions $\mathbf{r}_{i+1}$ by using the position we are at $\mathbf{r}_{n}$, a small time step $dt$ and the derivative of its position. Which can be expressed as:
 

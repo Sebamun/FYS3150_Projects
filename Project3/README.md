@@ -51,4 +51,17 @@ We compile these programmes with N=100000, N=1000000 and N=10000000. We can also
 python3 PlotteN.py # Plotting of earth with different integration points.
 ```
 
-Where we have integration points N=1000, N=5000 and N=10000. This is accessible in the "Prosjekt3_kode" folder after you have compiled. 
+Where we have integration points N=1000, N=5000 and N=10000. This is accessible in the "Prosjekt3_kode" folder after you have compiled, the same goes for plotting the angular momentum and energy for Velocity Verlet:
+
+```terminal
+python3 Plotte_ang_E.py # Plotting the angular momentum and energy for Velocity Verlet
+```
+
+We also have the plotting for the earth's orbit at different initial velocities. We changed these initial velocities manually and stored the data in textfiles at "Textfiles/Escape". You can run the program which plots the orbits at different initial velocities by using the commands:
+
+```terminal
+python3 photesc_vel.py # Plotting of earth's orbit with different initial velocities 
+```
+
+
+
