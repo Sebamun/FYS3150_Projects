@@ -14,7 +14,7 @@ using namespace std;
 
 int main(int argc, char const *argv[]){
     double beta = atof(argv[1]); // Vi prover for 3, 3.5 og 3.99
-    int n = 100000; // Integrasjonspunkter.
+    int n = atoi(argv[2]); // Integrasjonspunkter.
     double FinalTime = 100.;
     int dim = 3;
     double x[3], v[3];
