@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2020.2.24)  1 NOV 2020 12:07
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2020.2.24)  1 NOV 2020 14:11
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -578,88 +578,113 @@ Overfull \hbox (0.23232pt too wide) in paragraph at lines 67--69
 
 {/usr/local/texlive/2019/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 106--109
+Underfull \hbox (badness 10000) in paragraph at lines 127--130
 
  []
 
-<esc_vel_plot.png, id=139, 1284.8pt x 963.6pt>
+<esc_vel_plot.png, id=150, 1284.8pt x 963.6pt>
 File: esc_vel_plot.png Graphic file (type png)
 <use esc_vel_plot.png>
-Package pdftex.def Info: esc_vel_plot.png  used on input line 113.
+Package pdftex.def Info: esc_vel_plot.png  used on input line 134.
 (pdftex.def)             Requested size: 236.01563pt x 176.99872pt.
-
-Overfull \hbox (8.57332pt too wide) in paragraph at lines 122--127
- [] 
- []
-
-
-Overfull \vbox (83.15495pt too high) has occurred while \output is active []
-
-
-[3pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) 
-has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.141 \end{multicols}
-                     pdfTeX warning (ext4): destination with the same identifie
-r (name{table.1}) has been already used, duplicate ignored
+<Force_beta.png, id=152, 1353.055pt x 667.49374pt>
+File: Force_beta.png Graphic file (type png)
+<use Force_beta.png>
+Package pdftex.def Info: Force_beta.png  used on input line 143.
+(pdftex.def)             Requested size: 236.01563pt x 116.42612pt.
+<Jup_mass.png, id=154, 1363.0925pt x 733.74126pt>
+File: Jup_mass.png Graphic file (type png)
+<use Jup_mass.png>
+Package pdftex.def Info: Jup_mass.png  used on input line 155.
+(pdftex.def)             Requested size: 236.01563pt x 127.04073pt.
+[3pdfTeX warning (ext4): destination with the same identifier (name{table.1}) h
+as been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.141 \end{multicols}
-                      <./esc_vel_plot.png>] [4]
-<K2L.jpg, id=158, 1821.80624pt x 744.7825pt>
-File: K2L.jpg Graphic file (type jpg)
-<use K2L.jpg>
-Package pdftex.def Info: K2L.jpg  used on input line 186.
-(pdftex.def)             Requested size: 227.62204pt x 93.05212pt.
- [5
-
-pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) ha
-s been already used, duplicate ignored
+l.159 
+      pdfTeX warning (ext4): destination with the same identifier (name{figure.
+1}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.204 
-       <./K2L.jpg>]
-<sketch.jpg, id=169, 1362.08875pt x 614.295pt>
-File: sketch.jpg Graphic file (type jpg)
-<use sketch.jpg>
-Package pdftex.def Info: sketch.jpg  used on input line 207.
-(pdftex.def)             Requested size: 227.62204pt x 102.64781pt.
- [6pdfTeX warning (ext4): destination with the same identifier (name{figure.3})
+l.159 
+       <./esc_vel_plot.png>]
+<Solar.png, id=170, 1068.99374pt x 683.55376pt>
+File: Solar.png Graphic file (type png)
+<use Solar.png>
+Package pdftex.def Info: Solar.png  used on input line 164.
+(pdftex.def)             Requested size: 236.01563pt x 150.91423pt.
+ [4pdfTeX warning (ext4): destination with the same identifier (name{figure.2})
  has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.242 \end{align}
+l.185 \clearpage
+                pdfTeX warning (ext4): destination with the same identifier (na
+me{figure.3}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.185 \clearpage
+                pdfTeX warning (ext4): destination with the same identifier (na
+me{figure.4}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.185 \clearpage
+                 <./Force_beta.png> <./Jup_mass.png> <./Solar.png>]
+<K2L.jpg, id=186, 1821.80624pt x 744.7825pt>
+File: K2L.jpg Graphic file (type jpg)
+<use K2L.jpg>
+Package pdftex.def Info: K2L.jpg  used on input line 228.
+(pdftex.def)             Requested size: 227.62204pt x 93.05212pt.
+ [5
+
+pdfTeX warning (ext4): destination with the same identifier (name{figure.5}) ha
+s been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.238 
+       <./K2L.jpg>]
+<sketch.jpg, id=196, 1362.08875pt x 614.295pt>
+File: sketch.jpg Graphic file (type jpg)
+<use sketch.jpg>
+Package pdftex.def Info: sketch.jpg  used on input line 241.
+(pdftex.def)             Requested size: 227.62204pt x 102.64781pt.
+ [6pdfTeX warning (ext4): destination with the same identifier (name{figure.6})
+ has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.288 \end{align}
                   <./sketch.jpg>]
-Underfull \hbox (badness 10000) in paragraph at lines 250--255
+Underfull \hbox (badness 10000) in paragraph at lines 290--295
 
  []
 
 [7] [8]
 No file Project_3.bbl.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 371.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 411.
 [9]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 371.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 411.
  (./Project_3.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 371.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 371.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 411.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 411.
 Package rerunfilecheck Info: File `Project_3.out' has not changed.
-(rerunfilecheck)             Checksum: 986456C6D2D6CB27DD4E18D08F3C18A7;1780.
+(rerunfilecheck)             Checksum: 865A569ABFCC16D2D723D56397AA3504;1999.
 
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 371.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 411.
  ) 
 Here is how much of TeX's memory you used:
- 9148 strings out of 492616
- 133723 string characters out of 6129481
- 261344 words of memory out of 5000000
- 12850 multiletter control sequences out of 15000+600000
+ 9176 strings out of 492616
+ 134114 string characters out of 6129481
+ 249628 words of memory out of 5000000
+ 12870 multiletter control sequences out of 15000+600000
  34896 words of font info for 98 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  33i,19n,32p,1356b,498s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -674,10 +699,10 @@ e/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive
 mf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/local/texlive/2019/texmf-dist
 /fonts/type1/urw/palatino/uplr8a.pfb></usr/local/texlive/2019/texmf-dist/fonts/
 type1/urw/palatino/uplri8a.pfb>
-Output written on Project_3.pdf (9 pages, 394257 bytes).
+Output written on Project_3.pdf (9 pages, 948142 bytes).
 PDF statistics:
- 259 PDF objects out of 1000 (max. 8388607)
- 231 compressed objects within 3 object streams
- 68 named destinations out of 1000 (max. 500000)
- 240 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 290 PDF objects out of 1000 (max. 8388607)
+ 256 compressed objects within 3 object streams
+ 73 named destinations out of 1000 (max. 500000)
+ 279 words of extra memory for PDF output out of 10000 (max. 10000000)
 

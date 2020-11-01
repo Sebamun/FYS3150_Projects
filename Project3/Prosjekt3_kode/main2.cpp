@@ -12,13 +12,14 @@
 
 using namespace std;
 
-int main()
+int main(int argc, char const *argv[])
 {
     double beta = 3.0; // For 3.99 så forlot den banen.
     //string Initial_values = "Initial_values.txt"; // Her henter vi initialbetingelser.
     int n = 100000;
     double FinalTime = 50.0;
     int dim = 3;
+    double mass_adjust = atoi(argv[1]);
 
     solver binary_vv(100.0);
 
@@ -46,7 +47,7 @@ int main()
     }
     fclose(fp_init); //Close file with initial conditions
     //fclose(fp_mass); //Close file with masses.
-    planet jupiter(mass[3]*100, x[3], y[3], z[3], vx[3], vy[3], vz[3]);
+    planet jupiter(mass[3]*mass_adjust, x[3], y[3], z[3], vx[3], vy[3], vz[3]);
     planet earth(mass[5], x[5], y[5], z[5], vx[5], vy[5], vz[5]);
     planet sun(mass[8], x[8], y[8], z[8], vx[8], vy[8], vz[8]);
     binary_vv.add(jupiter);

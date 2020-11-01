@@ -68,18 +68,24 @@ We will here discuss the program flow of the code we have used to model the sola
 \url{https://github.com/Sebamun/FYS3150_Projekter/tree/Sebastian/Project3}  \\ The code is mostly based on two classes, a planet class and a solver class. Initializing the planet class creates an instance which contains all the relevant information about a celestial object. When the desired celestial objects are initialized, they can then be added to an instance of the solver class. The solver class contains many different functions, mostly aimed toward aiding the velocity Verlet or Euler function. These two functions are based on using their respective algorithms to print out the relevant information of each time step to output-files. The output files can then be read by python-programs which analyze/plot the data.
 
 \subsection{Comparison of the algorithms}
-The timing and counting of number of FLOPS of the algorithms is done by writing two separate programs with the sole purpose of doing only this. Comparing the stability of the algorithms is done by plotting the earth-sun system for different time-steps, with the Sun as the center of mass. For the case of a circular orbit we expect that both the potential and kinetic energies are constant and conserved. This is naturally also something we check that the algorithms uphold. 
+The timing and counting of number of FLOPS of the algorithms is done by writing two separate programs with the sole purpose of doing only this. Comparing the stability of the algorithms is done by plotting the earth-sun system for different time-steps, with the Sun as the center of mass. For the case of a circular orbit we expect that both the potential and kinetic energies are constant and conserved. This is naturally also something we check that the algorithms uphold. We test both algorithms with integration points $N=10^5$, $N=10^6$ and $N=10^7$. This will tell us how fast our two integration methods are. 
 
 \subsection{Earth-Sun system}
 We have used the Earth-Sun system to compare the two algorithms, but we will now proceed by ditching the forward Euler method, using only the velocity Verlet method instead. Kepler's second law of planetary motion states that the imaginary line joining a planet and the sons sweeps equal areas of space during equal time intervals as the planet orbits. As shown in the appendix, this is equivalent to conservation of angular momentum. [noe mer om dette]. 
 
+\subsection{Testing forms of the force}
+
+We know that the gravitational force is an inverse square force. We wish to know what would occur if we changed this force to a higher order inverse force. This is explained in appendix A.
+
 \subsection{Many-body system}
 
-Before we include all the planets of the solar system, we start by including only Jupiter. But instead of using our own manufactured initial conditions, we extract the initial conditions from the NASA website \url{https://ssd.jpl.nasa.gov/horizons.cgi#top}. We write the initial conditions to a text file, before we convert the velocities to $\text{AU/Y}$. We also have to take into account, that the velocities extracted from NASA is relative to the center of mass. We therefore have to subtract the velocity of the center of mass to all the velocities. The velocity of the center of mass of the system is found by 
+Before we include all the planets of the solar system, we start by including only Jupiter. But instead of using our own manufactured initial conditions, we extract the initial conditions from the NASA website \url{https://ssd.jpl.nasa.gov/horizons.cgi#top}. We write the initial conditions to a text file, before we convert the velocities to $\text{AU/Y}$. We also have to take into account, that the velocities extracted from NASA is relative to the center of mass. We therefore have to subtract the velocity of the center of mass to all the velocities. The velocity of the center of mass of the system is found by:
 \begin{align}
 v_{cm} = \frac{\sum v_i m_i}{M}
 \end{align}
-where $M$ is the total mass of all the objects in the system, and $v_i$ and $m_i$ are the respective velocities and masses of the objects. 
+where $M$ is the total mass of all the objects in the system, and $v_i$ and $m_i$ are the respective velocities and masses of the objects. We will test our three body problem with different masses for Jupiter. We want to see how this impacts the orbit of the objects. The mass is increased by a factor of ten each time (for Jupiter). 
+
+Finally we are going to use the Verlet algorithm to simulate all the planets in the solar-system. The initial values are extracted from NASA. We study a time period of 170 years. 
 
 \subsection{Perihelion precession of mercury}
 
@@ -93,6 +99,21 @@ where $M_\odot\ $ is the mass of the Sun, $M_{Mercury}$ is the mass of Mercury, 
 \end{equation}
 
 \section{Results}
+
+\subsection{Comparison of the algorithms}
+
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{  |c|c|c|c|c|c| } \hline
+Algorithm&$N=10^5$&$N=10^6$&$N=10^7$ \\ \hline
+Euler&0.30419 s&2.89849 s&38.3016 s\\ \hline
+Verlet&0.37503 s&3.16336 s &33.3088 s \\ \hline
+\end{tabular}
+\caption{The speed of the different algorithms.}
+\label{tab:Algo_N}
+\end{center}
+\end{table}
+
 \subsection{The Earth-Sun system}
 From Keeplers third law we have
 \begin{align}
@@ -115,24 +136,45 @@ In the figure below we can see the behavior for the Sun-Earth system with differ
 	\label{fig:1bplot}
 \end{figure}
 
-\subsection{The speed of the algorithms}
+\subsection{Testing forms of the force}
 
-\begin{table}[H]
-\begin{center}
-\begin{tabular}{  |c|c|c|c|c|c| } \hline
-Algorithm&N=100000&N=1000000&N=10000000 \\ \hline
-Euler&0.30419 s&2.89849 s&38.3016 s\\ \hline
-Verlet&0.37503 s&3.16336 s &33.3088 s \\ \hline
-\end{tabular}
-\caption{The speed of the different algorithms.}
-\label{tab:Algo_N}
-\end{center}
-\end{table}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{Force_beta}
+	\caption{The planetary motion of earth at different $\beta$.}
+	\label{fig:Force_beta}
+\end{figure}
+
+We can see the different planetary motion of earth as we adjust $\beta$ in Figure \ref{fig:Force_beta}.
+
+
+\subsection{Many-body system}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{Jup_mass}
+	\caption{Three body problem with varying Jupiter masses.}
+	\label{fig:Jup_mass}
+\end{figure}
+
+We can see the different orbits of the three body problem with varying masses for Jupiter in Figure \ref{fig:Jup_mass}. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{Solar}
+	\caption{The solar system.}
+	\label{fig:Solar}
+\end{figure}
+
+We solved the many body problem with 8 planets and the sun and the plot is given in Figure \ref{fig:Solar}. 
 
 \section{Discussion}
 \subsection{Testing forms of the force}
-When we let $\beta$ varies between $[2,3]$ we get different results depending on the initial values for position and velocity. If we for example set the distance between the sun and earth $|\mathbf{r}|>AU$ larger then 1 AU, will the gravitational force decrease when we increase $\beta$, and the orbit will get more and more elliptical. \\
-If we say that the distance $|\mathbf{r}|<AU$, is larger then 1 AU, the Earth will move towards the sun since the gravitational force will increase when we increase $\beta$.    
+
+
+As we increase $\beta$ in equation \ref{eq:F_b} we see that the orbit becomes more unstable (Figure \ref{fig:Force_beta} ). This comes from the fact that an increased $\beta$ leads to a smaller gravitational force. In other words, we keep the initial distance form the sun and decrease the force that works on the planet. When this force is lower than a certain threshold we will lose our planet from orbit. In our case this limit was at $\beta=2.99$.  
+
+
 \subsection{Escape velocity}
 If we increase the initial velocity we see that the orbit of the earth changes from circular orbit to an elliptical orbit, and when the elliptical orbit increase will the position between the two object increase. Hence, will the force of gravity decrease. And when the initial velocity to the planet make it to the escape velocity it will be tear loose from the gravitational field.\\
 It is also important to add that we say the center of mass does not move, which means that the center of mass will be constant and it will be very close to the Sun.  
@@ -190,14 +232,6 @@ Where the circular radius $r$ is substituted with the semi-major axis $a$. In ou
 
 The definition of Keplers law is that the area $A$, which is formed from a connecting line between a planet and the sun is always the same for a given time interval. This is illustrated in Figure \ref{fig:Kep}.
 
-
-
-
-
-
-
-
-
 We have that the angular momentum is 
 
 The best way to show that the angular momentum is conserved by using Keplers second law is to make a drawing:
@@ -209,7 +243,6 @@ The best way to show that the angular momentum is conserved by using Keplers sec
 	\label{fig:1bplot}
 \end{figure}
 
-
 Figure 3 shows us that the area is:
 
 \begin{equation}
@@ -217,22 +250,29 @@ Figure 3 shows us that the area is:
 \label{eq:dA}
 \end{equation}
 
-We now want to find an infinitesimal area where the planet has moved around the sun, over an infinitesimal time step, where we use equation 12.
+We now want to find an infinitesimal area where the planet has moved around the sun, over an infinitesimal time step, where we use equation \ref{eq:dA}.
 
 \begin{align}
     \frac{dA}{dt}&=\frac{1}2{r^2}\frac{d\theta}{dt}\\
     &=\frac{1}{2}rv_\theta
+    \label{eq:dadt}
 \end{align}
 And the definition of angular momentum is given as
-\begin{align}
+\begin{align*}
     L=mrv_\theta
-\end{align}
-With equation 14 and 15 we can show that the angular momentum is conserved.
+\end{align*}
+
+With equation \ref{eq:dadt} and \ref{eq:dA} we can show that the angular momentum is conserved.
+
 \subsection{Testing forms of the force}
-Until now we have looked at the movement for the planet with the gravitational force with the square of r. We will now try to change the gravitational force where the power of r is in the range $\beta \in [2,3]$ The gravitational force is then given as
+
+The force $F_g$ is on the form of an inverse square force. We can replace the r squared in \ref{eq:G} with a $\beta$ which we can alternate $\beta \in [2,3]$ . This gives us the equation:
+
 \begin{align}
     \mathbf{F}_G=-\frac{GM_{\odot}M_{planet}}{r^{\beta}}\frac{\mathbf{r}}{r}
+    \label{eq:F_b}
 \end{align}
+
 \subsection{Escape velocity}
 We will now look at a planet which begins at a distance 1 AU from the sun, 
 and see how fast the initial velocity must be for the planet to be able to escape the sun. We find the analytical solution to compare it to our numerical solution. \\

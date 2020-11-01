@@ -51,7 +51,6 @@ for n in range(len(beta)):
         y1VV[i] = float(vals[7])
         z1VV[i] = float(vals[8])
 
-
     fig.suptitle(f'Verlet method with N={len(lines)}')
     axs[n].title.set_text(f'beta={str(beta_name[n])}')
     axs[n].plot(xVV[1:], yVV[1:],label=f'N={len(lines)}')

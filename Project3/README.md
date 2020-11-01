@@ -21,10 +21,9 @@ python3 Plotte.py # Plotting and runs executable 1.x.
 Here we have run the program for beta = 3, 3.5 and 3.99 in the Velocity Verlet method. You run the three body system of objects and plot their positions with the commands:
 
 ```terminal
-./2.x # Run the executable.
-python3 Plotte2.py # Plotting.
+python3 Plotte2.py # Plotting and runs executable 2.x mass_adjust, with different mass adjustment for Jupiter.
 ```
-You run and plot the system of all the planets and the sun with the commands: <br />
+Where mass_adjust=1,mass_adjust=10 and mass_adjust=100. You run and plot the system of all the planets and the sun with the commands: <br />
 
 ```terminal
 ./3.x # Run the executable.
