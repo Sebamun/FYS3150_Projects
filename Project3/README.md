@@ -23,7 +23,7 @@ Here we have run the program for beta = 3, 3.5 and 3.99 in the Velocity Verlet m
 ```terminal
 python3 Plotte2.py # Plotting and runs executable 2.x mass_adjust, with different mass adjustment for Jupiter.
 ```
-Where mass_adjust=1,mass_adjust=10 and mass_adjust=100. You run and plot the system of all the planets and the sun with the commands: <br />
+Where mass_adjust=1,mass_adjust=10 and mass_adjust=1000. You run and plot the system of all the planets and the sun with the commands: <br />
 
 ```terminal
 ./3.x # Run the executable.
@@ -45,4 +45,10 @@ make all
 ./kjor_euler.x N # Here we run the executable for the Euler method.
 ./kjor_verlet.x N # Here we runt the executable for the Verlet method.
 ```
-We compile these programmes with N=100000, N=1000000 and N=10000000.
+We compile these programmes with N=100000, N=1000000 and N=10000000. We can also check the accuracy of the two algorithms at different integration steps. This is done by using the commands:
+
+```terminal
+python3 PlotteN.py # Plotting of earth with different integration points.
+```
+
+Where we have integration points N=1000, N=5000 and N=10000. This is accessible in the "Prosjekt3_kode" folder after you have compiled. 

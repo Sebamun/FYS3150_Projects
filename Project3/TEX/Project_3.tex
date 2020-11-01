@@ -61,17 +61,17 @@ For more details see Appendix B.
 
 \section{Method}
 
-
 \subsection{Program flow}
 
 We will here discuss the program flow of the code we have used to model the solar system. All code can be found at the GitHub repository \\
 \url{https://github.com/Sebamun/FYS3150_Projekter/tree/Sebastian/Project3}  \\ The code is mostly based on two classes, a planet class and a solver class. Initializing the planet class creates an instance which contains all the relevant information about a celestial object. When the desired celestial objects are initialized, they can then be added to an instance of the solver class. The solver class contains many different functions, mostly aimed toward aiding the velocity Verlet or Euler function. These two functions are based on using their respective algorithms to print out the relevant information of each time step to output-files. The output files can then be read by python-programs which analyze/plot the data.
 
 \subsection{Comparison of the algorithms}
-The timing and counting of number of FLOPS of the algorithms is done by writing two separate programs with the sole purpose of doing only this. Comparing the stability of the algorithms is done by plotting the earth-sun system for different time-steps, with the Sun as the center of mass. For the case of a circular orbit we expect that both the potential and kinetic energies are constant and conserved. This is naturally also something we check that the algorithms uphold. We test both algorithms with integration points $N=10^5$, $N=10^6$ and $N=10^7$. This will tell us how fast our two integration methods are. 
+The timing and counting of number of FLOPS of the algorithms is done by writing two separate programs with the sole purpose of doing only this. Comparing the stability of the algorithms is done by plotting the earth-sun system for different time-steps, with the Sun as the center of mass. For the case of a circular orbit we expect that both the potential and kinetic energies are constant and conserved. This is naturally also something we check that the algorithms uphold. We test both algorithms with integration points $N=10^5$, $N=10^6$ and $N=10^7$. This will tell us how fast our two integration methods are. We will also test the accuracy of each algorithm at these integration points. This will give us a clue for which algorithm that is best to use in our specific case. 
 
 \subsection{Earth-Sun system}
-We have used the Earth-Sun system to compare the two algorithms, but we will now proceed by ditching the forward Euler method, using only the velocity Verlet method instead. Kepler's second law of planetary motion states that the imaginary line joining a planet and the sons sweeps equal areas of space during equal time intervals as the planet orbits. As shown in the appendix, this is equivalent to conservation of angular momentum. [noe mer om dette]. 
+
+We have used the Earth-Sun system to compare the two algorithms, but we will now proceed by ditching the forward Euler method, using only the velocity Verlet method instead. Kepler's second law of planetary motion states that the imaginary line joining a planet and the suns sweeps equal areas of space during equal time intervals as the planet orbits \cite{94}. As shown in the appendix, this is equivalent to conservation of angular momentum. [noe mer om dette]. 
 
 \subsection{Testing forms of the force}
 
@@ -83,7 +83,7 @@ Before we include all the planets of the solar system, we start by including onl
 \begin{align}
 v_{cm} = \frac{\sum v_i m_i}{M}
 \end{align}
-where $M$ is the total mass of all the objects in the system, and $v_i$ and $m_i$ are the respective velocities and masses of the objects. We will test our three body problem with different masses for Jupiter. We want to see how this impacts the orbit of the objects. The mass is increased by a factor of ten each time (for Jupiter). 
+where $M$ is the total mass of all the objects in the system, and $v_i$ and $m_i$ are the respective velocities and masses of the objects. We will test our three body problem with different masses for Jupiter. We want to see how this impacts the orbit of the objects. The mass is increased by a factor of ten and a factor of 1000 for Jupiter. 
 
 Finally we are going to use the Verlet algorithm to simulate all the planets in the solar-system. The initial values are extracted from NASA. We study a time period of 170 years. 
 
@@ -113,6 +113,17 @@ Verlet&0.37503 s&3.16336 s &33.3088 s \\ \hline
 \label{tab:Algo_N}
 \end{center}
 \end{table}
+
+The time it took to run the different algorithms is given in Table \ref{tab:Algo_N}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{Acc}
+	\caption{The accuracy of the different algorithms at different time steps.}
+	\label{fig:Acc}
+\end{figure}
+
+The plots for the different algorithms with different integration points is given in Figure \ref{fig:Acc}.
 
 \subsection{The Earth-Sun system}
 From Keeplers third law we have
@@ -169,16 +180,24 @@ We can see the different orbits of the three body problem with varying masses fo
 We solved the many body problem with 8 planets and the sun and the plot is given in Figure \ref{fig:Solar}. 
 
 \section{Discussion}
+
+\subsection{Comparison of the algorithms}
+
+We can see from Table \ref{tab:Algo_N} that the Verlet method is slower than the Euler method. This is to be expected given the number of FLOPS in the Verlet method compared to the Euler method. In Figure \ref{fig:Acc} we can see that the Verlet method is more precise at lower integration points than Euler. When we increase the number of integration points, the orbits given the two methods become more equal. Since the Euler method is quicker, there is an argument to use Euler at higher integration points. However, it is important to note that over longer time periods the Euler method becomes less viable. This is due to the fact that the Euler method dosen't conserve energy. 
+
 \subsection{Testing forms of the force}
 
-
 As we increase $\beta$ in equation \ref{eq:F_b} we see that the orbit becomes more unstable (Figure \ref{fig:Force_beta} ). This comes from the fact that an increased $\beta$ leads to a smaller gravitational force. In other words, we keep the initial distance form the sun and decrease the force that works on the planet. When this force is lower than a certain threshold we will lose our planet from orbit. In our case this limit was at $\beta=2.99$.  
-
 
 \subsection{Escape velocity}
 If we increase the initial velocity we see that the orbit of the earth changes from circular orbit to an elliptical orbit, and when the elliptical orbit increase will the position between the two object increase. Hence, will the force of gravity decrease. And when the initial velocity to the planet make it to the escape velocity it will be tear loose from the gravitational field.\\
 It is also important to add that we say the center of mass does not move, which means that the center of mass will be constant and it will be very close to the Sun.  
 
+\subsection{Many-body system}
+
+When we increase the mass of Jupiter we will see that the force that is exerted on the sun and earth increases. This leads to a more unstable orbit for all objects. For the mass of Jupiter $\times 10$ we stil have an orbit around the sun, but it is somewhat more unstable. When we increase the mass of Jupiter by 1000 we lose our elliptical orbits. We can see the earth being "slinged" out of the system. This is due to the drastically increased force from Jupiter. When the earth gets close to the two other objects, the forces on the earth accumulate and gives the planet an acceleration which is big enough to escape the gravitational pull from the sun (Figure \ref{fig:Jup_mass}). 
+
+We wanted to have a full rotation around the sun for all the planets. The outer most planet Neptune reached a full orbit after a period of 170 years, which became the time we run our simulation with. In this time span the inner planets managed to preform multiple orbits around the sun. The later orbits changed relative to their original orbit, which is to be expected given that the sun and planets move over time. That is why the lines become thicker towards the center of the plot (Figure \ref{fig:Solar}. 
 
 \end{multicols}
 
@@ -291,7 +310,7 @@ LES GJENNOM DETTE MARCUS\\
 The definition of perihelion precision is that the perihelion point of an objects, in our case Mercury, changes its position because of 
 the gravitational field deflection from light. RIKTIG? The perihelion point for Mercury changes with $43''$ arcseconds for each century. \\
 \\
-Mercury's orbit has a small prescision for each century. This comes from that Mercury is the nearest planet to the sun, and therefore its acceleration and velocity will be large, which means that the space time will wrap    and we have to obey the rules of General Relativity. Hrnce, we rewrite the expression for Newtons gravitational force to a relativistic gravitational force.
+Mercury's orbit has a small prescision for each century. This comes from that Mercury is the nearest planet to the sun, and therefore its acceleration and velocity will be large, which means that the space time will wrap    and we have to obey the rules of General Relativity. Hence, we rewrite the expression for Newtons gravitational force to a relativistic gravitational force.
 \begin{align}
     \mathbf{F}=-G\frac{M_{\odot}M_{Mercury}}{r^2}\Bigg[1+\Bigg(\frac{3l^2}{r^2c^2}\bigg)\bigg]\frac{\mathbf{r}}{r}
 \end{align}
@@ -342,9 +361,8 @@ Pseudocode:
         V[n+1] = v[n] + a[n] * dt;
         r[n+1] = r[n] + v[n] * dt;
         t[n+1] = t[n] + dt;
-        
+       
   }
-
 \end{verbatim}
 
 \subsection{Velocity Verlet method}
@@ -405,7 +423,7 @@ Pseudocode:
 \bibliography{References} % Kilder.
 \begin{thebibliography}{9}
 \bibitem{94}
-	Skriv inn kilde her.
+	NASA, 2008, Orbits and Kepler's laws
 \end{thebibliography}
 
 \end{document}

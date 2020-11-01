@@ -4,8 +4,9 @@ import subprocess
 
 beta = [3,3.5,3.99]
 beta_name = [2,2.5,2.99]
+N = 100000
 
-subprocess.run(['./1.x', str(beta[0])])
+subprocess.run(['./1.x', str(beta[0]), str(N)])
 infileEU = open('Textfiles/PlanetsEU_2.txt', 'r')
 lines = infileEU.readlines()
 xEU = np.zeros(len(lines))
@@ -32,7 +33,7 @@ plt.show()
 
 fig, axs = plt.subplots(1, 3, sharex=True, sharey=True)
 for n in range(len(beta)):
-    subprocess.run(['./1.x', str(beta[n])])
+    subprocess.run(['./1.x', str(beta[n]), str(N)])
     infileVV = open('Textfiles/PlanetsVV_2.txt', 'r')
 
     lines = infileVV.readlines()

@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import subprocess
 
-mass_adjust = [1,10,100] # The mass adjustments for Jupiter
+mass_adjust = [1,10,1000] # The mass adjustments for Jupiter
 fig, axs = plt.subplots(1, 3, sharex=True, sharey=True) # Set figure.
 fig.suptitle('Three body problem with different Jupiter masses')
 for n in range(len(mass_adjust)):
@@ -22,6 +22,6 @@ for n in range(len(mass_adjust)):
         axs[n].plot(object['x'], object['y'], label=f'{name[i]}')
     axs[n].set_xlabel('x (AU)')
     axs[n].set_ylabel('y (AU)')
-    axs[n].title.set_text(f'Jupiter mass ={str(mass_adjust[n])}')
+    axs[n].title.set_text(f'Jupiter mass * {str(mass_adjust[n])}')
 plt.legend()
 plt.show()
