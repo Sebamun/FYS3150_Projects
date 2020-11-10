@@ -1,1 +1,14 @@
+# Attributes of folder on mac:
 .DS_Store
+
+# tex files:
+*.log
+*.dvi
+*.aux
+*.blg
+*.idx
+*.nav
+*.out
+*.toc
+*.snm
+*.vrb
