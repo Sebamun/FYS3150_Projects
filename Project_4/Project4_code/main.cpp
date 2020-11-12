@@ -51,6 +51,7 @@ int main(int argc, char* argv[])
   MPI_Init (&argc, &argv); // Antall "threads" hentes her.
   MPI_Comm_size (MPI_COMM_WORLD, &numprocs); // Stoorrelsen paa "communicatoren".
   MPI_Comm_rank (MPI_COMM_WORLD, &my_rank); // Gir de ulike "rankene".
+  // Read in output file, abort if there are too few command-line arguments:
   if (my_rank == 0 && argc <= 1) {
     cout << "Bad Usage: " << argv[0] <<
       " read output file" << endl;
@@ -60,7 +61,7 @@ int main(int argc, char* argv[])
     outfilename=argv[1];
     ofile.open(outfilename); // Apner outputfilen.
   }
-  n_spins = 40; mcs = 100000;  initial_temp = 2.0; final_temp = 2.6; temp_step =0.02;
+  n_spins = 2; mcs = 1000000; initial_temp = 0.1; final_temp = 2.6; temp_step =0.01; // Initialbetingelser. 
   int no_intervalls = mcs/numprocs; // Intervallet som skal brukes av de ulike kjernene.
   int myloop_begin = my_rank*no_intervalls + 1; // myloop_begin gives the starting point on process my_rank
   int myloop_end = (my_rank+1)*no_intervalls; // myloop_end gives the end point for summation on process my_rank
@@ -195,6 +196,7 @@ void output(int n_spins, int mcs, double temperature, double *total_average)
 ** (exclusive of end-point values).
 */
 
+// Den neste delen er skrevet i programeringsspraaket C:
 #define IM1 2147483563
 #define IM2 2147483399
 #define AM (1.0/IM1)
@@ -211,7 +213,7 @@ void output(int n_spins, int mcs, double temperature, double *total_average)
 #define RNMX (1.0-EPS)
 
 double ran2(long *idum)
-{
+{ // Bruker "L'Ecuyer and Bays-Durham shuffle" til aa generere tilfeldige tall.
   int            j;
   long           k;
   static long    idum2 = 123456789;

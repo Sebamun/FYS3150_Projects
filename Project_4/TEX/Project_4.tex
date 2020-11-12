@@ -37,17 +37,65 @@
 
 \section{Method}
 
+\subsection*{The analytical expression}
+
+We have the normalization constant Z which defines the partition function:
+
+\begin{equation}
+Z(\beta) = \sum_{s} e^{(-\beta E_s)}
+\label{eq:Z}
+\end{equation}
+
+With $\beta=1/T$, where T is temperature. We can use this partition function to find the probability $P_s$ of finding a system in a state s:
+
+\begin{equation}
+P_s=\frac{e^{-(\beta E_s)}}{Z}
+\label{eq:P_s}
+\end{equation}
+
+Where $E_s$ is the energy in a given state. We have that the mean energy $E_m$ is given by:
+
+\begin{equation}
+E_m = \sum_s \frac{E_s e^{-(\beta*E_s)}}{Z}
+\label{eq:E_m}
+\end{equation}
+
+We have that the mean magnetization $|M|$ is given by:
+
+\begin{equation}
+|M|=\sum_s^M M_s P_s(\beta)=\frac{1}{Z}\sum_s^M M_s e^{-(\beta E_s)}
+\label{eq:mM}
+\end{equation}
+
+Where $M_s$ is the different magnetizations. 
+
+\subsection{Metropolis algorithm}
+
+The metropolis algorithm only considers ratios between probabilities, which means that we do not need to calculate the partition function at all when we are using the algorithm. 
+
 \section{Results}
+
+\begin{table}[H]
+\begin{center}
+\caption{Energy and magnetization given number of up spins.}
+\begin{tabular}{  |c|c|c|c|c|c| } \hline
+$N_{\text{spins up}}$&Degeneracy&E&M \\ \hline
+4&1&-8 J&4\\ \hline
+3&4&0 &2 \\ \hline
+2&4&0&0\\ \hline
+2&2&8 J&0\\ \hline
+1&4&0&-2\\ \hline
+0&1&-8 J&-4\\ \hline
+\end{tabular}
+\label{tab:up_spins}
+\end{center}
+\end{table}
 
 \section{Discussion}
 
 \section{Concluding remarks}
 
-
-
 \end{multicols}
-
-
 
 \bibliography{References} % Kilder.
 \begin{thebibliography}{9}
