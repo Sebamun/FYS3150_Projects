@@ -60,10 +60,10 @@ E_m = \sum_s \frac{E_s e^{-(\beta*E_s)}}{Z}
 \label{eq:E_m}
 \end{equation}
 
-We have that the mean magnetization $|M|$ is given by:
+We have that the mean magnetization $\langle M \rangle$ is given by:
 
 \begin{equation}
-|M|=\sum_s^M M_s P_s(\beta)=\frac{1}{Z}\sum_s^M M_s e^{-(\beta E_s)}
+\langle M \rangle=\sum_s^M M_s P_s(\beta)=\frac{1}{Z}\sum_s^M M_s e^{-(\beta E_s)}
 \label{eq:mM}
 \end{equation}
 
@@ -96,6 +96,20 @@ $N_{\text{spins up}}$&Degeneracy&E&M \\ \hline
 \section{Concluding remarks}
 
 \end{multicols}
+
+\clearpage
+\appendix \section{Calculations} % Her kommer appendix.
+
+We find the mean magnetization by using equation \ref{eq:mM}:
+
+\begin{equation} \label{eq1}
+\begin{split}
+\langle M \rangle& = 4 \times P(-8J) + 4 \times 2 \times P(0) + 4 \times 0 \\
+& + 2\times0+4 \times 2 \times P(0) + 4 \times 1 \times P(-8)
+\end{split}
+\end{equation}
+
+
 
 \bibliography{References} % Kilder.
 \begin{thebibliography}{9}
