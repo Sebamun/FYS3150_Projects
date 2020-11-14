@@ -61,7 +61,7 @@ int main(int argc, char* argv[])
     outfilename=argv[1];
     ofile.open(outfilename); // Apner outputfilen.
   }
-  n_spins = 2; mcs = 1000000; initial_temp = 0.1; final_temp = 2.6; temp_step =0.01; // Initialbetingelser. 
+  n_spins = 2; mcs = 1000000; initial_temp = 0.1; final_temp = 2.6; temp_step =0.01; // Initialbetingelser.
   int no_intervalls = mcs/numprocs; // Intervallet som skal brukes av de ulike kjernene.
   int myloop_begin = my_rank*no_intervalls + 1; // myloop_begin gives the starting point on process my_rank
   int myloop_end = (my_rank+1)*no_intervalls; // myloop_end gives the end point for summation on process my_rank
@@ -321,10 +321,6 @@ void free_matrix(void **matr)
   delete [] matr;
 
 }  // End:  function free_matrix()
-
-
-
-
 
 /*
 int main (int nargs, char* args[])

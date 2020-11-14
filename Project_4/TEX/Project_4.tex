@@ -37,7 +37,7 @@
 
 \section{Method}
 
-\subsection*{The analytical expression}
+\subsection*{The analytical expressions}
 
 We have the normalization constant Z which defines the partition function:
 
@@ -46,7 +46,7 @@ Z(\beta) = \sum_{s} e^{(-\beta E_s)}
 \label{eq:Z}
 \end{equation}
 
-With $\beta=1/T$, where T is temperature. We can use this partition function to find the probability $P_s$ of finding a system in a state s:
+With $\beta=1/k_BT$, where T is temperature and $k_B$ is Boltzmann's constant. We can use this partition function to find the probability $P_s$ of finding a system in a state s:
 
 \begin{equation}
 P_s=\frac{e^{-(\beta E_s)}}{Z}
@@ -60,6 +60,23 @@ E_m = \sum_s \frac{E_s e^{-(\beta*E_s)}}{Z}
 \label{eq:E_m}
 \end{equation}
 
+The mean energy can be used to find the energy variance $\sigma_E^2$:
+
+\begin{equation}
+\begin{split}
+\sigma_E^2 &= \langle E^2 \rangle - \langle E \rangle^2 \\
+&= \sum_s \frac{E_s^2 e^{-(\beta*E_s)}}{Z} - \bigg(\sum_s \frac{E_s e^{-(\beta*E_s)}}{Z}\bigg)^2
+\end{split}
+\label{eq:E_v}
+\end{equation}
+
+This variance can give us the heat capacity $C_v$ of the system:
+
+\begin{equation}
+C_v = \frac{1}{kT} \sigma_E^2 
+\label{eq:C_v}
+\end{equation}
+
 We have that the mean magnetization $\langle M \rangle$ is given by:
 
 \begin{equation}
@@ -67,9 +84,27 @@ We have that the mean magnetization $\langle M \rangle$ is given by:
 \label{eq:mM}
 \end{equation}
 
-Where $M_s$ is the different magnetizations. 
+Where $M_s$ is the different magnetizations. We have that the corresponding magnetic variance is given by:
 
-\subsection{Metropolis algorithm}
+\begin{equation}
+\begin{split}
+\sigma_M^2&=\langle M^2 \rangle-\langle M \rangle^2 \\
+& = \frac{1}{Z}\sum_s^M M_s^2 e^{-(\beta E_s)}
+\end{split}
+\label{eq:M_v}
+\end{equation}
+
+We can use the magnetic variance to find the susceptibility $\chi$:
+
+\begin{equation}
+\chi = \frac{1}{k_BT}\sigma_M^2
+\end{equation}
+
+\subsection*{Specific case for a 2 X 2 lattice}
+
+We can use our analytical expressions in conjunction with some periodic boundary conditions. We assume two spins in each dimension L=2. If we draw up each lattice with the different spin orientations we can find the degeneracy, energy and magnetization for each state. These values can be used to find the analytical expressions with periodic boundary conditions.
+
+\subsection*{Metropolis algorithm}
 
 The metropolis algorithm only considers ratios between probabilities, which means that we do not need to calculate the partition function at all when we are using the algorithm. 
 
@@ -91,6 +126,33 @@ $N_{\text{spins up}}$&Degeneracy&E&M \\ \hline
 \end{center}
 \end{table}
 
+In Table \ref{tab:up_spins} we have the energy and magnetization given the number of up spins. 
+
+\subsection*{Specific case for a 2 X 2 lattice}
+
+We have that the partition function for our specific $2\times2$ lattice case is given by:
+
+\begin{equation}
+Z=4\cosh{(8J\beta)}+12
+\label{eq:Z_22}
+\end{equation}
+
+The energy is given by:
+
+\begin{equation}
+E_m=-8\bigg(\frac{\sinh{(8J\beta)}}{\cosh{(8J\beta)}+4}\bigg)
+\label{eq:E_22}
+\end{equation}
+
+The magnetization is given by:
+
+\begin{equation}
+\langle M \rangle=\frac{\cosh{(8J\beta)}+4} {\cosh{(8J\beta)}+3}
+\label{eq:M_22}
+\end{equation}
+
+The calculations are given in appendix X.
+
 \section{Discussion}
 
 \section{Concluding remarks}
@@ -98,18 +160,42 @@ $N_{\text{spins up}}$&Degeneracy&E&M \\ \hline
 \end{multicols}
 
 \clearpage
+
 \appendix \section{Calculations} % Her kommer appendix.
 
-We find the mean magnetization by using equation \ref{eq:mM}:
+The partition function for the $2\times2$ lattice is given by equation \ref{eq:Z}:
 
-\begin{equation} \label{eq1}
+\begin{equation}
 \begin{split}
-\langle M \rangle& = 4 \times P(-8J) + 4 \times 2 \times P(0) + 4 \times 0 \\
-& + 2\times0+4 \times 2 \times P(0) + 4 \times 1 \times P(-8)
+Z&=2e^{8J\beta}+2e^{-8J\beta}+12e^0\\
+&=4\cosh{(8J\beta)}+12
+\end{split}
+\label{eq:calc_Z}
+\end{equation}
+
+This expression combined with equation \ref{eq:E_m} gives the energy:
+
+\begin{equation}
+\begin{split}
+E_m &= \frac{2\times8Je^{-8J\beta}-2\times8Je^{8J\beta}}{Z}\\
+&=\frac{-16J(e^{8J\beta}-e^{-8J\beta})}{Z}\\
+&=\frac{-32\sinh{(8J\beta)}}{4\cosh{(8J\beta)}+12}\\
+&=-8\bigg(\frac{\sinh{(8J\beta)}}{\cosh{(8J\beta)}+3}\bigg)
+\label{eq:calc_E}
 \end{split}
 \end{equation}
 
 
+We find the mean magnetization by using equation \ref{eq:mM}:
+
+\begin{equation} \label{eq:calc_M}
+\begin{split}
+\langle M \rangle& = 4 \times P(-8J) + 4 \times 2 \times P(0) + 4 \times 0 \\
+& + 2\times0+4 \times 2 \times P(0) + 4 \times 1 \times P(-8)\\
+&=4\bigg(\frac{e^{-8J\beta }}{4\cosh{(8J\beta)}+12}\bigg)+16\bigg(\frac{e^{-0J\beta}}{4\cosh{(8J\beta)}+12}\bigg)+4\bigg(\frac{e^{8J\beta }}{4\cosh{(8J\beta)}+12}\bigg) \\
+&=\frac{4(e^{-8J\beta}+e^{8J\beta})+16} {4\cosh{(8J\beta)}+12} =\frac{4\cosh{(8J\beta)}+16} {4\cosh{(8J\beta)}+12}=\frac{\cosh{(8J\beta)}+4} {\cosh{(8J\beta)}+3}
+\end{split}
+\end{equation}
 
 \bibliography{References} % Kilder.
 \begin{thebibliography}{9}
