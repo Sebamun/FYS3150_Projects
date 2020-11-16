@@ -61,7 +61,7 @@ int main(int argc, char* argv[])
     outfilename=argv[1];
     ofile.open(outfilename); // Apner outputfilen.
   }
-  n_spins = 2; mcs = 1000000; initial_temp = 0.1; final_temp = 2.6; temp_step =0.01; // Initialbetingelser.
+  n_spins = 2; mcs = 4000000; initial_temp = 0.1; final_temp = 2.6; temp_step =0.01; // Initialbetingelser.
   int no_intervalls = mcs/numprocs; // Intervallet som skal brukes av de ulike kjernene.
   int myloop_begin = my_rank*no_intervalls + 1; // myloop_begin gives the starting point on process my_rank
   int myloop_end = (my_rank+1)*no_intervalls; // myloop_end gives the end point for summation on process my_rank
@@ -172,7 +172,7 @@ void output(int n_spins, int mcs, double temperature, double *total_average)
   double M2total_average = total_average[3]*norm;
   double Mabstotal_average = total_average[4]*norm;
   // all expectation values are per spin, divide by 1/n_spins/n_spins
-  double Evariance = (E2total_average- Etotal_average*Etotal_average)/n_spins/n_spins;
+  double Evariance = (E2total_average- Etotal_average*Etotal_average)/n_spins/n_spins; // Pers spinn.
   double Mvariance = (M2total_average - Mtotal_average*Mtotal_average)/n_spins/n_spins;
   ofile << setiosflags(ios::showpoint | ios::uppercase);
   ofile << setw(15) << setprecision(8) << temperature; // Printes i forste kolonne.
