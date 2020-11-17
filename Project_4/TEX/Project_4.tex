@@ -35,6 +35,8 @@
 
 \section{Introduction}
 
+
+
 \section{Method}
 
 \subsection*{The analytical expressions}
@@ -98,15 +100,32 @@ We can use the magnetic variance to find the susceptibility $\chi$:
 
 \begin{equation}
 \chi = \frac{1}{k_BT}\sigma_M^2
+\label{eq:chi}
 \end{equation}
 
 \subsection*{Specific case for a 2 X 2 lattice}
 
-We can use our analytical expressions in conjunction with some periodic boundary conditions. We assume two spins in each dimension L=2. If we draw up each lattice with the different spin orientations we can find the degeneracy, energy and magnetization for each state. These values can be used to find the analytical expressions with periodic boundary conditions.
+We can use our analytical expressions in conjunction with some periodic boundary conditions. We assume two spins in each dimension L=2. If we draw up each lattice with the different spin orientations we can find the degeneracy, energy and magnetization for each state. These values can be used to find the analytical expressions with periodic boundary conditions. We have five different spin orientations if we are studying the spin structures in Figure \ref{fig:spinn}. The energy differences $\Delta E$ in such a structure is given by:
+
+\begin{equation}
+\Delta E = E_2 - E_1 =  2J s_l^1\sum_{<k>}^N s_k
+\label{eq:dE}
+\end{equation}
+
+where $E_2$ is the energy after, $E_1$ the energy before and the sum runs  over the nearest neighbors k of spin l. We can also find the difference in magnetization $\Delta M$ by only flipping the spin in the middle (dot in Figure \ref{fig:spinn}):
+
+\begin{equation}
+\Delta M = M_2-M_1=\pm2
+\label{eq:dM}
+\end{equation}
+
+Where $M_2$ is the magnetization after and $M_1$ is the magnetization before we flip the spin. We can see that the change in magnetization is always $\Delta M=\pm2$, given that we only have spin configurations L=$\pm1$. These expressions are only valid as long as we have zero magnetic field. 
 
 \subsection*{Metropolis algorithm}
 
-The metropolis algorithm only considers ratios between probabilities, which means that we do not need to calculate the partition function at all when we are using the algorithm. 
+We wish to find the energy differences and the change in magnetization as we run through our simulation. It is beneficial to find the energy differences before we do the metropolis sampling. Since we are only flipping one spin at a time, it is possible to find and store all the energy differences in an array as $e^{\beta\Delta E}$. This saves a lot of time, as we don't have to evaluate the exponentials in the Monte Carlo sampling. 
+
+The metropolis algorithm only considers ratios between probabilities, which means that we do not need to calculate the partition function at all when we are using the algorithm \cite{94}. 
 
 \section{Results}
 
@@ -130,28 +149,45 @@ In Table \ref{tab:up_spins} we have the energy and magnetization given the numbe
 
 \subsection*{Specific case for a 2 X 2 lattice}
 
-We have that the partition function for our specific $2\times2$ lattice case is given by:
-
 \begin{equation}
 Z=4\cosh{(8J\beta)}+12
 \label{eq:Z_22}
 \end{equation}
 
-The mean energy is given by:
+We have that the partition function for our specific $2\times2$ lattice case is given by equation \ref{eq:Z_22}.
 
 \begin{equation}
 E_m=-8\bigg(\frac{\sinh{(8J\beta)}}{\cosh{(8J\beta)}+4}\bigg)
 \label{eq:E_22}
 \end{equation}
 
-The mean magnetization is given by:
+The mean energy is given by equation \ref{eq:E_22}.
+
+\begin{equation}
+\begin{split}
+C_v = \frac{1}{kT} \bigg({4cosh(8\beta)+12}\\
+-\bigg(\frac{-8\sinh{(8J\beta)}}{\cosh{(8J\beta)}+3}\bigg)^2\bigg)
+\end{split}
+\label{eq:Cv_22}
+\end{equation}
+
+The heat capacity is given by equation \ref{eq:Cv_22}.
 
 \begin{equation}
 \langle M \rangle=0
 \label{eq:M_22}
 \end{equation}
 
-The calculations are given in appendix X.
+The mean magnetization is given by equation \ref{eq:M_22}.
+
+\begin{equation}
+\chi = \frac{1}{kT} \bigg(\frac{32e^{8\beta}+128}{4cosh+12}\bigg)
+\label{eq:chi_22}
+\end{equation}
+
+The susceptibility is given by equation \ref{eq:chi_22}. All the calculations are given in appendix B.
+
+In the $2\times2$ lattice case there are only five possible values for the energy difference. These are given in section \ref{eq:calc_dE} in appendix B.
 
 \section{Discussion}
 
@@ -161,7 +197,19 @@ The calculations are given in appendix X.
 
 \clearpage
 
-\appendix \section{Calculations} % Her kommer appendix.
+\appendix % Her kommer appendix.
+
+\section{Appendix}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=100mm]{Spin}
+	\caption{The different spin orientations.}
+	\label{fig:spinn}
+\end{figure}
+
+\section{Appendix}
+\subsection*{Analytical expression}
 
 The partition function for the $2\times2$ lattice is given by equation \ref{eq:Z}:
 
@@ -185,6 +233,23 @@ E_m &= \frac{2\times8Je^{-8J\beta}-2\times8Je^{8J\beta}}{Z}\\
 \end{split}
 \end{equation}
 
+We also have a variance $<\sigma_E^2>$ which we find by using equation \ref{eq:E_v}:
+
+\begin{equation}
+\begin{split}
+<\sigma_E^2>&=\bigg(\frac{2\times(-8)^2e^{-(-8\beta)} + 2 \times (8)^2e^{-(8\beta)}}{Z}\bigg)-E_m^2\\
+&=\frac{128(e^{8\beta}+e^{-8\beta})}{Z}-E_m^2=\frac{256\cosh{(8\beta)}}{4cosh(8\beta)+12}-\bigg(\frac{-8\sinh{(8J\beta)}}{\cosh{(8J\beta)}+3}\bigg)^2
+\label{eq:calc_Ev}
+\end{split}
+\end{equation}
+
+Which gives us the heat capacity $C_v$ by using equation \ref{eq:C_v}:
+
+\begin{equation}
+C_v = \frac{1}{kT} \bigg({4cosh(8\beta)+12}-\bigg(\frac{-8\sinh{(8J\beta)}}{\cosh{(8J\beta)}+3}\bigg)^2\bigg)
+\label{eq:calc_Cv}
+\end{equation}
+
 We find the mean magnetization by using equation \ref{eq:mM}:
 
 \begin{equation} \label{eq:calc_M}
@@ -196,10 +261,43 @@ We find the mean magnetization by using equation \ref{eq:mM}:
 \end{split}
 \end{equation}
 
+We also have a variance $<\sigma_M^2>$ which we find by using equation \ref{eq:M_v}:
+
+\begin{equation}
+\begin{split}
+<\sigma_M^2>&=\frac{1}{Z}\bigg(4^2e^{-(-8\beta)}+8^2e^0+(-8)^2e^0+(-4)^2e^{-(-8\beta)}\bigg)\\
+&=\frac{16e^{8\beta}+64+64+6e^{8\beta}}{Z}=\frac{32e^{8\beta}+128}{4cosh+12}
+\end{split}
+\label{eq:calc_Mv}
+\end{equation}
+
+Which gives us the susceptibility $\chi$ by using equation \ref{eq:chi}:
+
+\begin{equation}
+\chi = \frac{1}{kT} \bigg(\frac{32e^{8\beta}+128}{4cosh+12}\bigg)
+\label{eq:calc_chi}
+\end{equation}
+
+\subsection*{Boundary conditions and Boltzmanns distribution}
+
+We assume that the original position of the middle spin in Figure \ref{fig:spinn} is up (the middle spin is the dot). We find the energy differences by using equation \ref{eq:dM}:
+
+\begin{equation}\label{eq:calc_dE}
+\begin{split}
+&\Delta E_1 = 4-(-4)=8\\
+&\Delta E_2 = 2-(-2)=4\\
+&\Delta E_3 = -2-(2)=-4\\
+&\Delta E_4 = 0-0=0\\
+&\Delta E_5 = -4-(4)=-8\\
+\end{split}
+\end{equation}
+
+We can see that we obtain five different energy differences as we flip the spin from up to down in the middle of the structures in Figure \ref{fig:spinn}.
+
 \bibliography{References} % Kilder.
 \begin{thebibliography}{9}
 \bibitem{94}
-	kilder
+	Jensen, M.H., 2015, Computational Physics Lecture Notes Fall 2015
 \end{thebibliography}
 
 \end{document}
