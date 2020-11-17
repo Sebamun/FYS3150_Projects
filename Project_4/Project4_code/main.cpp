@@ -1,12 +1,3 @@
-/*
-   Program to solve the two-dimensional Ising model
-   with zero external field using MPI
-   The coupling constant J = 1
-   Boltzmann's constant = 1, temperature has thus dimension energy
-   Metropolis sampling is used. Periodic boundary conditions.
-   The code needs an output file on the command line and the variables mcs, nspins,
-   initial temp, final temp and temp step.
-*/
 #include "mpi.h"
 #include <cmath>
 #include <iostream>
@@ -15,8 +6,7 @@
 #include <cstdlib>
 using namespace  std;
 
-// output file
-ofstream ofile;
+ofstream ofile; // Output fil.
 
 // inline function for periodic boundary conditions
 inline int periodic(int i, int limit, int add) {
@@ -51,7 +41,7 @@ int main(int argc, char* argv[])
   MPI_Init (&argc, &argv); // Antall "threads" hentes her.
   MPI_Comm_size (MPI_COMM_WORLD, &numprocs); // Stoorrelsen paa "communicatoren".
   MPI_Comm_rank (MPI_COMM_WORLD, &my_rank); // Gir de ulike "rankene".
-  // Read in output file, abort if there are too few command-line arguments:
+  // Leser inn output fil, avbryter hvis det er for få kommandolinje argumenter.
   if (my_rank == 0 && argc <= 1) {
     cout << "Bad Usage: " << argv[0] <<
       " read output file" << endl;
@@ -60,8 +50,9 @@ int main(int argc, char* argv[])
   if (my_rank == 0 && argc > 1) {
     outfilename=argv[1];
     ofile.open(outfilename); // Apner outputfilen.
-  }
-  n_spins = 2; mcs = 2000000; initial_temp = 0.1; final_temp = 2.6; temp_step =0.01; // Initialbetingelser. (mcs er monte carlo cycles)
+  } // Initialverdiene settes i en python fil:
+  n_spins = atoi(argv[2]); mcs = atoi(argv[3]); initial_temp = atof(argv[4]);
+  final_temp = atof(argv[5]); temp_step = atof(argv[6]); // Initialbetingelser.
   int no_intervalls = mcs/numprocs; // Intervallet som skal brukes av de ulike kjernene.
   int myloop_begin = my_rank*no_intervalls + 1; // myloop_begin gives the starting point on process my_rank
   int myloop_end = (my_rank+1)*no_intervalls; // myloop_end gives the end point for summation on process my_rank
@@ -181,7 +172,7 @@ void output(int n_spins, int mcs, double temperature, double *total_average)
   ofile << setw(15) << setprecision(8) << Mtotal_average/n_spins/n_spins;
   ofile << setw(15) << setprecision(8) << Mvariance/temperature;
   ofile << setw(15) << setprecision(8) << Mabstotal_average/n_spins/n_spins << endl;
-} // end output function
+}
 
 /*
 ** The function

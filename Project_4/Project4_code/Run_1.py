@@ -1,11 +1,21 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
-# Skriver om til dataframe:
-df = pd.read_csv("Output.txt", delim_whitespace=True, \
-names=["T","E_tot","E_var","M_tot","M_var","M_abs"]) # Leser av tekstfilen.
+import subprocess
 # Initialverdier:
 num_spins = 2 # Antall spinn.
+mcs = 1000000 # Monte Carlo cycles.
+init_temp = 0.1
+final_temp = 2.6
+temp_step = 0.01
+proc = 6
+# Kjoorer programmet vårt:
+subprocess.run(['mpirun', '-n', str(proc), './code.x', 'Textfiles/Output_1.txt', \
+str(num_spins), str(mcs), str(init_temp), str(final_temp), str(temp_step)])
+# Skriver om til dataframe:
+df = pd.read_csv("Textfiles/Output_1.txt", delim_whitespace=True, \
+names=["T","E_tot","E_var","M_tot","M_var","M_abs"]) # Leser av tekstfilen.
+# Initialverdier for analytiske beregninger:
 k = 1.0 # Boltzmann konstant.
 T = 1.0 # Temperatur.
 beta = 1/(k*T)
@@ -23,8 +33,6 @@ E_var = np.array(df.loc[df['T'] == T]['E_var'])[0]
 C_num = beta * E_var**2
 C_ana = beta * ((256*np.cosh(8*beta) / Z) - (-32*(np.sinh(8*beta)) / Z)**2) / (num_spins**4)
 diff_C = np.abs(C_ana-C_num)
-print(C_num)
-print(((256*np.cosh(8*beta) / Z) - (-32*(np.sinh(8*beta)) / Z)**2) / 4)
 #Susceptibilitet:
 M_var = np.array(df.loc[df['T'] == T]['M_var'])[0]
 Chi_num = beta * M_var**2
