@@ -6,24 +6,22 @@
 using std::vector;
 
 class planet{
-private:
-protected:
+  
 public:
-    // Properties
+    // Globale verdier:
     double mass;
     double position[3];
     double velocity[3];
     double potential;
     double kinetic;
-    //Initializer
-    planet();
-    planet(double M, double x, double y, double z, double vx, double vy, double vz);
-    // Functions
+    //Initialiserer:
+    planet(double M, double x, double y, double z, double vx, double vy,
+      double vz);
+    // Funksjoner:
     double distance(planet otherPlanet);
     double GravitationalForce(planet otherPlanet, double Gconst);
     double Acceleration(planet otherPlanet, double Gconst);
     double KineticEnergy();
     double PotentialEnergy(planet &otherPlanet, double Gconst, double epsilon);
 };
-
-#endif // PLANET_H
+#endif

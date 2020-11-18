@@ -8,7 +8,6 @@ infile_VV = open('posisjonVV.txt', 'r')
 lines_VV = infile_VV.readlines()
 x_VV = np.zeros(len(lines_VV))
 y_VV = np.zeros(len(lines_VV))
-
 for i in range(1,len(lines_EU)):
     vals_VV = lines_VV[i].split()
     x_VV[i] = float(vals_VV[0])
@@ -16,7 +15,7 @@ for i in range(1,len(lines_EU)):
     vals_EU = lines_EU[i].split()
     x_EU[i] = float(vals_EU[0])
     y_EU[i] = float(vals_EU[1])
-
+# PLotting:
 fig, axes = plt.subplots(2,1)
 axes[0].plot(x_VV, y_VV)
 axes[0].set_xlabel('x[AU]')
