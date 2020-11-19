@@ -7,6 +7,8 @@
 using namespace  std;
 
 ofstream ofile; // Output fil.
+ofstream ofile2;
+ofstream ofile3;
 
 // inline function for periodic boundary conditions
 inline int periodic(int i, int limit, int add) {
@@ -35,7 +37,14 @@ int main(int argc, char* argv[])
   long idum;
   int **spin_matrix, n_spins, mcs, my_rank, numprocs;
   double w[17], average[5], total_average[5],
-         initial_temp, final_temp, E, M, temp_step;
+         initial_temp, final_temp, E, M, temp_step, array[1000], counter, T_n;
+  counter = 0;
+  for ( int i=0; i < 1000; i++){
+    counter += 1000;
+    array[i] = counter;
+  }
+
+  //double array[6] = {10, 100, 1000, 10000, 100000, 1000000}; // Dette er de cyclesene vi vil hente verdier for.
 
   //  MPI initializations
   MPI_Init (&argc, &argv); // Antall "threads" hentes her.
@@ -50,9 +59,10 @@ int main(int argc, char* argv[])
   if (my_rank == 0 && argc > 1) {
     outfilename=argv[1];
     ofile.open(outfilename); // Apner outputfilen.
+    ofile2.open("Energier");
   } // Initialverdiene settes i en python fil:
   n_spins = atoi(argv[2]); mcs = atoi(argv[3]); initial_temp = atof(argv[4]);
-  final_temp = atof(argv[5]); temp_step = atof(argv[6]); // Initialbetingelser.
+  final_temp = atof(argv[5]); temp_step = atof(argv[6]), T_n = atof(argv[7]); // Initialbetingelser.
   int no_intervalls = mcs/numprocs; // Intervallet som skal brukes av de ulike kjernene.
   int myloop_begin = my_rank*no_intervalls + 1; // myloop_begin gives the starting point on process my_rank
   int myloop_end = (my_rank+1)*no_intervalls; // myloop_end gives the end point for summation on process my_rank
@@ -86,8 +96,26 @@ int main(int argc, char* argv[])
     for (int cycles = myloop_begin; cycles <= myloop_end; cycles++){
       Metropolis(n_spins, idum, spin_matrix, E, M, w);
       // update expectation values  for local node
-      average[0] += E;    average[1] += E*E;
-      average[2] += M;    average[3] += M*M; average[4] += fabs(M);
+      average[0] += E;
+      average[1] += E*E;
+      average[2] += M;
+      average[3] += M*M;
+      average[4] += fabs(M);
+
+      double *foo = std::find(std::begin(array), std::end(array), cycles);
+      // When the element is not found, std::find returns the end of the range
+      if ( (temperature==T_n) && (foo != std::end(array))){
+        ofile2 << average[0]/cycles << setw(10) << average[2]/cycles<< endl;
+      }
+      /*
+      }
+      if ( (temperature==1.0) && (foo != std::end(array))) {
+          ofile2 << average[0]/cycles << endl;
+        }
+      else if ( (temperature==2.4) && (foo2 != std::end(array))) {
+        ofile3 << average[0]/cycles << endl;
+        }
+        */
     }
     // Find total average
     for( int i =0; i < 5; i++){
@@ -100,6 +128,7 @@ int main(int argc, char* argv[])
   }
   free_matrix((void **) spin_matrix); // free memory
   ofile.close();  // close output file
+  ofile2.close();
  TimeEnd = MPI_Wtime();
   TotalTime = TimeEnd-TimeStart;
   if ( my_rank == 0) {

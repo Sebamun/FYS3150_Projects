@@ -115,7 +115,7 @@ void solver::GravitationalConstant()
 }
 
 void solver::print_position(std::ofstream &output, int dimension, double time, int number)
-{ // Skrice masse, posisjon og hastighet til OUTPUT fil. 
+{ // Skrice masse, posisjon og hastighet til OUTPUT fil.
     if (dimension > 3 || dimension <= 0)
         dimension = 3;
     else
