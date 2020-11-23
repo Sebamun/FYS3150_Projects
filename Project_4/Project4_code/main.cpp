@@ -38,14 +38,12 @@ int main(int argc, char* argv[])
   int **spin_matrix, n_spins, mcs, my_rank, numprocs;
   double w[17], average[5], total_average[5],
          initial_temp, final_temp, E, M, temp_step, array[1000], counter, T_n;
+
   counter = 0;
   for ( int i=0; i < 1000; i++){
     counter += 1000;
     array[i] = counter;
   }
-
-  //double array[6] = {10, 100, 1000, 10000, 100000, 1000000}; // Dette er de cyclesene vi vil hente verdier for.
-
   //  MPI initializations
   MPI_Init (&argc, &argv); // Antall "threads" hentes her.
   MPI_Comm_size (MPI_COMM_WORLD, &numprocs); // Stoorrelsen paa "communicatoren".
@@ -59,7 +57,8 @@ int main(int argc, char* argv[])
   if (my_rank == 0 && argc > 1) {
     outfilename=argv[1];
     ofile.open(outfilename); // Apner outputfilen.
-    ofile2.open("Energier");
+    ofile2.open("Energier.txt");
+    ofile3.open("E_M.txt");
   } // Initialverdiene settes i en python fil:
   n_spins = atoi(argv[2]); mcs = atoi(argv[3]); initial_temp = atof(argv[4]);
   final_temp = atof(argv[5]); temp_step = atof(argv[6]), T_n = atof(argv[7]); // Initialbetingelser.
@@ -104,21 +103,17 @@ int main(int argc, char* argv[])
 
       double *foo = std::find(std::begin(array), std::end(array), cycles);
       // When the element is not found, std::find returns the end of the range
-      if ( (temperature==T_n) && (foo != std::end(array))){
-        ofile2 << average[0]/cycles << setw(10) << average[2]/cycles<< endl;
-      }
-      /*
-      }
-      if ( (temperature==1.0) && (foo != std::end(array))) {
-          ofile2 << average[0]/cycles << endl;
+      if ( temperature==T_n){
+      ofile2 << average[0]/cycles << endl;
+        if (foo != std::end(array)){
+          //Test som henter ut verdier for energi og magnetisering gitt en temperatur T_n.
+          ofile3 << average[0]/cycles << setw(20) << average[2]/cycles<< endl;
         }
-      else if ( (temperature==2.4) && (foo2 != std::end(array))) {
-        ofile3 << average[0]/cycles << endl;
-        }
-        */
+      }
+
     }
     // Find total average
-    for( int i =0; i < 5; i++){
+    for( int i = 0; i < 5; i++){
       MPI_Reduce(&average[i], &total_average[i], 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
     }
     // print results
@@ -129,6 +124,7 @@ int main(int argc, char* argv[])
   free_matrix((void **) spin_matrix); // free memory
   ofile.close();  // close output file
   ofile2.close();
+  ofile3.close();
  TimeEnd = MPI_Wtime();
   TotalTime = TimeEnd-TimeStart;
   if ( my_rank == 0) {
