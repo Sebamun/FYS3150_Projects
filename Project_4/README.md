@@ -2,7 +2,7 @@
 
 ## Report
 
-You can find the report document Project_4.pdf in the Project4 folder.
+You can find the report document "Project_4_compphys.pdf" in the Project4 folder.
 
 ## Code
 
