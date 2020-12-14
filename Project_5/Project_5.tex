@@ -68,7 +68,65 @@ and
 \end{align}
 Equation \eqref{eq:heat_one} with the mentioned initial conditions and boundary conditions can be solved numerically using the forward Euler method, the backward Euler method and the implicit Crank-Nicholson scheme. 
 
+\subsubsection{Explicit forward Euler method}
+We proceed with equation \eqref{eq:heat_one} and the mentioned initial/boundary conditions. We define the step length for the spatial variable $x$,
+\begin{equation}
+	\Delta x=\frac{1}{n+1}.
+\end{equation}
+The position after i steps and time after j steps are then given by,
+\begin{align*}
+	t_j &= j\Delta t, \quad j \geq 0, \\
+	x_i &= i\Delta x, \quad 0 \leq i \leq n+1.
+\end{align*}
+By using the forward formula to approximate the derivatives we obtain 
+\begin{comment}
+\begin{equation}
+	T_t = \frac{T(x_i, t_j+\Delta t)-T(x_i, t_j)}{\Delta t}
+\end{equation}
+and 
+\begin{equation}
+	T_{xx}= \frac{T(x_i+\Delta x , t_j)-2T(x_i, t_j)+T(x_i-\Delta x, t_j)}{{\Delta x}^2}
+\end{equation}
+\end{comment}
 
+\begin{equation}
+	T_t=\frac{T_{i,j+1}-T_{i,j}}{\Delta t}
+\end{equation}
+and
+\begin{equation}
+	T_{xx}=\frac{T_{i+1,j}-2T_{i,j}+ T_{i-1,j}}{{\Delta x}^2}.
+\end{equation}
+Defining the value $\alpha = \Delta t/ {\Delta x}^2 $, the one-dimensional heat equation can be rewritten as
+\begin{equation}
+	T_{i,j+1}=\alpha T_{i-1,j}+(1-2\alpha )T_{i,j} + \alpha T_{i+1, j}. \label{for_eul}
+\end{equation}
+We can then see than since the initial conditions are known, one could use equation \eqref{for_eul} to find the temperature in the next time step, which one could use to the find the temperature after two time steps, and so on. This algorithm is an explicit scheme, since the temperature in the next time step is explicitly given. 
+\subsubsection{Implicit backward Euler method}
+Here, we do just as for the forward Euler method, but instead of using the forward formula to approximate the first derivative, we use the backward formula,
+\begin{equation}
+T_t=\frac{T_{i,j}-T_{i,j-1}}{\Delta t}.
+\end{equation}
+The spatial second derivative becomes just as for the explicit scheme, 
+\begin{equation}
+T_{xx}=\frac{T_{i+1,j}-2T_{i,j}+ T_{i-1,j}}{{\Delta x}^2}.
+\end{equation}
+Again, by defining $\alpha = \Delta t/ {\Delta x}^2$ we obtain
+\begin{equation}
+T_{i,j-1}=-\alpha T_{i-1,j}+(1+2\alpha )T_{i,j} - \alpha T_{i+1, j}. \label{for_eul}
+\end{equation}
+\subsubsection{Crank-Nicholson scheme}
+The Crank-Nicholson scheme 
+\begin{equation}
+T_t=\frac{T_{i,j+1}-T_{i,j}}{\Delta t}.
+\end{equation}
+and 
+\begin{align*}
+T_{xx}=&\frac{1}{2}\bigg( \frac{T(x_i+\Delta x, t_j)-2T(x_i,t_j)+T(x_i-\Delta x, t_j)}{{\Delta x}^2} \\
+&\frac{T(x_i + \Delta x, t_j + \Delta t )-2T(x_i,t_j+\Delta t)+T(x_i -\Delta x, t_j + \Delta t)}{{\Delta x}^2}\bigg)
+\end{align*}
+
+\subsection{Algorithm for specific tri-diagonal matrix}
+As we can see from equation (LINEQ_MATRIX), the diagonal elements of the matrix A are identical  
 \section{Method}
 
 
