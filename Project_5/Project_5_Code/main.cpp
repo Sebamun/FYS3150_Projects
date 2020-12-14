@@ -15,9 +15,9 @@ using namespace std;
 int main()
 {
     double a, b, c;
-    int num_int = 100;
-    int num_time_steps = 100;
-    int time_step = 1.0;
+    int num_int = 1000;
+    int num_time_steps = 1000;
+    int time_step = 0.1;
     double Length = 1.0;
     Solver backward(num_int, num_time_steps, time_step, Length);
     backward.backward_euler();
