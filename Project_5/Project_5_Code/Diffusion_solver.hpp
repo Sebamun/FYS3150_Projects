@@ -14,6 +14,6 @@ public:;
     Solver(int num_int, int num_time_steps, double time_step, double Length); //, char filename);
     void tridiag(double a, double b, double c, double *u, double *f);
     void PrintToFile(double *u, double time);
-    void backward_euler();
+    void backward_euler(double *u, double *f);
 };
 #endif //TRIDIAG_HPP
