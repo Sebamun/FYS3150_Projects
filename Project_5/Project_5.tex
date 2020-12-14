@@ -11,7 +11,7 @@
 \renewcommand{\abstractname}{\vspace{-\baselineskip}}
 \bibliographystyle{plain}
 \usepackage[utf8]{inputenc}
-\usepackage{verbatim} %for å inkludere filer med tegn LaTeX ikke liker
+\usepackage{verbatim} %for aa inkludere filer med tegn LaTeX ikke liker
 \usepackage{mathpazo}
 \usepackage{float}
 \usepackage{algpseudocode}
@@ -34,8 +34,6 @@
 \begin{multicols}{2}
 
 \section{Introduction}
-
-
 
 \section{Theory}
 
@@ -101,7 +99,9 @@ Defining the value $\alpha = \Delta t/ {\Delta x}^2 $, the one-dimensional heat 
 	T_{i,j+1}=\alpha T_{i-1,j}+(1-2\alpha )T_{i,j} + \alpha T_{i+1, j}. \label{for_eul}
 \end{equation}
 We can then see than since the initial conditions are known, one could use equation \eqref{for_eul} to find the temperature in the next time step, which one could use to the find the temperature after two time steps, and so on. This algorithm is an explicit scheme, since the temperature in the next time step is explicitly given. 
+
 \subsubsection{Implicit backward Euler method}
+
 Here, we do just as for the forward Euler method, but instead of using the forward formula to approximate the first derivative, we use the backward formula,
 \begin{equation}
 T_t=\frac{T_{i,j}-T_{i,j-1}}{\Delta t}.
@@ -112,23 +112,101 @@ T_{xx}=\frac{T_{i+1,j}-2T_{i,j}+ T_{i-1,j}}{{\Delta x}^2}.
 \end{equation}
 Again, by defining $\alpha = \Delta t/ {\Delta x}^2$ we obtain
 \begin{equation}
-T_{i,j-1}=-\alpha T_{i-1,j}+(1+2\alpha )T_{i,j} - \alpha T_{i+1, j}. \label{for_eul}
+T_{i,j-1}=-\alpha T_{i-1,j}+(1+2\alpha )T_{i,j} - \alpha T_{i+1, j}. \label{eq:back_eul}
 \end{equation}
-\subsubsection{Crank-Nicholson scheme}
-The Crank-Nicholson scheme 
+
+The only unknown quantity in equation \ref{eq:back_eul} is $T_{i,j-1}$, which means that we can rewrite the equation as a matrix A:
+
 \begin{equation}
-T_t=\frac{T_{i,j+1}-T_{i,j}}{\Delta t}.
+A = 
+\begin{bmatrix}
+1+2\alpha & -\alpha & 0 & \cdots & 0 \\
+-\alpha & 1+2\alpha & -\alpha & \cdots & 0  \\
+\vdots  & \ddots  & \ddots & \ddots & \vdots  \\
+\vdots  & \vdots  & \ddots & \ddots & -\alpha  \\
+0 & 0 & \cdots & -\alpha & 1+2\alpha
+\end{bmatrix}
+\end{equation}
+
+We can reformulate the problem as a matrix vector multiplication:
+
+\begin{equation}
+A V_j=V_{j-1}
+\end{equation}
+
+We can then write the problem as:
+
+\begin{equation}
+\begin{split}
+V_j &= A^{-1}V_{j-1}=A^{-1}(A^{-1}V_{j-2})\\
+&=A^{-1}(A^{-1}(A^{-1}V_{j-3}))=A^{-j}V_0
+\end{split}
+\end{equation}
+
+\subsubsection{Crank-Nicholson scheme}
+
+The Crank-Nicholson scheme is given by
+\begin{equation}
+T_t = \frac{T(x_i,t_j+\Delta t)-T(x_i,t_j)}{\Delta t}
+\label{eq:T_t}
 \end{equation}
 and 
-\begin{align*}
-T_{xx}=&\frac{1}{2}\bigg( \frac{T(x_i+\Delta x, t_j)-2T(x_i,t_j)+T(x_i-\Delta x, t_j)}{{\Delta x}^2} \\
+\begin{equation}
+\begin{split}
+&T_{xx}=\frac{1}{2}\bigg( \frac{T(x_i+\Delta x, t_j)-2T(x_i,t_j)+T(x_i-\Delta x, t_j)+}{{\Delta x}^2} \\
 &\frac{T(x_i + \Delta x, t_j + \Delta t )-2T(x_i,t_j+\Delta t)+T(x_i -\Delta x, t_j + \Delta t)}{{\Delta x}^2}\bigg)
-\end{align*}
+\label{eq:T_xx}
+\end{split}
+\end{equation}
 
-\subsection{Algorithm for specific tri-diagonal matrix}
-As we can see from equation (LINEQ_MATRIX), the diagonal elements of the matrix A are identical  
+We then combine equation \ref{eq:T_t} and \ref{eq:T_xx}, where the left side is given by $t_j+\Delta t$ and the right by $t_j$:
+
+\begin{equation}
+\begin{split}
+&-\alpha T(x_i-\Delta x, t_j+\Delta t)+(2+2\alpha) T(x_i, t_j+\Delta t)\\
+&-\alpha T(x_i+\Delta x,t_j+\Delta t)=\alpha T(x_i-\Delta x, t_j)+(2-2\alpha)T(x_i,t_j)\\
+&+\alpha T(x_i+\Delta x, t_j)
+\end{split}
+\end{equation}
+
+Where we have used that $\alpha = \frac{D\Delta t}{\Delta x^2}$. We can write this as a tridiagonal matrix system:
+
+\begin{equation}
+(2I+\alpha B)V_j=(2I-\alpha B)V_{j-1}
+\label{eq:IB}
+\end{equation}
+
+We can rewrite equation \ref{eq:IB} as:
+
+\begin{equation}
+V_j = (2I+\alpha B)^{-1}(2I-\alpha B)V_{j-1}
+\end{equation}
+
+Where I is the identity matrix and B is given by:
+
+\begin{equation*}
+B = 
+\begin{bmatrix}
+2 & -1 & 0 & \cdots & 0 \\
+-1 & 2 & -1 & \cdots & 0  \\
+\vdots  & \ddots  & \ddots & \ddots & \vdots  \\
+\vdots  & \vdots  & \ddots & \ddots & -1  \\
+0 & 0 & \cdots & -1 & 2
+\end{bmatrix}
+\end{equation*}
+
+\subsection{Analytical solution for one dimensional diffusion equation}
+
+It is beneficial to have a analytical solution which we can compare our numerical methods to. For the one dimensional diffusion equation we have the analytical expression:
+
+\begin{equation}
+u(x,t) = \sum_{n=1}^{\infty}\frac{2}{L}\int_0^Lg(x)\sin{(n\pi x/L)} dx\sin{(n\pi x/L)}
+\end{equation}
+
+Where g(x) is a function of position. The calculations are given in appendix B. 
+
+
 \section{Method}
-
 
 \section{Implementation}
 
@@ -154,6 +232,89 @@ As we can see from equation (LINEQ_MATRIX), the diagonal elements of the matrix 
 
 \section{Appendix}
 
+Her kommer plotts og bilder. 
+
+\section{Appendix}
+
+The one dimensional diffusion equation has an analytical expression for the continuous problem. 
+
+\begin{equation}
+\nabla ^2 u(x,t)=\frac{\partial u(x,t)}{\partial t}
+\label{eq:a1d}
+\end{equation}
+
+The initial condition is $u(x,0)=g(x)$, when $0<x<L$. We also have $u(0,t)=0$ and $u(L,t)=0$, when $t\leq0$. We use separation of variables when solving \ref{eq:a1d}:
+
+\begin{equation}
+u(x,t) = F(x)G(t)
+\label{eq:sep}
+\end{equation}
+
+This gives us one function only depending on position x and one only depending on time t. We get the set of equations:
+
+\begin{equation*}
+\frac{\partial u}{\partial t} = F \frac{\partial G}{\partial t}
+\end{equation*}
+
+and
+
+\begin{equation*}
+\frac{\partial^2 u}{\partial x^2} = G \frac{\partial^2 F}{\partial x^2}
+\end{equation*}
+
+We can now use the relation given equation \ref{eq:heat_one}:
+
+\begin{equation}
+\begin{split}
+&F\frac{\partial G}{\partial t} = G \frac{\partial ^2 F}{\partial x^2}\\
+&\frac{1}{G}\frac{\partial G}{\partial t} = \frac{1}{F} \frac{\partial^2 F}{\partial x^2}
+\end{split}
+\end{equation}
+
+We set the equations equal to a negative constant $-\lambda^2$. This gives us the solutions:
+
+\begin{equation*}
+\begin{split}
+G &= Ae^{-\lambda^2 t}\\
+F &= B\cos{(\lambda x)} + C\sin{(\lambda x)}
+\end{split}
+\end{equation*} 
+
+We can now use equation \ref{eq:sep} to find the general solution u:
+
+\begin{equation}
+\begin{split}
+u &= GF = Ae^{-\lambda^2 t} [B\cos{(\lambda x)} + C\sin{(\lambda x)}]\\
+&=e^{-\lambda^2 t} [C_1\cos{(\lambda x)} + C_2\sin{(\lambda x)}]
+\end{split}
+\end{equation}
+
+The boundary conditions gives us the solution:
+
+\begin{equation}
+u(x,t) = A_n\sin{(n\pi x/L)}e^{-n^2\pi^2t/L}
+\end{equation}
+
+We have infinitely many solutions to this equation, due to the n factor. We can use a superposition of these solutions since the diffusion equation is linear:
+
+\begin{equation}
+u(x,t) = \sum_{n=1}^{\infty}A_n\sin{(n\pi x/L)}
+\label{eq:u_undfA}
+\end{equation}
+
+We decide the coefficient $A_n$ by using the initial condition:
+
+\begin{equation}
+u(x,0)=g(x)=\sum_{n=1}^{\infty}A_n\sin{(n\pi x/L)}
+\end{equation}
+
+Which gives us that:
+
+\begin{equation}
+A_n=\frac{2}{L}\int_0^Lg(x)\sin{(n\pi x/L)} dx
+\end{equation}
+
+We can insert this $A_n$ in equation \ref{eq:u_undfA}, which gives us the final expression \cite{94}.
 
 
 \bibliography{References} % Kilder.
