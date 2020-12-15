@@ -1,0 +1,109 @@
+\documentclass{article}
+\usepackage{multicol}
+\usepackage{graphicx}% Include figure files
+\usepackage{dcolumn}% Align table columns on decimal point
+\usepackage{bm}% bold math
+\usepackage{hyperref}% add hypertext capabilities
+\usepackage{booktabs}
+\usepackage{listings}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\renewcommand{\abstractname}{\vspace{-\baselineskip}}
+\bibliographystyle{plain}
+\usepackage[utf8]{inputenc}
+\usepackage{verbatim} %for å inkludere filer med tegn LaTeX ikke liker
+\usepackage{mathpazo}
+\usepackage{float}
+\usepackage{algpseudocode}
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+\usepackage[left=20mm,right=20mm,top=33.95mm,bottom=33.95mm]{geometry} 
+% Justerer bredden på columns.
+\setlength{\columnsep}{1cm}
+
+\begin{document}
+
+\title{Diffusion}
+\author{Sebastian Amundsen, Marcus Berget and Andreas Wetzel}
+
+\maketitle
+
+\begin{abstract}
+
+\end{abstract}
+
+\begin{multicols}{2}
+
+\section{Introduction}
+
+
+
+\section{Theory}
+
+\subsection{Heat equation}
+
+The general heat equation can be written as,
+\begin{equation}
+	\frac{\partial T(\textbf{x}, t)}{\partial t} = \frac{k}{C\rho}\nabla^2 T(\textbf{x}, t). \label{eq:gen_heat}
+\end{equation}
+where $\textbf{x}$ is the spatial vector, $t$ is time, $c_p$ is the specific heat capacity, $\rho$ is the density and $k$ is the thermal conductivity. We can then gather all the constants in the diffusion constant, $D=\frac{k}{C\rho}$. For the first part of the project we will just set the diffusion constant equal to one. The heat equation in one dimension then becomes, 
+\begin{equation}
+	\frac{\partial T(x,t)}{\partial t} = \frac{\partial^2 T(x,t)}{\partial x^2}, \label{eq:heat_one}
+\end{equation}
+or 
+\begin{equation}
+	T_{xx}=T_t.
+\end{equation}
+\subsection{Numerical methods for solving the heat equation}
+We set the initial conditions of equation \eqref{eq:heat_one} at $t=0$ to,
+\begin{align}
+	T(x,0)=0, \quad 0<x<L
+\end{align}
+where $L=1$ is the length of the x-region of interest. We set the boundary conditions to
+\begin{align}
+	T(0, t)=0, \quad t\geq 0,
+\end{align}
+and
+\begin{align}
+	T(L, t)= 1, \quad t\geq 0.
+\end{align}
+Equation \eqref{eq:heat_one} with the mentioned initial conditions and boundary conditions can be solved numerically using the forward Euler method, the backward Euler method and the implicit Crank-Nicholson scheme. 
+
+
+\section{Method}
+
+
+\section{Implementation}
+
+
+
+\section{Results}
+
+
+\section{Discussion}
+
+
+
+\section{Concluding remarks}
+
+
+
+
+\end{multicols}
+
+\clearpage
+
+\appendix % Her kommer appendix.
+
+\section{Appendix}
+
+
+
+\bibliography{References} % Kilder.
+\begin{thebibliography}{9}
+\bibitem{94}
+	Jensen, M.H., 2015, Computational Physics Lecture Notes Fall 2015
+\bibitem{95}
+	Jensen, M.H., 2017, Computational Physics Lectures: Statistical physics and the Ising Model
+\end{thebibliography}
+
+\end{document}
