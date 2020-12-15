@@ -93,7 +93,7 @@ void Solver::crank_nicholson(double *u, double *f){
         u[0] = 0.0;
         u[n] = 1.0;
         double time = t * dt;
-        if (t % 100 == 1)
+        if (t % 10 == 1)
             PrintToFile(u, time, output_crank);
     }
 }
