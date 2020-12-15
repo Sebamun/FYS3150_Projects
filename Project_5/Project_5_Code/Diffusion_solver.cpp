@@ -19,10 +19,26 @@ Solver::Solver(int num_int, int num_time_steps, double time_step, double Length)
     cout << "n=" << n << endl;
     cout << "Nt=" << Nt << endl;
     cout << "dx=" << dx << endl;
-    //char filename = filename; 
     
 };
 
+void Solver::forward_euler(double *u, double *r){
+    for (int i = 0; i <= n; i++)
+        r[i] = u[i];
+    std::ofstream output_forward("forward_output.txt");
+    for (int t = 1; t <= Nt; t++)
+    {
+        for (int i = 1; i < n; i++)
+        {
+            // Discretized diff eq
+            u[i] = alpha * r[i - 1] + (1 - 2 * alpha) * r[i] + alpha * r[i + 1];
+        }
+        double time = t * dt;
+        if (t % 100 == 1)
+            PrintToFile(u, time, output_forward);
+        // note that the boundaries are not changed.
+    }
+};
 
 void Solver::tridiag(double a, double b, double c, double *u, double *f)
 {
@@ -35,7 +51,6 @@ void Solver::tridiag(double a, double b, double c, double *u, double *f)
     for (int i = 1; i <= n - 2; i++){
         b_array[i] = b - (a * c) / b_array[i-1];
         f_t[i] = f[i] - (f_t[i - 1] * a) / b_array[i-1];
-        cout << f[i] << endl;
     }
     // Backward substitution
     u[n-1] = f_t[n-2] / b_array[n-2];
@@ -48,6 +63,7 @@ void Solver::backward_euler(double *u, double *f){
     double a, b, c;
     a = c = - alpha;
     b = 1 + 2*alpha;
+    std::ofstream output_back("Backward_output.txt");
     for (int t = 1; t <= Nt; t++)
     {
         for (int i = 0; i <= n - 2; i++) f[i] = u[i + 1];
@@ -56,16 +72,38 @@ void Solver::backward_euler(double *u, double *f){
         u[0] = 0.0;
         u[n] = 1.0;
         double time = t * dt;
-        if (t % 10 == 1)
-            PrintToFile(u, time);
+        if (t % 100 == 1)
+            PrintToFile(u, time, output_back);
     }
 };
 
-void Solver::PrintToFile(double *u, double time){
-    std::ofstream output_file("Backward_output.txt");
-    output_file << time << std::endl;
+void Solver::crank_nicholson(double *u, double *f){
+    double a, b, c;
+    a = c = -alpha;
+    b = 2 + 2 * alpha;
+    std::ofstream output_crank("crank_nicholson.txt");
+    for (int t = 1; t <= Nt; t++)
+    {
+        for (int i = 0; i <= n - 2; i++)
+        {
+            f[i] = alpha * u[i] + (2 - 2 * alpha) * u[i+1] + alpha * u[i + 2];
+        }
+        tridiag(a, b, c, u, f);
+        // boundary conditions
+        u[0] = 0.0;
+        u[n] = 1.0;
+        double time = t * dt;
+        if (t % 100 == 1)
+            PrintToFile(u, time, output_crank);
+    }
+}
+
+void Solver::PrintToFile(double *u, double time, std::ofstream &output)
+{
+    output << time << " ";
     for (int i = 0; i <= n; i++)
     {
-        output_file << u[i] << std::endl;
+        output << u[i] << " ";
     }
+    output << endl;
 };
