@@ -28,8 +28,20 @@ int main()
     Solver backward(num_int, num_time_steps, time_step, Length);
     backward.backward_euler(u, f);
 
+    for (int i = 0; i <= num_int; i++)
+    {
+        u[i] = 0.0;
+    }
+    u[num_int] = 1.0;
+
     Solver crank(num_int, num_time_steps, time_step, Length);
     crank.crank_nicholson(u, f);
+
+    for (int i = 0; i <= num_int; i++)
+    {
+        u[i] = 0.0;
+    }
+    u[num_int] = 1.0;
 
     double r[num_int + 1];
     Solver forward(num_int, num_time_steps, time_step, Length);
