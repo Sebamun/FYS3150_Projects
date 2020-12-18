@@ -12,13 +12,15 @@
 using namespace std;
 
 // parts of the function for backward Euler
-int main()
+int main(int argc, char* argv[])
 {
-    int num_int = 10;
-    int num_time_steps = 10000;
-    double time_step = 0.001;
-    double Length = 1.0;
-    double u[num_int + 1], f[num_int - 1];
+  int factor = atof(argv[1]);
+  int num_int = factor;
+  int num_time_steps = 1000*(factor*factor);
+  double time_step = 0.001/(factor*factor);
+  double Length = 1.0;
+  double u[num_int + 1], f[num_int - 1];
+
     for (int i = 0; i <= num_int; i++)
     {
         u[i] = 0.0;

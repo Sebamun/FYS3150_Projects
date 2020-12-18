@@ -9,7 +9,7 @@ using namespace std;
 class Solver
 {
 private:
-    int n, Nt; 
+    int n, Nt;
     double L, dx, dt, alpha;
 
 public:;
