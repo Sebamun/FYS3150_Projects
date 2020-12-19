@@ -2,7 +2,7 @@
 
 ## Report
 
-You can find the report document "Project_5.pdf" in the Project_5 folder.
+You can find the report document "Project_5.pdf" in the TEX folder.
 
 ## Code
 
