@@ -228,7 +228,7 @@ We can test the stability and precision of our numerical algorithms by comparing
 RRMSE = \sqrt{\frac{\frac{1}{n}\sum_{i=1}^n(u_{ana}-u_{num})^2}{\sum_{i=1}^n u_{ana}^2}}
 \end{equation}
 
-Where $u_{ana}$ is the analytical solution and $u_{num}$ is the numerical approximation \cite{97}.
+Where $u_{ana}$ is the analytical solution and $u_{num}$ is the numerical approximation \cite{97}. We will also be plotting the difference between the analytical solution and the values given the algorithms. This is to be done for both $\alpha>0.5$ and $\alpha<0.5$, which hopefully will showcase the stability of the implicit methods. 
 
 \section{Implementation}
 
@@ -237,13 +237,19 @@ Where $u_{ana}$ is the analytical solution and $u_{num}$ is the numerical approx
 
 \subsection{One dimensional model}
 
-The analytical solution for different time occasions ($t_1$ and $t_2$) and spatial steps are given in Figure \ref{fig:b}. 
+The analytical solution for different time occasions ($t_1$ and $t_2$) and spatial steps are given in Figure \ref{fig:b}. The simulation time for each of the different algorithms are given in Table \ref{tab:time}.
+
+The deviation from the analytical solution is given in Figure ..... for the Forward Euler method, Figure .... for the Backward Euler method and Figure ..... for the Crank Nicholson scheme. The RRMSE values are given in Table....
 
 \section{Discussion}
 
 \subsection{One dimensional model}
 
-There is little variance between the three algorithms when looking at the one dimensional case (see Figure \ref{fig:c}). This is to be expected as long as we satisfy the boundary condition $\alpha<0.5$ for the explicit method. If this boundary conditions is fulfilled 
+There is little variance between the three algorithms when looking at the one dimensional case (see Figure \ref{fig:c}). This is to be expected as long as we satisfy the boundary condition $\alpha<0.5$ for the explicit method. The numerical approximations seem to move towards the analytical solution when we increase the resolution in time and space for all three algorithms. This is to be expected, given the fact that smaller time and spatial steps lead to greater accuracy.  
+
+The forward Euler method has the shortest simulation time by far, which make it time efficient when solving large simulations (Table \ref{tab:time}). The Forward Euler method seems to be the best algorithm for solving the one dimensional problem as long as the boundary condition is fulfilled. 
+
+However, when $\alpha>0.5$ the error for the explicit method (Forward Euler) "skyrockets" ( Figure ....). For the implicit schemes we dont have the same problem. The implicit solvers maintain stable at all values for $\alpha$. 
 
 \section{Concluding remarks}
 
@@ -287,6 +293,19 @@ Backward Euler&$O(\Delta x^2) and O(\Delta t^2)$&Stable for all\\ \hline
 Froward Euler&$O(\Delta x^2) and O(\Delta t^2)$&$\Delta t \leq 1/2\Delta x^2$\\ \hline
 \end{tabular}
 \label{tab:a}
+\end{center}
+\end{table}
+
+\begin{table}[H]
+\begin{center}
+\caption{Simulation time for algorithms (1D case).}
+\begin{tabular}{  |c|c|c|c|c|c| } \hline
+Scheme:&	$\Delta x = 1/10$&$\Delta x = 1/100$ \\ \hline
+Crank Nicholson&0.019732s&14.9372s\\ \hline
+Backward Euler&0.021026s&14.5824s\\ \hline
+Froward Euler&	0.00865s&3.58414s\\ \hline
+\end{tabular}
+\label{tab:time}
 \end{center}
 \end{table}
 
@@ -444,6 +463,8 @@ We now have a analytical expression for heat diffusion in one dimension \cite{94
 	Dawkins, Paul., 2018, Heat Equation With Non-Zero Temperature Boundaries
 \bibitem{97}
 	Despotovic, M, et al., 2016, Evaluation of empirical models for predicting monthly mean horizontal diffuse solar radiation
+\bibitem{98}
+	Daileda, R.,  2012, The two dimensional heat equation
 	
 \end{thebibliography}
 

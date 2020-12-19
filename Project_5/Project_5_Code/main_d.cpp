@@ -15,9 +15,10 @@ using namespace std;
 int main(int argc, char* argv[])
 {
   int factor = atof(argv[1]);
+  double variable = atof(argv[2]);
   int num_int = factor;
-  int num_time_steps = 1000*(factor*factor);
-  double time_step = atof(argv[2])/(factor*factor);
+  int num_time_steps = 100*(factor*factor);
+  double time_step = variable/(factor*factor);
   double Length = 1.0;
   double u[num_int + 1], f[num_int - 1];
 
