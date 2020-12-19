@@ -29,13 +29,17 @@
 
 \begin{abstract}
 
+We found that the heat equation can be solved using the explicit forward method, the implicit backward Euler method and the Crank- Nicholson scheme. The stability of the explicit method is decided by the condition $\Delta t \leq \Delta x^2/2$. We found that the implicit methods were stable regardless of this condition. The Forward Euler method was the fastest numerical solver, being 76\% and 75 \% faster than Crank Nicholson and Backward Euler respectively. 
+
 \end{abstract}
 
 \begin{multicols}{2}
 
 \section{Introduction}
 
-In this report we want to test three algorithms for solving partial differentiation equations using finite difference schemes. Specifically we want to solve the heat equation in one dimension using three different methods, where we compare our numerical results to an analytical solution. Secondly, we wish to simulate the temperature distribution in the lithosphere. This is to be done in two dimensions using the Forward Euler algorithm. 
+In this report we want to test three algorithms for solving partial differentiation equations using finite difference schemes. Specifically we want to solve the heat equation in one dimension using three different methods, where we compare our numerical results to an analytical solution. This is done by calculating the root mean square error and by looking at the deviation between numerical and analytical values for each of the algorithms. 
+
+We will also be looking at two different boundary conditions, which will impact the stability of our explicit solver. We then expand the most suited numerical method for solving the heat equation to two dimensions. Afterwards we wish to simulate the temperature distribution in the lithosphere. This will showcase how an algorithm can be implemented numerically to solve a physical problem. 
 
 \section{Theory}
 
@@ -117,7 +121,7 @@ Again, by defining $\alpha = \Delta t/ {\Delta x}^2$ we obtain
 T_{i,j-1}=-\alpha T_{i-1,j}+(1+2\alpha )T_{i,j} - \alpha T_{i+1, j}. \label{eq:back_eul}
 \end{equation}
 
-The only unknown quantity in equation \ref{eq:back_eul} is $T_{i,j-1}$, which means that we can rewrite the equation as a matrix A:
+The only unknown quantity in equation \ref{eq:back_eul} is $T_{i,j-1}$, we can then define the matrix A,
 
 \begin{equation}
 A = 
@@ -130,7 +134,7 @@ A =
 \end{bmatrix}
 \end{equation}
 
-We can reformulate the problem as a matrix vector multiplication:
+so that we can reformulate the problem as a matrix vector multiplication equation:
 
 \begin{equation}
 A V_j=V_{j-1}
@@ -144,10 +148,11 @@ V_j &= A^{-1}V_{j-1}=A^{-1}(A^{-1}V_{j-2})\\
 &=A^{-1}(A^{-1}(A^{-1}V_{j-3}))=A^{-j}V_0
 \end{split}
 \end{equation}
+we can then use the tridiagonal algorithm discussed in Appendix B.1 to solve this set of linear equations for every time step. 
 
 \subsubsection{Crank-Nicholson scheme}
 
-The Crank-Nicholson scheme is given by
+The Crank-Nicholson scheme a bit more tedious to derive, so we will go ahead just give the approximations it uses for the time and spatial derivative:
 \begin{equation}
 T_t = \frac{T(x_i,t_j+\Delta t)-T(x_i,t_j)}{\Delta t}
 \label{eq:T_t}
@@ -213,8 +218,26 @@ It is beneficial to have a analytical solution which we can compare our numerica
 
 Where g(x) is a function of position. The calculations are given in appendix B. 
 
-\section{Method}
+\subsection{Heating of the Fennoscandian lithosphere}
+The lithosphere is the solid upper-most part of the earth, consisting of the mantle, lower crust and upper crust. We will focus on an area of the earth's lithosphere located in Scandinavia, which we will call the fennoscandian lithosphere. About 1 Gy ago the oceanic lithosphere on the west coast of Norway was subducted under the fennoscandian lithosphere. This process released radioactive elements trapped in, and heating, the fennoscandian lithosphere. 
 
+\subsubsection{Parameters of the model}
+The boundary conditions are 8 $\text{C}^{\circ}$ at the surface and 1300 $\text{C}^{\circ}$ at the bottom at a depth of 120 km. We will assume a constant density of $\rho=3500 \, \text{kg/m}^3$, a constant thermal conductivity of $\kappa=2.5 \text{W/m/} \text{C}^{\circ}$ and a constant specific heat capacity of $c_p=1000 \text{J/kg/}\text{C}^{\circ}$. Before the subduction of the oceanic lithosphere we will assume that the fennoscandic lithosphere already contained radioactive elements causing the following heat production:
+\[
+P(z, t) =
+\begin{cases}
+1.4 \, \mu \text{W/m}^3 &  0 \, \text{km} < z < 20 \, \text{km} \\
+0.35 \, \mu \text{W/m}^3 &  20 \, \text{km} < z < 40 \, \text{km} \\
+0.05 \, \mu \text{W/m}^3 &  z > 40 \, \text{km} \\
+\end{cases}
+\]
+for $t\in [0, 1]$ Gy. \textbf{It is worth noting that we here give the heat production in units of power, and not change in temperature per time unit.} We will assume that the additional heat production caused by the enrichment of radioactive elements at 1 Gy is $\text{P}_0=0.5 \, \mu \text{W/m}^3$. We assume that this additional heat is produced is at 40$\%$ by U, 40$\%$ by Th, and 20$\%$ by K, which have halflives of 4.47 Gy, 14.0 Gy, 1.25 Gy respectively. The reduction of radioactive sources over time will cause the additional heat production to decrease as function of time, which can be described as follows:
+\begin{equation}
+	P_R(t) = P_0\Bigg(0.4\bigg(\frac{1}{2}\bigg)^{t/4.47}+0.4\bigg(\frac{1}{2}\bigg)^{t/14.0}+0.2\bigg(\frac{1}{2}\bigg)^{t/1.25}\Bigg)
+\end{equation}
+
+
+\section{Method}
 
 \subsection{One dimensional model}
 
@@ -236,8 +259,35 @@ Where $u_{ana}$ is the analytical solution and $u_{num}$ is the numerical approx
 
 We wish to study the case where this boundary is fulfilled and when it is unsatisfied. 
 
+\subsection{Heating of the Fennoscandian lithosphere}
+
+We will assume that the fennoscandian lithosphere will be affected equally across the whole area surface, so that the depth is the only spatial dimension affecting the time evolution of the temperature. We also have to take in to account the heat production caused by radioactive elements. This translates to the heat equation as:
+\begin{equation}
+	\frac{\partial T}{\partial t}= \frac{P}{\rho c_p} + \frac{\kappa}{\rho c_p}\frac{\partial^2 T}{\partial^2 z}
+\end{equation}
+where z is the depth. We set $D=\frac{\kappa}{\rho c_p}$ and introduce $z=a\hat{z}$, so that the heat equation becomes
+\begin{equation}
+	\frac{\partial T}{\partial t}=\frac{P}{\rho c_p}+\frac{1}{D a^2}\frac{\partial^2 T}{\partial^2 \hat{z}}.
+\end{equation}
+We then choose $Da^2=1$ so that the final heat equation becomes,
+\begin{equation}
+	\frac{\partial T}{\partial t}=\frac{P}{\rho c_p}+\frac{\partial^2 T}{\partial^2 \hat{z}}.
+\end{equation}
+By using the exact same approximations as for the forward Euler method, we have an explicit expression for temperature after in the next time step:
+\begin{equation}
+	T_{i,j+1}= \frac{P}{\rho c_p}\Delta t + \alpha T_{i-1,j}+(1-2\alpha )T_{i,j} + \alpha T_{i+1, j}
+\end{equation}
+where $\alpha=\frac{\Delta t}{\Delta x ^2}$ . 
+When initializing the temperature we will consider the state without radioactive elements, but in thermal equilibrium. The temperature distribution must therefore be linear:
+\begin{equation}
+	T(z) = 10.77z + 8.0
+\end{equation}
+when z is in units km. We then start time evolving the temperature as explained above, with the relevant parameters. 
+
+
 \section{Implementation}
 
+All algorithms are implemented in the C++ language. All our data are written to textfiles and read by python scripts. These scripts are used for analyization and visualization of our numerical data. Our codes are available at the GitHub repository: \url{https://github.com/Sebamun/FYS3150_Projekter/tree/master/Project_5}.
 
 \section{Results}
 
@@ -245,13 +295,17 @@ We wish to study the case where this boundary is fulfilled and when it is unsati
 
 The analytical solution for different time occasions ($t_1$ and $t_2$) and spatial steps are given in Figure \ref{fig:b}. The simulation time for each of the different algorithms are given in Table \ref{tab:time}.
 
+The numerical solution for different step lengths and time periods are given in Figure \ref{fig:c}.
+
 The deviation from the analytical solution for the three methods are given in Figure \ref{fig:1_10} and \ref{fig:1_10_a} for $\Delta x = 1/10$. The deviation for $\Delta x = 1/100$ is given in Figure \ref{fig:1_100} and \ref{fig:1_100_a}. The RRMSE values are given in Table \ref{tab:error}.
 
 \section{Discussion}
 
 \subsection{One dimensional model}
 
-There is little variance between the three algorithms when looking at the one dimensional case (see Figure \ref{fig:c}). The RRMSE values for $t_1=0.01$ were smallest for the Backward Euler method and highest for the Forward Euler method, when looking at $\Delta x = 1/10$. For $t_1=0.01$ and $\Delta x = 1/10$ the RRMSE values were highest for the Crank Nicholson scheme and smallest for the Backward Euler scheme. This is surprising given the fact that the Crank Nicholson algorithm has an higher order of truncation error than both the backward and forward method (Table \ref{tab:a}). One explanation could be the amount of FLOPS for each method. The Crank Nicholson method has more calculations than both the other algorithms, which makes room for round off errors. It is also possible that either the algorithms, the analytical solution or the RRMSE method are not implemented correctly. 
+There is little variance between the three algorithms when looking at the one dimensional case (see Figure \ref{fig:c}). All of the curves seem to evolve similarly. We have a period where the solution moves toward an equilibrium state and a solution given this equilibrium state, which seems to be linear. This development also corresponds with the analytical solutions given in Figure \ref{fig:b}, which indicates that we have implemented the algorithms correctly. 
+
+The RRMSE values for $t_1=0.01$ were smallest for the Backward Euler method and highest for the Forward Euler method, when looking at $\Delta x = 1/10$. For $t_1=0.01$ and $\Delta x = 1/10$ the RRMSE values were highest for the Crank Nicholson scheme and smallest for the Backward Euler scheme. This is surprising given the fact that the Crank Nicholson algorithm has an higher order of truncation error than both the backward and forward method (Table \ref{tab:a}). One explanation could be the amount of FLOPS for each method. The Crank Nicholson method has more calculations than both the other algorithms, which makes room for round off errors. It is also possible that either the algorithms, the analytical solution or the RRMSE method are not implemented correctly. 
 
 The differences in RRMSE were not detectable for $t_2$ (\ref{tab:error2}). This is to be expected given that all three algorithms should move towards the same final solution (as long as the boundary condition for the explicit method is satisfied). We can see that the increased spatial resolution (decreasing $\Delta x$) leads to better precision for all the methods, due to the error becoming smaller for $\Delta x=1/100$ than for $\Delta x = 1/10$. This is true for both $t_1$ and $t_2$. 
 
@@ -259,11 +313,17 @@ The forward Euler method has the shortest simulation time by far, which make it 
 
 However, when $\alpha>0.5$ the error for the explicit method (Forward Euler) "skyrockets" ( Figure \ref{fig:1_10_a} and Figure \ref{fig:1_100_a}). For the implicit schemes we dont have the same problem. The implicit solvers maintain stable at all values for $\alpha$. It is therefore necessary to choose the numerical method based on the problem you wish to solve. The Forward Euler method might not be suitable when we are required to use larger time-steps in our simulation. 
 
+\subsection{Heating of the Fennoscandian lithosphere}
 
+Figure (BLAH) tells us a lot about how the temperature is affected by the radioactive elements, depending on the depth. We can see that in the very beginning the temperature increases the most for the depths in the middle, before the temperature reaches equilibrium. For the depth of 50 km the temperature increase is significantly bigger than for the depth of 50 km. This is in spite of the heat production being 28 times bigger at $z=10$ km, compared to the heat production at $z=90$ km to the surface. However, this does make sense. Even though the heat production close to the surface is high, it doesn't have time to increase the temperature before the heat disappears into the cold surface. 
+
+We can then see that after 1 Gy, the oceanic lithosphere gets subducted and the additional radioactive elements start kicking in. As we would expect, the temperature has a sudden spike at $t=1$ Gy before it reaches equilibrium and starts declining. The reason for the decline is of course the radioactive elements start decaying. We would then expect that after a very long time that the temperature would go back to same as before the additional radioactive elements started kicking in. 
+
+In figure (HEAT) we can see the temperature distribution across the depth for different times. for $t=0$ Gy we can see that the temperature is linear, as expected. We can then see that after $t=0.25$ Gy the temperature has reached close to equilibrium, given that there is at least a graphically small difference between the temperature distrubition at $t=0.25$ Gy and $t=1.0$ Gy. The temperature distributions at the other times only further confirm what we discussed for figure (BLAH). Though it is arguably visual pleasing, figure (BLAH) doesn't seem to add any information other from what is already discussed. 
 
 \section{Concluding remarks}
 
-
+We have implemented all three algorithms numerically and compared them with the analytical solution. We found that the implicit Backward Euler method had the least relative root mean square error and that the explicit Forward Euler method had the fastest simulation time. We studied the explicit method at the boundary and found that the assumption of instability at $\Delta t \geq \Delta x^2/2$ was correct. Simulation time, simplicity and relatively insignificant truncation error led us to choose the Forward Euler method for solving the 2D case. 
 
 
 \end{multicols}
@@ -279,14 +339,14 @@ However, when $\alpha>0.5$ the error for the explicit method (Forward Euler) "sk
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=140mm]{b.png}
-	\caption{.}
+	\caption{Analytical solution for $\Delta x = 1/10$ and $\Delta x =1/100$.}
 	\label{fig:b}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=140mm]{c.png}
-	\caption{.}
+	\caption{The numerical solution given different times $t_1$ and $t_2$ and spatial steps $\Delta x =1/10$ and $\Delta x = 1/100$.}
 	\label{fig:c}
 \end{figure}
 
@@ -373,8 +433,24 @@ Froward Euler&$9.5847294\times 10^{-5}$&$6.7524668\times10^{-5}$\\ \hline
 \end{center}
 \end{table}
 
+\clearpage
 
 \section{Appendix}
+
+\subsection{General algorithm for tri-diagonal matrix}
+
+There exists an algorithm for solving generic sets of linear equations, but in the case for equation (\ref{eq:lineq})  where we have a tri-diagonal matrix we can use a different algorithm which decreases the amount of floating point operations needed. We denote the elements in the leading diagonal of A as $b_1, b_2, ..., b_n$, the elements above the leading diagonal as $a_2, a_3 ..., a_n$, and the elements below the leading diagonal as $c_1, c_2, ..., c_{n-1}$. The algorithm uses a forward substitution to replace the leading diagonal with elements denoted by $\tilde{b}_i$, and replaces the righthand side in with the elements $\tilde{f}_i$ as shown below[REFERENSE TIL PROSJEKT 1]:
+\begin{align*}
+\tilde{b}_i=b_i-\frac{a_ic_{i-1}}{\tilde{b}_{i-1}} \\
+\tilde{f}_i=f_i-\frac{a_i\tilde{f}_{i-1}}{\tilde{b}_{i-1}}
+\end{align*}
+where $\tilde{b}_1=b_1$ and $\tilde{f}_i=f_i$. The algorithm then continues with a backward substitution which gives the solution:
+\begin{align}
+u_{i-1}=\frac{\tilde{f}_{i-1}-c_{i-1}u_i}{\tilde{b}_{i-1}}
+\end{align}
+\\
+
+\subsection{Analytical expression for 1D diffusion equation}
 
 The one dimensional diffusion equation has an analytical expression for the continuous problem. 
 
@@ -518,6 +594,7 @@ We solve the integral and find the final solution:
 
 We now have a analytical expression for heat diffusion in one dimension \cite{94}\cite{96}. 
 
+\clearpage
 
 \begin{thebibliography}{9}
 \bibitem{94}
