@@ -19,5 +19,8 @@ public:;
     void backward_euler(double *u, double *f);
     void crank_nicholson(double *u, double *f);
     void forward_euler(double *u, double *r);
+    void forward_euler2d(double **u, double **r);
+    void PrintToFile2d(double **u, double time, std::ofstream &output);
+    void specific_forward(double *u,double *r, double W0, double W1, double W2, double W3, double c_p, double kappa, double rho);
 };
 #endif //TRIDIAG_HPP

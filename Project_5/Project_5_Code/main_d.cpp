@@ -8,17 +8,19 @@
 #include <vector>
 #include "Diffusion_solver.hpp"
 
-
 using namespace std;
 
 // parts of the function for backward Euler
-int main()
+int main(int argc, char *argv[])
 {
-    int num_int = 20;
-    int num_time_steps = 10000;
-    double time_step = 0.001;
+    int factor = atof(argv[1]);
+    double variable = atof(argv[2]);
+    int num_int = factor;
+    int num_time_steps = 100 * (factor * factor);
+    double time_step = variable / (factor * factor);
     double Length = 1.0;
     double u[num_int + 1], f[num_int - 1];
+
     for (int i = 0; i <= num_int; i++)
     {
         u[i] = 0.0;
