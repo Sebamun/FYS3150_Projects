@@ -2,7 +2,7 @@
 
 ## Report
 
-You can find the report document "Project_5_final.pdf".
+You can find the report document "Project_5_final.pdf" in the Project_5 folder.
 
 ## Code
 
