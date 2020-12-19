@@ -35,7 +35,7 @@
 
 \section{Introduction}
 
-In this report we want to test three algorithms for solving partial differentiation equations using finite difference schemes. Specifically we want to solve the heat equation in one dimension using three different methods, where we compare out numerical results to an analytical solution. Secondly, we wish to simulate the temperature distribution in the lithosphere. This is to be done in two dimensions using the Forward Euler algorithm. 
+In this report we want to test three algorithms for solving partial differentiation equations using finite difference schemes. Specifically we want to solve the heat equation in one dimension using three different methods, where we compare our numerical results to an analytical solution. Secondly, we wish to simulate the temperature distribution in the lithosphere. This is to be done in two dimensions using the Forward Euler algorithm. 
 
 \section{Theory}
 
@@ -228,7 +228,13 @@ We can test the stability and precision of our numerical algorithms by comparing
 RRMSE = \sqrt{\frac{\frac{1}{n}\sum_{i=1}^n(u_{ana}-u_{num})^2}{\sum_{i=1}^n u_{ana}^2}}
 \end{equation}
 
-Where $u_{ana}$ is the analytical solution and $u_{num}$ is the numerical approximation \cite{97}. We will also be plotting the difference between the analytical solution and the values given the algorithms. This is to be done for both $\alpha>0.5$ and $\alpha<0.5$, which hopefully will showcase the stability of the implicit methods. 
+Where $u_{ana}$ is the analytical solution and $u_{num}$ is the numerical approximation \cite{97}. We will also be plotting the difference between the analytical solution and the values given the algorithms. This is to be done for both $\alpha>0.5$ and $\alpha<0.5$, which hopefully will showcase the stability of the implicit methods. To obtain the different values for $\alpha$ we adjust the duration of each time step in our simulation. The boundary given time steps $\Delta t$ and spatial steps $\Delta x$ for the explicit method is:
+
+\begin{equation}
+\Delta t \leq \Delta x^2/2
+\end{equation}
+
+We wish to study the case where this boundary is fulfilled and when it is unsatisfied. 
 
 \section{Implementation}
 
@@ -239,17 +245,21 @@ Where $u_{ana}$ is the analytical solution and $u_{num}$ is the numerical approx
 
 The analytical solution for different time occasions ($t_1$ and $t_2$) and spatial steps are given in Figure \ref{fig:b}. The simulation time for each of the different algorithms are given in Table \ref{tab:time}.
 
-The deviation from the analytical solution is given in Figure ..... for the Forward Euler method, Figure .... for the Backward Euler method and Figure ..... for the Crank Nicholson scheme. The RRMSE values are given in Table....
+The deviation from the analytical solution for the three methods are given in Figure \ref{fig:1_10} and \ref{fig:1_10_a} for $\Delta x = 1/10$. The deviation for $\Delta x = 1/100$ is given in Figure \ref{fig:1_100} and \ref{fig:1_100_a}. The RRMSE values are given in Table \ref{tab:error}.
 
 \section{Discussion}
 
 \subsection{One dimensional model}
 
-There is little variance between the three algorithms when looking at the one dimensional case (see Figure \ref{fig:c}). This is to be expected as long as we satisfy the boundary condition $\alpha<0.5$ for the explicit method. The numerical approximations seem to move towards the analytical solution when we increase the resolution in time and space for all three algorithms. This is to be expected, given the fact that smaller time and spatial steps lead to greater accuracy.  
+There is little variance between the three algorithms when looking at the one dimensional case (see Figure \ref{fig:c}). The RRMSE values for $t_1=0.01$ were smallest for the Backward Euler method and highest for the Forward Euler method, when looking at $\Delta x = 1/10$. For $t_1=0.01$ and $\Delta x = 1/10$ the RRMSE values were highest for the Crank Nicholson scheme and smallest for the Backward Euler scheme. This is surprising given the fact that the Crank Nicholson algorithm has an higher order of truncation error than both the backward and forward method (Table \ref{tab:a}). One explanation could be the amount of FLOPS for each method. The Crank Nicholson method has more calculations than both the other algorithms, which makes room for round off errors. It is also possible that either the algorithms, the analytical solution or the RRMSE method are not implemented correctly. 
 
-The forward Euler method has the shortest simulation time by far, which make it time efficient when solving large simulations (Table \ref{tab:time}). The Forward Euler method seems to be the best algorithm for solving the one dimensional problem as long as the boundary condition is fulfilled. 
+The differences in RRMSE were not detectable for $t_2$ (\ref{tab:error2}). This is to be expected given that all three algorithms should move towards the same final solution (as long as the boundary condition for the explicit method is satisfied). We can see that the increased spatial resolution (decreasing $\Delta x$) leads to better precision for all the methods, due to the error becoming smaller for $\Delta x=1/100$ than for $\Delta x = 1/10$. This is true for both $t_1$ and $t_2$. 
 
-However, when $\alpha>0.5$ the error for the explicit method (Forward Euler) "skyrockets" ( Figure ....). For the implicit schemes we dont have the same problem. The implicit solvers maintain stable at all values for $\alpha$. 
+The forward Euler method has the shortest simulation time by far, which make it time efficient when solving large simulations (Table \ref{tab:time}). When $alpha<0.5$ the deviation from the analytical solution is indistinguishable for the three methods when we are looking at Figure \ref{fig:1_10} and \ref{fig:1_100}. Based on these factors, it seems that Forward Euler method is the best algorithm for solving the one dimensional problem as long as the boundary condition is fulfilled. 
+
+However, when $\alpha>0.5$ the error for the explicit method (Forward Euler) "skyrockets" ( Figure \ref{fig:1_10_a} and Figure \ref{fig:1_100_a}). For the implicit schemes we dont have the same problem. The implicit solvers maintain stable at all values for $\alpha$. It is therefore necessary to choose the numerical method based on the problem you wish to solve. The Forward Euler method might not be suitable when we are required to use larger time-steps in our simulation. 
+
+
 
 \section{Concluding remarks}
 
@@ -268,16 +278,44 @@ However, when $\alpha>0.5$ the error for the explicit method (Forward Euler) "sk
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=120mm]{b.png}
+	\includegraphics[width=140mm]{b.png}
 	\caption{.}
 	\label{fig:b}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=120mm]{c.png}
+	\includegraphics[width=140mm]{c.png}
 	\caption{.}
 	\label{fig:c}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=180mm]{1_10}
+	\caption{Deviation from analytical solution for $\alpha<0.5$.}
+	\label{fig:1_10}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=180mm]{1_100}
+	\caption{Deviation from analytical solution for $\alpha<0.5$.}
+	\label{fig:1_100}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=180mm]{1_10_a}
+	\caption{Deviation from analytical solution for $\alpha>0.5$.}
+	\label{fig:1_10_a}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=140mm]{1_100_a}
+	\caption{Deviation from analytical solution for $\alpha>0.5$.}
+	\label{fig:1_100_a}
 \end{figure}
 
 \subsection{Tables}
@@ -288,9 +326,9 @@ However, when $\alpha>0.5$ the error for the explicit method (Forward Euler) "sk
 \caption{Theoretical truncation errors.}
 \begin{tabular}{  |c|c|c|c|c|c| } \hline
 Scheme:&	Truncation error&Stability requirments \\ \hline
-Crank Nicholson&$O(\Delta x^2) and O(\Delta t^2)$&Stable for all\\ \hline
-Backward Euler&$O(\Delta x^2) and O(\Delta t^2)$&Stable for all\\ \hline
-Froward Euler&$O(\Delta x^2) and O(\Delta t^2)$&$\Delta t \leq 1/2\Delta x^2$\\ \hline
+Crank Nicholson&$O(\Delta x^2) \text{ and } O(\Delta t^2)$&Stable for all\\ \hline
+Backward Euler&$O(\Delta x^2)  \text{ and } O(\Delta t)$&Stable for all\\ \hline
+Froward Euler&$O(\Delta x^2)  \text{ and } O(\Delta t)$&$\Delta t \leq 1/2\Delta x^2$\\ \hline
 \end{tabular}
 \label{tab:a}
 \end{center}
@@ -308,6 +346,33 @@ Froward Euler&	0.00865s&3.58414s\\ \hline
 \label{tab:time}
 \end{center}
 \end{table}
+
+\begin{table}[H]
+\begin{center}
+\caption{RRMSE for the different algorithms for $t_1=0.01$.}
+\begin{tabular}{  |c|c|c|c|c|c| } \hline
+Scheme:&	$\Delta x =1/10$&$\Delta x = 1/100$ \\ \hline
+Crank Nicholson&0.034560&0.0038095\\ \hline
+Backward Euler&0.034521&0.0038079\\ \hline
+Froward Euler&0.034599&0.0038086\\ \hline
+\end{tabular}
+\label{tab:error}
+\end{center}
+\end{table}
+
+\begin{table}[H]
+\begin{center}
+\caption{RRMSE for the different algorithms for $t_2=0.99$.}
+\begin{tabular}{  |c|c|c|c|c|c| } \hline
+Scheme:&	$\Delta x =1/10$&$\Delta x = 1/100$ \\ \hline
+Crank Nicholson&$9.5847294\times 10^{-5}$&$6.7524668\times10^{-5}$\\ \hline
+Backward Euler&$9.5847294\times 10^{-5}$&$6.7524668\times10^{-5}$\\ \hline
+Froward Euler&$9.5847294\times 10^{-5}$&$6.7524668\times10^{-5}$\\ \hline
+\end{tabular}
+\label{tab:error2}
+\end{center}
+\end{table}
+
 
 \section{Appendix}
 

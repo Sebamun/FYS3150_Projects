@@ -13,7 +13,7 @@ index1 = [6,600] # Indeks som gir kurvet linje.
 fig, axs = plt.subplots(1, 3)
 fig2, axs2 = plt.subplots(1, 2)
 for i in range(len(n_dx)):
-    subprocess.run(['./run.x', str(n_dx[i])])
+    subprocess.run(['./run_c.x', str(n_dx[i])])
     df = pd.read_csv("forward_output.txt", delim_whitespace=True, index_col=None)
     df2 = pd.read_csv("Backward_output.txt", delim_whitespace=True, index_col=None)
     df3 = pd.read_csv("crank_nicholson.txt", delim_whitespace=True, index_col=None)
