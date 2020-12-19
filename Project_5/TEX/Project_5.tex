@@ -39,7 +39,7 @@ We found that the heat equation can be solved using the explicit forward method,
 
 In this report we want to test three algorithms for solving partial differentiation equations using finite difference schemes. Specifically we want to solve the heat equation in one dimension using three different methods, where we compare our numerical results to an analytical solution. This is done by calculating the root mean square error and by looking at the deviation between numerical and analytical values for each of the algorithms. 
 
-We will also be looking at two different boundary conditions, which will impact the stability of our explicit solver. We then expand the most suited numerical method for solving the heat equation to two dimensions. Afterwards we wish to simulate the temperature distribution in the lithosphere. This will showcase how an algorithm can be implemented numerically to solve a physical problem. 
+We will also be looking at two different stability conditions, which will impact the stability of our explicit solver. We then expand the most suited numerical method for solving the heat equation to two dimensions. Afterwards we wish to simulate the temperature distribution in the lithosphere. This will showcase how an algorithm can be implemented numerically to solve a physical problem. 
 
 \section{Theory}
 
@@ -251,13 +251,13 @@ We can test the stability and precision of our numerical algorithms by comparing
 RRMSE = \sqrt{\frac{\frac{1}{n}\sum_{i=1}^n(u_{ana}-u_{num})^2}{\sum_{i=1}^n u_{ana}^2}}
 \end{equation}
 
-Where $u_{ana}$ is the analytical solution and $u_{num}$ is the numerical approximation \cite{97}. We will also be plotting the difference between the analytical solution and the values given the algorithms. This is to be done for both $\alpha>0.5$ and $\alpha<0.5$, which hopefully will showcase the stability of the implicit methods. To obtain the different values for $\alpha$ we adjust the duration of each time step in our simulation. The boundary given time steps $\Delta t$ and spatial steps $\Delta x$ for the explicit method is:
+Where $u_{ana}$ is the analytical solution and $u_{num}$ is the numerical approximation \cite{97}. We will also be plotting the difference between the analytical solution and the values given the algorithms. This is to be done for both $\alpha>0.5$ and $\alpha<0.5$, which hopefully will showcase the stability of the implicit methods. To obtain the different values for $\alpha$ we adjust the duration of each time step in our simulation. The limit given time steps $\Delta t$ and spatial steps $\Delta x$ for the explicit method is:
 
 \begin{equation}
 \Delta t \leq \Delta x^2/2
 \end{equation}
 
-We wish to study the case where this boundary is fulfilled and when it is unsatisfied. 
+We wish to study the case where this limit is fulfilled and when it is unsatisfied. 
 
 \subsection{Heating of the Fennoscandian lithosphere}
 
@@ -307,9 +307,9 @@ There is little variance between the three algorithms when looking at the one di
 
 The RRMSE values for $t_1=0.01$ were smallest for the Backward Euler method and highest for the Forward Euler method, when looking at $\Delta x = 1/10$. For $t_1=0.01$ and $\Delta x = 1/10$ the RRMSE values were highest for the Crank Nicholson scheme and smallest for the Backward Euler scheme. This is surprising given the fact that the Crank Nicholson algorithm has an higher order of truncation error than both the backward and forward method (Table \ref{tab:a}). One explanation could be the amount of FLOPS for each method. The Crank Nicholson method has more calculations than both the other algorithms, which makes room for round off errors. It is also possible that either the algorithms, the analytical solution or the RRMSE method are not implemented correctly. 
 
-The differences in RRMSE were not detectable for $t_2$ (\ref{tab:error2}). This is to be expected given that all three algorithms should move towards the same final solution (as long as the boundary condition for the explicit method is satisfied). We can see that the increased spatial resolution (decreasing $\Delta x$) leads to better precision for all the methods, due to the error becoming smaller for $\Delta x=1/100$ than for $\Delta x = 1/10$. This is true for both $t_1$ and $t_2$. 
+The differences in RRMSE were not detectable for $t_2$ (\ref{tab:error2}). This is to be expected given that all three algorithms should move towards the same final solution (as long as the stability condition for the explicit method is satisfied). We can see that the increased spatial resolution (decreasing $\Delta x$) leads to better precision for all the methods, due to the error becoming smaller for $\Delta x=1/100$ than for $\Delta x = 1/10$. This is true for both $t_1$ and $t_2$. 
 
-The forward Euler method has the shortest simulation time by far, which make it time efficient when solving large simulations (Table \ref{tab:time}). When $alpha<0.5$ the deviation from the analytical solution is indistinguishable for the three methods when we are looking at Figure \ref{fig:1_10} and \ref{fig:1_100}. Based on these factors, it seems that Forward Euler method is the best algorithm for solving the one dimensional problem as long as the boundary condition is fulfilled. 
+The forward Euler method has the shortest simulation time by far, which make it time efficient when solving large simulations (Table \ref{tab:time}). When $alpha<0.5$ the deviation from the analytical solution is indistinguishable for the three methods when we are looking at Figure \ref{fig:1_10} and \ref{fig:1_100}. Based on these factors, it seems that Forward Euler method is the best algorithm for solving the one dimensional problem as long as the stability condition is fulfilled. 
 
 However, when $\alpha>0.5$ the error for the explicit method (Forward Euler) "skyrockets" ( Figure \ref{fig:1_10_a} and Figure \ref{fig:1_100_a}). For the implicit schemes we dont have the same problem. The implicit solvers maintain stable at all values for $\alpha$. It is therefore necessary to choose the numerical method based on the problem you wish to solve. The Forward Euler method might not be suitable when we are required to use larger time-steps in our simulation. 
 
@@ -323,7 +323,7 @@ In figure (HEAT) we can see the temperature distribution across the depth for di
 
 \section{Concluding remarks}
 
-We have implemented all three algorithms numerically and compared them with the analytical solution. We found that the implicit Backward Euler method had the least relative root mean square error and that the explicit Forward Euler method had the fastest simulation time. We studied the explicit method at the boundary and found that the assumption of instability at $\Delta t \geq \Delta x^2/2$ was correct. Simulation time, simplicity and relatively insignificant truncation error led us to choose the Forward Euler method for solving the 2D case. 
+We have implemented all three algorithms numerically and compared them with the analytical solution. We found that the implicit Backward Euler method had the least relative root mean square error and that the explicit Forward Euler method had the fastest simulation time. We studied the explicit method at the stability boundary and found that the assumption of instability at $\Delta t \geq \Delta x^2/2$ was correct. Simulation time, simplicity and relatively insignificant truncation error led us to choose the Forward Euler method for solving the 2D case. 
 
 
 \end{multicols}
@@ -353,28 +353,28 @@ We have implemented all three algorithms numerically and compared them with the 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=180mm]{1_10}
-	\caption{Deviation from analytical solution for $\alpha<0.5$.}
+	\caption{Deviation from analytical solution for $\alpha=0.0121$, $\Delta x=1/10$ and $\Delta t =0.0001$. The blue line $t_{curve}=0.07$ is the error after a short time period, where the solution is curved. The orange line $t_{linear}=0.94$ is the error after a longer time period, where the solution is linear.}
 	\label{fig:1_10}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=180mm]{1_100}
-	\caption{Deviation from analytical solution for $\alpha<0.5$.}
+	\caption{Deviation from analytical solution for $\alpha=0.0102$, $\Delta x=1/100$ and $\Delta t =0.000001$. The blue line $t_{curve}=0.06$ is the error after a short time period, where the solution is curved. The orange line $t_{linear}=0.94$ is the error after a longer time period, where the solution is linear.}
 	\label{fig:1_100}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=180mm]{1_10_a}
-	\caption{Deviation from analytical solution for $\alpha>0.5$.}
+	\caption{Deviation from analytical solution for $\alpha=0.6050$, $\Delta x=1/10$ and $\Delta t =0.005$. The blue line $t_{curve}=0.51$ is the error after a short time period, where the solution is curved. The orange line $t_{linear}=1.0$ is the error after a longer time period, where the solution is linear. }
 	\label{fig:1_10_a}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=140mm]{1_100_a}
-	\caption{Deviation from analytical solution for $\alpha>0.5$.}
+	\includegraphics[width=180mm]{1_100_a}
+	\caption{Deviation from analytical solution for $\alpha=0.5101$, $\Delta x=1/100$ and $\Delta t =0.0001$. The blue line $t_{curve}=0.01$ is the error after a short time period, where the solution is curved. The orange line $t_{linear}=0.71$ is the error after a longer time period, where the solution is linear.}
 	\label{fig:1_100_a}
 \end{figure}
 
